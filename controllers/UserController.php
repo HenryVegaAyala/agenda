@@ -98,6 +98,7 @@ class UserController extends Controller
                         'usuario_modificado' => Yii::$app->user->identity->correo,
                         'ip' => Yii::$app->request->userIP,
                         'host' => strval(php_uname()),
+                        'privilegio' => $model->privilegio,
                         'estado' => (int)$model->estado,
                         'genero' => $model->genero,
                         'fecha_inicio' => ($model->fecha_inicio == '') ? '' :Yii::$app->formatter->asDate(strtotime($model->fecha_inicio), 'Y-MM-dd'),

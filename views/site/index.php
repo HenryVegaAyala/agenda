@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Sistema de Afiliación';
+$this->title = 'Sistema de Agenda';
 ?>
 
 <div class="right_col" role="main">

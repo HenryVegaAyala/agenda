@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Branusac - Listas de Usuario';
+$this->title = 'SISAGE - Listas de Usuario';
 $this->params['breadcrumbs'][] = $this->title;
 $usuario = new User();
 ?>
