@@ -67,7 +67,7 @@ use yii\helpers\Url;
                                 'data-placement' => 'top',
                                 'title' => 'Configuración',
                             ]) ?>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <a id="fullScreen" onclick="DoFullScreen()" data-toggle="tooltip" data-placement="top" title="FullScreen">
                             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
