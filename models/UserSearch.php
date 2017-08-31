@@ -60,7 +60,7 @@ class UserSearch extends User
             'date_format(fecha_inicio, \'%d-%m-%Y\') AS fecha_inicio',
             'date_format(fecha_cumpleanos, \'%d-%m-%Y\') AS fecha_cumpleanos',
         ])
-            ->orderBy(['id' => SORT_DESC]);
+            ->orderBy(['id' => SORT_ASC]);
 
         // add conditions that should always apply here
 
@@ -72,7 +72,6 @@ class UserSearch extends User
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 

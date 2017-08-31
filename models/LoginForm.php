@@ -13,12 +13,12 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    const USERNAME = 'username';
+    const USER_PASS = 'password';
     public $username;
     public $password;
     public $rememberMe = true;
-
     private $user = false;
-
 
     /**
      * @return array the validation rules.
@@ -27,14 +27,14 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [[self::USERNAME, self::USER_PASS], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            [self::USER_PASS, 'validatePassword'],
 
-            [['username'], 'match', 'pattern' => "/^.{1,45}$/", 'message' => 'Mínimo 1 caracter'],
-            [['username'], 'email', 'message' => 'Tiene que ser un correo válido.'],
+            [[self::USERNAME], 'match', 'pattern' => "/^.{1,45}$/", 'message' => 'Mínimo 1 caracter'],
+            [[self::USERNAME], 'email', 'message' => 'Tiene que ser un correo válido.'],
 
         ];
     }
@@ -45,8 +45,8 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => 'Usuario',
-            'password' => 'Contraseña',
+            self::USERNAME => 'Usuario',
+            self::USER_PASS => 'Contraseña',
         ];
     }
 
@@ -59,13 +59,11 @@ class LoginForm extends Model
     public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
-
-            if (!$user) {
+            if (!$this->getUser()) {
                 $this->addError($attribute, 'Usuario ingresado es incorrecto.');
-            } elseif (!$user->validatePassword($this->password)) {
+            } elseif (!$this->getUser()->validatePassword($this->password)) {
                 $this->addError($attribute, 'Contraseña ingresada es incorrecta.');
-            } elseif (!$user && !$user->validatePassword($this->password)) {
+            } elseif (!$this->getUser() && !$this->getUser()->validatePassword($this->password)) {
                 $this->addError($attribute, 'Usuario ó Contraseña Incorrecta.');
             }
         }

@@ -14,6 +14,10 @@ use yii\filters\VerbFilter;
  */
 class UserController extends Controller
 {
+    const DATE_FORMAT = 'Y-MM-dd';
+    const INDEX = 'index';
+    const SUCCESS = 'success';
+
     /**
      * @inheritdoc
      */
@@ -38,7 +42,7 @@ class UserController extends Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->post());
 
-        return $this->render('index', [
+        return $this->render(self::INDEX, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -64,16 +68,16 @@ class UserController extends Controller
             $model->estado = (int)$model->estado;
             $model->genero = (string)$model->genero;
             $model->fecha_inicio = ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio),
-                'Y-MM-dd');
+                self::DATE_FORMAT);
             $model->fecha_cumpleanos = ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos),
-                'Y-MM-dd');
+                self::DATE_FORMAT);
             $model->save();
             $this->encryptPassword($model->id, $model->contrasena);
             $names = $model->nombre . ' ' . $model->apellido;
             $rol = $model->getRol($model->privilegio);
             $this->notification(1, $names, $rol);
 
-            return $this->redirect(['index']);
+            return $this->redirect([self::INDEX]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -104,9 +108,9 @@ class UserController extends Controller
                         'estado' => (int)$model->estado,
                         'genero' => $model->genero,
                         'fecha_inicio' => ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio),
-                            'Y-MM-dd'),
+                            self::DATE_FORMAT),
                         'fecha_cumpleanos' => ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos),
-                            'Y-MM-dd'),
+                            self::DATE_FORMAT),
                     ],
                     'id = :id', [':id' => $id])
                 ->execute();
@@ -114,7 +118,7 @@ class UserController extends Controller
             $rol = $model->getRol($model->privilegio);
             $this->notification(2, $names, $rol);
 
-            return $this->redirect(['index']);
+            return $this->redirect([self::INDEX]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -143,7 +147,7 @@ class UserController extends Controller
             $rol = $model->getRol($model->privilegio);
             $this->notification(4, $names, $rol);
 
-            return $this->redirect(['index']);
+            return $this->redirect([self::INDEX]);
         } else {
             return $this->render('change', [
                 'model' => $model,
@@ -154,7 +158,7 @@ class UserController extends Controller
 
     /**
      * Deletes an existing User model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected to the self::INDEX page.
      * @param integer $id
      * @return mixed
      */
@@ -162,10 +166,10 @@ class UserController extends Controller
     {
         $user = User::find()->where(['id' => $id])->one();
         $names = $user->nombre . ' ' . $user->apellido;
-        $this->notification(3, $names, $rol = '');
+        $this->notification(3, $names, '');
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect([self::INDEX]);
     }
 
     /**
@@ -221,43 +225,37 @@ class UserController extends Controller
             case 1:
                 $title = 'Se registró un Usuario Nuevo';
                 $message = 'Se ha registrado satisfactoriamente a ' . $usuario . ' como usuario ' . $rol . '.';
-                $type = 'success';
+                $type = self::SUCCESS;
                 break;
             case 2:
                 $title = 'El Usuario fué Actualizado';
                 $message = 'Se ha actualizado satisfactoriamente el usuario ' . $usuario . '.';
-                $type = 'success';
+                $type = self::SUCCESS;
                 break;
             case 3:
                 $title = 'Se Eliminado un Usuario';
                 $message = 'Se ha eliminado satisfactoriamente al usuario ' . $usuario . '.';
-                $type = 'success';
+                $type = self::SUCCESS;
                 break;
             case 4:
                 $title = 'Se Actualizado el Perfil de ' . $usuario;
                 $message = 'Se ha actualizado satisfactoriamente los datos del perfil.';
-                $type = 'success';
+                $type = self::SUCCESS;
+                break;
+            default :
+
                 break;
         }
 
-        if (isset($type)) {
-            if (isset($message)) {
-                if (isset($title)) {
-                    /** @noinspection PhpVoidFunctionResultUsedInspection */
-                    $notification = Yii::$app->getSession()->setFlash('success', [
-                        'type' => $type,
-                        'duration' => 6000,
-                        'icon' => 'fa fa-users',
-                        'message' => $message,
-                        'title' => $title,
-                        'positonY' => 'top',
-                        'positonX' => 'right',
-                    ]);
-
-                    return $notification;
-                }
-            }
-        }
+        return Yii::$app->getSession()->setFlash(self::SUCCESS, [
+            'type' => $type,
+            'duration' => 6000,
+            'icon' => 'fa fa-users',
+            'message' => $message,
+            'title' => $title,
+            'positonY' => 'top',
+            'positonX' => 'right',
+        ]);
     }
 
     /**
@@ -266,7 +264,7 @@ class UserController extends Controller
      */
     public function notificationError($title, $message)
     {
-        $notification = Yii::$app->getSession()->setFlash('success', [
+        return Yii::$app->getSession()->setFlash(self::SUCCESS, [
             'type' => 'danger',
             'duration' => 6000,
             'icon' => 'fa fa-ban',
@@ -275,8 +273,6 @@ class UserController extends Controller
             'positonY' => 'top',
             'positonX' => 'right',
         ]);
-
-        return $notification;
     }
 
     /**

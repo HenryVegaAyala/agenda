@@ -272,12 +272,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function status()
     {
-        $status = [
+        return [
             '1' => 'Activo',
             '0' => 'Inactivo',
         ];
-
-        return $status;
     }
 
     /**
@@ -296,12 +294,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function rol()
     {
-        $rol = [
+        return [
             'G' => 'Administrador',
             'S' => 'Secretaria',
         ];
-
-        return $rol;
     }
 
     /**
@@ -313,9 +309,8 @@ class User extends ActiveRecord implements IdentityInterface
         $sentence = new Expression('IFNULL(MAX(id), 0) + 1');
         $query->select($sentence)->from('usuario');
         $command = $query->createCommand();
-        $value = $command->queryScalar();
 
-        return $value;
+        return $command->queryScalar();
     }
 
     /**
@@ -324,13 +319,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getRol($value)
     {
-        switch ($value) {
-            case 'G':
-                return 'Administrador';
-                break;
-            case 'S':
-                return 'Secretaria';
-                break;
+        if ($value === 'G') {
+            return 'Administrador';
+        } else {
+            return 'Secretaria';
         }
     }
 
@@ -340,13 +332,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getStatus($status)
     {
-        switch ($status) {
-            case 1:
-                return 'Activo';
-                break;
-            case 0:
-                return 'Inactivo';
-                break;
+        if ($status === 1) {
+            return 'Activo';
+        } else {
+            return 'Inactivo';
         }
     }
 }
