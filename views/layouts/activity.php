@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
                 <div class="navbar nav_title" style="border: 0;">
                     <a href="<?php echo Url::home() ?>" class="site_title"></i>
-                        <span class="pull-center">Sistema de Agenda</span>
+                        <span class="pull-center">Sistema de Ticket</span>
                     </a>
                 </div>
 

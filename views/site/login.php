@@ -15,7 +15,7 @@ $this->title = 'SISAGEN - Iniciar Sesión';
         <div class="animate form login_form">
             <section class="login_content">
                 <?php $form = ActiveForm::begin(); ?>
-                <h1>Sistema de Agenda</h1>
+                <h1>Sistema de Ticket</h1>
                 <div>
                     <?= $form->field($model, 'username')->textInput([
                         'autofocus' => true,

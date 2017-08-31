@@ -4,7 +4,7 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = 'SISAGE - Actualizar Usuario';
+$this->title = 'Sistema de Ticket - Actualizar Usuario';
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
