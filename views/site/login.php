@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'SISAGEN - Iniciar Sesión';
+$this->title = 'Sistema de Ticket - Iniciar Sesión';
 ?>
 <div>
     <a class="hiddenanchor" id="signin"></a>
@@ -39,7 +39,7 @@ $this->title = 'SISAGEN - Iniciar Sesión';
                     <div class="clearfix"></div>
                     <br/>
                     <div>
-                        <p>©2017 Todos los Derechos Reservador por SISAGEN.</p>
+                        <p>©2017 Todos los Derechos Reservador por Sistema de Ticket.</p>
                     </div>
                 </div>
             </section>
