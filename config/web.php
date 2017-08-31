@@ -38,6 +38,17 @@ $config = [
         ],
     ],
     'components' => [
+        'assetManager' => [
+            'linkAssets' => true,
+            'appendTimestamp' => true,
+            'converter' => [
+                'class' => 'yii\web\AssetConverter',
+                'commands' => [
+                    'less' => ['css', 'lessc {from} {to} --no-color'],
+                    'ts' => ['js', 'tsc --out {to} {from}'],
+                ],
+            ],
+        ],
         'session' => [
             'class' => 'yii\web\DbSession',
             'sessionTable' => 'session',
