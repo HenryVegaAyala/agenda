@@ -70,8 +70,8 @@ use yii\helpers\Url;
                         <a id="fullScreen" onclick="DoFullScreen()" data-toggle="tooltip" data-placement="top" title="FullScreen">
                             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        <a data-toggle="tooltip" data-placement="top" title="Chat">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                         </a>
                         <?= Html::a('<span class="glyphicon glyphicon-off" aria-hidden="true"></span>',
                             ['/site/logout', 'id' => Yii::$app->user->identity->id],
