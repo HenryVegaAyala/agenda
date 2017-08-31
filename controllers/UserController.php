@@ -136,17 +136,15 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $id = $model->id;
             $password = $model->contrasena;
             $model->fecha_modificada = Utils::zonaHoraria();
             $model->usuario_modificado = Yii::$app->user->identity->correo;
             $model->ip = Yii::$app->request->userIP;
             $model->host = strval(php_uname());
             $model->update();
-            $this->encryptPassword($id, $password);
-            $names = $model->nombre . ' ' . $model->apellido;
-            $rol = $model->getRol($model->privilegio);
-            $this->notification(4, $names, $rol);
+
+            $this->encryptPassword($model->id, $password);
+            $this->notification(4, $model->nombre . ' ' . $model->apellido, $model->getRol($model->privilegio));
 
             return $this->redirect([self::INDEX]);
         } else {
