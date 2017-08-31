@@ -73,6 +73,9 @@ class User extends ActiveRecord implements IdentityInterface
                 'required',
             ],
 
+            [['fecha_inicio'], 'required'],
+            [['fecha_cumpleanos'], 'required'],
+
             [['correo'], 'match', 'pattern' => "/^.{3,45}$/", 'message' => 'Mínimo 3 caracteres del correo.'],
             [['correo'], 'email', 'message' => 'El campo correo debe de ser válido.'],
 
