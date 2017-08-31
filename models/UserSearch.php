@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
+use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -47,21 +49,24 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find()->select([
-            'id',
-            'nombre',
-            'apellido',
-            'telefono',
-            'dni',
-            'correo',
-            'privilegio',
-            'estado',
-            'genero',
-            'date_format(fecha_inicio, \'%d-%m-%Y\') AS fecha_inicio',
-            'date_format(fecha_cumpleanos, \'%d-%m-%Y\') AS fecha_cumpleanos',
-        ])
-            ->orderBy(['id' => SORT_ASC]);
-
+        $db = Yii::$app->db;
+        $dependency = new DbDependency();
+        $query = User::getDb()->cache(function ($db) {
+            return User::find()->select([
+                'id',
+                'nombre',
+                'apellido',
+                'telefono',
+                'dni',
+                'correo',
+                'privilegio',
+                'estado',
+                'genero',
+                'date_format(fecha_inicio, \'%d-%m-%Y\') AS fecha_inicio',
+                'date_format(fecha_cumpleanos, \'%d-%m-%Y\') AS fecha_cumpleanos',
+            ])
+                ->orderBy(['id' => SORT_ASC]);
+        }, 3600, $dependency);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

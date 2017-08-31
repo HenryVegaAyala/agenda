@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Utils;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
@@ -61,7 +62,7 @@ class UserController extends Controller
             $model->id = (int)$model->getIdTable();
             $model->authKey = md5(rand(1, 9999));
             $model->accessToken = md5(rand(1, 9999));
-            $model->fecha_digitada = $this->zonaHoraria();
+            $model->fecha_digitada = Utils::zonaHoraria();
             $model->usuario_digitado = Yii::$app->user->identity->correo;
             $model->ip = Yii::$app->request->userIP;
             $model->host = strval(php_uname());
@@ -100,7 +101,7 @@ class UserController extends Controller
             $connection->createCommand()
                 ->update('usuario',
                     [
-                        'fecha_modificada' => $this->zonaHoraria(),
+                        'fecha_modificada' => Utils::zonaHoraria(),
                         'usuario_modificado' => Yii::$app->user->identity->correo,
                         'ip' => Yii::$app->request->userIP,
                         'host' => strval(php_uname()),
@@ -137,7 +138,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $id = $model->id;
             $password = $model->contrasena;
-            $model->fecha_modificada = $this->zonaHoraria();
+            $model->fecha_modificada = Utils::zonaHoraria();
             $model->usuario_modificado = Yii::$app->user->identity->correo;
             $model->ip = Yii::$app->request->userIP;
             $model->host = strval(php_uname());
@@ -202,16 +203,6 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    /**
-     * @return false|string
-     */
-    public function zonaHoraria()
-    {
-        date_default_timezone_set('America/Lima');
-
-        return date('Y-m-d h:i:s', time());
     }
 
     /**
