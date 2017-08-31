@@ -63,8 +63,10 @@ class UserController extends Controller
             $model->host = strval(php_uname());
             $model->estado = (int)$model->estado;
             $model->genero = (string)$model->genero;
-            $model->fecha_inicio = ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio), 'Y-MM-dd');
-            $model->fecha_cumpleanos = ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos), 'Y-MM-dd');
+            $model->fecha_inicio = ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio),
+                'Y-MM-dd');
+            $model->fecha_cumpleanos = ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos),
+                'Y-MM-dd');
             $model->save();
             $this->encryptPassword($model->id, $model->contrasena);
             $names = $model->nombre . ' ' . $model->apellido;
@@ -101,8 +103,10 @@ class UserController extends Controller
                         'privilegio' => $model->privilegio,
                         'estado' => (int)$model->estado,
                         'genero' => $model->genero,
-                        'fecha_inicio' => ($model->fecha_inicio == '') ? '' :Yii::$app->formatter->asDate(strtotime($model->fecha_inicio), 'Y-MM-dd'),
-                        'fecha_cumpleanos' => ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos), 'Y-MM-dd'),
+                        'fecha_inicio' => ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio),
+                            'Y-MM-dd'),
+                        'fecha_cumpleanos' => ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos),
+                            'Y-MM-dd'),
                     ],
                     'id = :id', [':id' => $id])
                 ->execute();
@@ -173,7 +177,23 @@ class UserController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = User::find()->select([
+                'id',
+                'nombre',
+                'apellido',
+                'telefono',
+                'dni',
+                'correo',
+                'privilegio',
+                'estado',
+                'genero',
+                'date_format(fecha_inicio, \'%d-%m-%Y\') AS fecha_inicio',
+                'date_format(fecha_cumpleanos, \'%d-%m-%Y\') AS fecha_cumpleanos',
+            ])
+                ->where('id = :id', [':id' => $id])
+                ->one()
+            ) !== null
+        ) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

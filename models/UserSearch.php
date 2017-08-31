@@ -47,7 +47,20 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->select([
+            'id',
+            'nombre',
+            'apellido',
+            'telefono',
+            'dni',
+            'correo',
+            'privilegio',
+            'estado',
+            'genero',
+            'date_format(fecha_inicio, \'%d-%m-%Y\') AS fecha_inicio',
+            'date_format(fecha_cumpleanos, \'%d-%m-%Y\') AS fecha_cumpleanos',
+        ])
+            ->orderBy(['id' => SORT_DESC]);
 
         // add conditions that should always apply here
 
