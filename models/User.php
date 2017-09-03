@@ -36,7 +36,6 @@ use yii\db\Query;
  *
  * @property null|string|false $idTable
  * @property mixed $password
- * @property Ruta[] $rutas
  */
 class User extends ActiveRecord implements IdentityInterface
 {
