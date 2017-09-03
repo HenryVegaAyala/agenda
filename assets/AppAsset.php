@@ -23,7 +23,7 @@ class AppAsset extends AssetBundle
         'css/custom.min.css',
     ];
     public $js = [
-        'js/agenda.js',
+        'js/agenda.min.js',
         'repository/bootstrap/dist/js/bootstrap.min.js',
         'js/custom.min.js',
     ];
