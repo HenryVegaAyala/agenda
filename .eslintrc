@@ -1,3 +1,13 @@
 {
-  "extends": "standard"
+  "extends": [
+    "standard",
+    "standard-jsx"
+  ],
+  "globals": {
+    "localStorage": true,
+    "fetch": true,
+    "XMLHttpRequest": true,
+    "FormData": true,
+    "reject": true
+  }
 }

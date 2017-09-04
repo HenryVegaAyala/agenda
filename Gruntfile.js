@@ -25,18 +25,18 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
-      },
+      }
     }
 
-  })
+  }),
 
-  grunt.loadNpmTasks('grunt-typescript')
-  grunt.loadNpmTasks('grunt-concat-sourcemap')
-  grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-contrib-less')
-  grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-contrib-copy')
+  grunt.loadNpmTasks('grunt-typescript'),
+  grunt.loadNpmTasks('grunt-concat-sourcemap'),
+  grunt.loadNpmTasks('grunt-contrib-watch'),
+  grunt.loadNpmTasks('grunt-contrib-less'),
+  grunt.loadNpmTasks('grunt-contrib-uglify'),
+  grunt.loadNpmTasks('grunt-contrib-copy'),
 
-  grunt.registerTask('build', ['less', 'uglify'])
+  grunt.registerTask('build', ['less', 'uglify']),
   grunt.registerTask('default', ['watch'])
 }
