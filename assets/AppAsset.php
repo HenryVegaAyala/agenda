@@ -20,9 +20,10 @@ class AppAsset extends AssetBundle
     public $css = [
         'repository/bootstrap/dist/css/bootstrap.min.css',
         'repository/font-awesome/css/font-awesome.min.css',
-        'css/custom.min.css',
+        'css/custom.scss',
     ];
     public $js = [
+        //'js/ticket.js',
         'js/agenda.min.js',
         'repository/bootstrap/dist/js/bootstrap.min.js',
         'js/custom.min.js',
