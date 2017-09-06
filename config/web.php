@@ -102,6 +102,7 @@ $config = [
                 /**Usuario**/
                 ['pattern' => '/nuevo-usuario', 'route' => '/user/create', 'suffix' => '.php'],
                 ['pattern' => '/lista-usuario', 'route' => '/user/index', 'suffix' => '.php'],
+                ['pattern' => '/importar-usuario', 'route' => '/user/import', 'suffix' => '.php'],
                 ['pattern' => '/actualizar-usuario/<id:\d+>', 'route' => '/user/update'],
                 ['pattern' => '/eliminar-usuario/<id:\d+>', 'route' => '/user/delete'],
                 ['pattern' => '/actualizar/datos/<id:\d+>', 'route' => '/user/change'],
