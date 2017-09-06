@@ -3,33 +3,33 @@ module.exports = function (grunt) {
     uglify: {
       options: {
         // compress: true,
-        separator: ";"
+        separator: ';'
       },
       dist: {
-        src: ["web/js/agenda.js", "web/js/custom.js"],
-        dest: "web/js/ticket.js"
+        src: ['web/js/agenda.js', 'web/js/custom.js'],
+        dest: 'web/js/ticket.js'
       }
     },
     less: {
       options: {
         compress: true,
-        style: "expanded"
+        style: 'expanded'
       },
       dist: {
-        src: "web/css/custom.css",
-        dest: "web/css/custom.scss"
+        src: 'web/css/custom.css',
+        dest: 'web/css/custom.scss'
       }
-    },
+    }
   }),
 
-    grunt.loadNpmTasks("grunt-typescript"),
-    grunt.loadNpmTasks("grunt-concat-sourcemap"),
-    grunt.loadNpmTasks("grunt-contrib-watch"),
-    grunt.loadNpmTasks("grunt-contrib-less"),
-    grunt.loadNpmTasks("grunt-contrib-uglify"),
-    grunt.loadNpmTasks("grunt-contrib-copy"),
-    grunt.loadNpmTasks("grunt-contrib-sass"),
-    grunt.loadNpmTasks("grunt-contrib-concat"),
+  grunt.loadNpmTasks('grunt-typescript'),
+  grunt.loadNpmTasks('grunt-concat-sourcemap'),
+  grunt.loadNpmTasks('grunt-contrib-watch'),
+  grunt.loadNpmTasks('grunt-contrib-less'),
+  grunt.loadNpmTasks('grunt-contrib-uglify'),
+  grunt.loadNpmTasks('grunt-contrib-copy'),
+  grunt.loadNpmTasks('grunt-contrib-sass'),
+  grunt.loadNpmTasks('grunt-contrib-concat'),
 
-    grunt.registerTask("build", ["less", "uglify"])
+  grunt.registerTask('build', ['less', 'uglify'])
 }
