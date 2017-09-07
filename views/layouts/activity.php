@@ -40,19 +40,39 @@ use yii\helpers\Url;
                         <h3>Menú General</h3>
                         <ul class="nav side-menu">
                             <?php if (Yii::$app->user->identity->privilegio === 'G') { ?>
-                                <li><a><i class="fa fa-list-alt"></i> Incidencia <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-list-alt"></i> Incidencia <span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="<?php echo Url::to(['/proforma/create']) ?>">Registrar Incidencia</a>
+                                        <li>
+                                            <a href="<?php echo Url::to(['/incidencia/create']) ?>">
+                                                Registrar Incidencia
+                                            </a>
                                         </li>
-                                        <li><a href="<?php echo Url::to(['/proforma/index']) ?>">Lista de Incidencia</a>
+                                        <li>
+                                            <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de
+                                                Incidencia
+                                            </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-list-alt"></i> Usuario <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-list-alt"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Cliente</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de Clientes</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo Url::to(['/user/index']) ?>">Importar Clientes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-list-alt"></i> Usuario <span
+                                                class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo Url::to(['/user/create']) ?>">Registrar Usuario</a></li>
                                         <li><a href="<?php echo Url::to(['/user/index']) ?>">Listar Privilegios</a></li>
-                                        <li><a href="<?php echo Url::to(['/user/index']) ?>">Importar Usuarios</a></li>
                                     </ul>
                                 </li>
                             <?php } ?>
@@ -67,7 +87,8 @@ use yii\helpers\Url;
                                 'data-placement' => 'top',
                                 'title' => 'Configuración',
                             ]) ?>
-                        <a id="fullScreen" onclick="DoFullScreen()" data-toggle="tooltip" data-placement="top" title="FullScreen">
+                        <a id="fullScreen" onclick="DoFullScreen()" data-toggle="tooltip" data-placement="top"
+                           title="FullScreen">
                             <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Chat">
