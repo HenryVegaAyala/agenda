@@ -44,33 +44,77 @@ $descripcion = "Registrar Incidencia";
                             ]) ?>
                         </div>
 
-                        <?= $form->field($model, 'contacto')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'contacto')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'notas')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'notas')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'resumen')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'resumen')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'servico')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'servico')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'ci')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'ci')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'fecha_deseada')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'fecha_deseada')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'impacto')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'impacto')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'urgencia')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'urgencia')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'prioridad')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'prioridad')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'tipo_incidencia')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'tipo_incidencia')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
 
-                        <?= $form->field($model, 'fuente_reportada')->textInput(['maxlength' => true]) ?>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'fuente_reportada')->textInput([
+                                'class' => 'form-control col-md-7 col-xs-12',
+                            ]) ?>
+                        </div>
                     </div>
                 </div>
                 <div class="ln_solid"></div>
                 <div class="form-group">
                     <center>
-                        <div class="col-md-6 col-md-offset-3">
+                        <div class="col-md-6 col-xs-12 col-md-offset-3">
                             <?= Html::submitButton('<i class="fa fa-floppy-o fa-lg"></i> ' . ' Guardar',
                                 ['class' => 'btn btn-success']) ?>
                             <?= Html::resetButton('<i class="fa fa-times fa-lg"></i> ' . ' Cancelar',

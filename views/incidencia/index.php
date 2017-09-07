@@ -3,52 +3,73 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\IncidenciaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Incidencias';
+$this->title = 'Ticket - Lista de Incidencias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="incidencia-index">
+<div class="right_col" role="main">
+    <div class="clearfix"></div>
+    <div class="x_panel">
+        <div class="x_content">
+            <?php Pjax::begin([
+                'timeout' => false,
+                'enablePushState' => false,
+                'clientOptions' => ['method' => 'POST'],
+            ]); ?>
+            <div class="table table-striped table-responsive jambo_table bulk_action">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><?= "Lista de Indicencias" ?></h3>
+                    </div>
+                    <p class="note"></p>
+                    <div class="container-fluid">
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'filterModel' => $searchModel,
+                            'columns' => [
+                                ['class' => 'yii\grid\SerialColumn'],
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                                'id',
+                                'empresa',
+                                'cliente',
+                                'contacto',
+                                'notas',
+                                // 'resumen',
+                                // 'servico',
+                                // 'ci',
+                                // 'fecha_deseada',
+                                // 'impacto',
+                                // 'urgencia',
+                                // 'prioridad',
+                                // 'tipo_incidencia',
+                                // 'fuente_reportada',
+                                // 'fecha_digitada',
+                                // 'fecha_modificada',
+                                // 'fecha_eliminada',
+                                // 'usuario_digitado',
+                                // 'usuario_modificado',
+                                // 'usuario_eliminado',
+                                // 'estado',
+                                // 'ip',
+                                // 'host',
 
-    <p>
-        <?= Html::a('Create Incidencia', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'empresa',
-            'cliente',
-            'contacto',
-            'notas',
-            // 'resumen',
-            // 'servico',
-            // 'ci',
-            // 'fecha_deseada',
-            // 'impacto',
-            // 'urgencia',
-            // 'prioridad',
-            // 'tipo_incidencia',
-            // 'fuente_reportada',
-            // 'fecha_digitada',
-            // 'fecha_modificada',
-            // 'fecha_eliminada',
-            // 'usuario_digitado',
-            // 'usuario_modificado',
-            // 'usuario_eliminado',
-            // 'estado',
-            // 'ip',
-            // 'host',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-<?php Pjax::end(); ?></div>
+                                ['class' => 'yii\grid\ActionColumn'],
+                            ],
+                        ]); ?>
+                    </div>
+                    <div class="panel-footer container-fluid">
+                        <div class="col-sm-12">
+                            <?= Html::a('<i class="fa fa-refresh" aria-hidden="true"></i> Refrescar', ['index'],
+                                ['class' => 'btn btn-primary']) ?>
+                        </div>
+                    </div>
+                </div>
+                <?php Pjax::end(); ?>
+            </div>
+        </div>
+    </div>
+</div>
