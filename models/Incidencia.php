@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "incidencia".
@@ -31,7 +31,7 @@ use Yii;
  * @property string $ip
  * @property string $host
  */
-class Incidencia extends \yii\db\ActiveRecord
+class Incidencia extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -47,10 +47,47 @@ class Incidencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'empresa', 'cliente', 'contacto', 'notas', 'resumen', 'servico', 'ci', 'fecha_deseada', 'impacto', 'urgencia', 'prioridad', 'tipo_incidencia', 'fuente_reportada'], 'required'],
+            [
+                [
+                    'id',
+                    'empresa',
+                    'cliente',
+                    'contacto',
+                    'notas',
+                    'resumen',
+                    'servico',
+                    'ci',
+                    'fecha_deseada',
+                    'impacto',
+                    'urgencia',
+                    'prioridad',
+                    'tipo_incidencia',
+                    'fuente_reportada',
+                ],
+                'required',
+            ],
             [['id', 'estado'], 'integer'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
-            [['empresa', 'cliente', 'contacto', 'notas', 'resumen', 'servico', 'ci', 'fecha_deseada', 'impacto', 'urgencia', 'prioridad', 'tipo_incidencia', 'fuente_reportada', 'host'], 'string', 'max' => 150],
+            [
+                [
+                    'empresa',
+                    'cliente',
+                    'contacto',
+                    'notas',
+                    'resumen',
+                    'servico',
+                    'ci',
+                    'fecha_deseada',
+                    'impacto',
+                    'urgencia',
+                    'prioridad',
+                    'tipo_incidencia',
+                    'fuente_reportada',
+                    'host',
+                ],
+                'string',
+                'max' => 150,
+            ],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
             [['ip'], 'string', 'max' => 30],
         ];
@@ -68,8 +105,8 @@ class Incidencia extends \yii\db\ActiveRecord
             'contacto' => 'Contacto',
             'notas' => 'Notas',
             'resumen' => 'Resumen',
-            'servico' => 'Servico',
-            'ci' => 'Ci',
+            'servico' => 'Servicio',
+            'ci' => 'CI',
             'fecha_deseada' => 'Fecha Deseada',
             'impacto' => 'Impacto',
             'urgencia' => 'Urgencia',

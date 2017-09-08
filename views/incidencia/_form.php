@@ -32,82 +32,92 @@ $descripcion = "Registrar Incidencia";
                 <span class="section"><?php echo Html::encode($descripcion) ?></span>
                 <div class="row">
                     <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'empresa')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'empresa')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'cliente')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'cliente')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'contacto')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'notas')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'contacto')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'resumen')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'servico')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'notas')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'ci')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'fecha_deseada')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'resumen')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'impacto')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'urgencia')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'servico')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'prioridad')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'tipo_incidencia')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'ci')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'fecha_deseada')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'impacto')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'urgencia')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'prioridad')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'tipo_incidencia')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'fuente_reportada')->textInput([
-                                'class' => 'form-control col-md-7 col-xs-12',
-                            ]) ?>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model, 'fuente_reportada')->textInput([
+                                        'class' => 'form-control col-md-7 col-xs-12',
+                                    ]) ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
