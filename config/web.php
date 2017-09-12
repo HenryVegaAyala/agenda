@@ -111,6 +111,12 @@ $config = [
                 ['pattern' => '/lista-incidencia', 'route' => '/incidencia/index', 'suffix' => '.php'],
                 ['pattern' => '/actualizar-incidencia/<id:\d+>', 'route' => '/incidencia/update'],
                 ['pattern' => '/eliminar-incidencia/<id:\d+>', 'route' => '/incidencia/delete'],
+
+                /**Cliente**/
+                ['pattern' => '/nuevo-cliente', 'route' => '/cliente/create', 'suffix' => '.php'],
+                ['pattern' => '/lista-cliente', 'route' => '/cliente/index', 'suffix' => '.php'],
+                ['pattern' => '/actualizar-cliente/<id:\d+>', 'route' => '/cliente/update'],
+                ['pattern' => '/eliminar-cliente/<id:\d+>', 'route' => '/cliente/delete'],
             ],
         ],
 

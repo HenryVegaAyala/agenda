@@ -7,7 +7,6 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\models\Incidencia */
 /* @var $form yii\widgets\ActiveForm */
-
 $descripcion = "Registrar Incidencia";
 ?>
 <div class="clearfix"></div>
@@ -18,7 +17,6 @@ $descripcion = "Registrar Incidencia";
                 <?php Pjax::begin(); ?>
                 <?php $form = ActiveForm::begin(
                     [
-                        'id' => 'dynamic-form',
                         'enableAjaxValidation' => false,
                         'enableClientValidation' => true,
                         'validateOnChange' => false,
@@ -45,7 +43,6 @@ $descripcion = "Registrar Incidencia";
                                     ]) ?>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?= $form->field($model, 'contacto')->textInput([
@@ -58,7 +55,6 @@ $descripcion = "Registrar Incidencia";
                                     ]) ?>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?= $form->field($model, 'resumen')->textInput([
@@ -71,7 +67,6 @@ $descripcion = "Registrar Incidencia";
                                     ]) ?>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?= $form->field($model, 'ci')->textInput([
@@ -84,7 +79,6 @@ $descripcion = "Registrar Incidencia";
                                     ]) ?>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?= $form->field($model, 'impacto')->textInput([
@@ -97,7 +91,6 @@ $descripcion = "Registrar Incidencia";
                                     ]) ?>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?= $form->field($model, 'prioridad')->textInput([
@@ -110,7 +103,6 @@ $descripcion = "Registrar Incidencia";
                                     ]) ?>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?= $form->field($model, 'fuente_reportada')->textInput([
