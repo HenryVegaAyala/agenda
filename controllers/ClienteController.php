@@ -112,7 +112,7 @@ class ClienteController extends Controller
      */
     public function actionImport()
     {
-
+        return $this->redirect(['import']);
     }
 
     /**

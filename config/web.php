@@ -115,6 +115,7 @@ $config = [
                 /**Cliente**/
                 ['pattern' => '/nuevo-cliente', 'route' => '/cliente/create', 'suffix' => '.php'],
                 ['pattern' => '/lista-cliente', 'route' => '/cliente/index', 'suffix' => '.php'],
+                ['pattern' => '/importar-cliente', 'route' => '/cliente/import', 'suffix' => '.php'],
                 ['pattern' => '/actualizar-cliente/<id:\d+>', 'route' => '/cliente/update'],
                 ['pattern' => '/eliminar-cliente/<id:\d+>', 'route' => '/cliente/delete'],
             ],
