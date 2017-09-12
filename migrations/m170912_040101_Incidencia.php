@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m170908_030101_Incidencia extends \yii\db\Migration
+class m170912_040101_Incidencia extends \yii\db\Migration
 {
     public function up()
     {
@@ -13,6 +13,7 @@ class m170908_030101_Incidencia extends \yii\db\Migration
         
         $this->createTable('incidencia', [
             'id' => $this->integer(99)->notNull(),
+            'usuario_id' => $this->integer(11)->notNull(),
             'empresa' => $this->string(150)->notNull(),
             'cliente' => $this->string(150)->notNull(),
             'contacto' => $this->string(150)->notNull(),

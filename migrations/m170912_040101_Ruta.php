@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m170908_030101_Ruta extends \yii\db\Migration
+class m170912_040101_Ruta extends \yii\db\Migration
 {
     public function up()
     {
@@ -13,6 +13,7 @@ class m170908_030101_Ruta extends \yii\db\Migration
         
         $this->createTable('ruta', [
             'id' => $this->primaryKey(),
+            'usuario_id' => $this->integer(11)->notNull(),
             'rol_usuario' => $this->string(30),
             'nombre_url' => $this->string(150),
             'url' => $this->string(150),

@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m170828_050101_User extends \yii\db\Migration
+class m170912_040101_User extends \yii\db\Migration
 {
     public function up()
     {
@@ -10,7 +10,7 @@ class m170828_050101_User extends \yii\db\Migration
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         }
-
+        
         $this->createTable('usuario', [
             'id' => $this->primaryKey(),
             'nombre' => $this->string(80),
@@ -34,8 +34,8 @@ class m170828_050101_User extends \yii\db\Migration
             'genero' => $this->char(1),
             'fecha_inicio' => $this->date(),
             'fecha_cumpleanos' => $this->date(),
-        ], $tableOptions);
-
+            ], $tableOptions);
+                
     }
 
     public function down()
