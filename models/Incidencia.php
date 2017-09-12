@@ -2,12 +2,13 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "incidencia".
  *
  * @property integer $id
+ * @property integer $usuario_id
  * @property string $empresa
  * @property string $cliente
  * @property string $contacto
@@ -31,7 +32,7 @@ use yii\db\ActiveRecord;
  * @property string $ip
  * @property string $host
  */
-class Incidencia extends ActiveRecord
+class Incidencia extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -50,6 +51,7 @@ class Incidencia extends ActiveRecord
             [
                 [
                     'id',
+                    'usuario_id',
                     'empresa',
                     'cliente',
                     'contacto',
@@ -66,7 +68,7 @@ class Incidencia extends ActiveRecord
                 ],
                 'required',
             ],
-            [['id', 'estado'], 'integer'],
+            [['id', 'usuario_id', 'estado'], 'integer'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [
                 [
@@ -100,13 +102,14 @@ class Incidencia extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'usuario_id' => 'Usuario ID',
             'empresa' => 'Empresa',
             'cliente' => 'Cliente',
             'contacto' => 'Contacto',
             'notas' => 'Notas',
             'resumen' => 'Resumen',
-            'servico' => 'Servicio',
-            'ci' => 'CI',
+            'servico' => 'Servico',
+            'ci' => 'Ci',
             'fecha_deseada' => 'Fecha Deseada',
             'impacto' => 'Impacto',
             'urgencia' => 'Urgencia',

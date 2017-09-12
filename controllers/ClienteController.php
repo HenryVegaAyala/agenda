@@ -107,6 +107,15 @@ class ClienteController extends Controller
     }
 
     /**
+     * Import Cliente model.
+     * If is successful, the browser will be redirected to the 'details' page.
+     */
+    public function actionImport()
+    {
+
+    }
+
+    /**
      * Finds the Cliente model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

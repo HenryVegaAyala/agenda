@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "ruta".
  *
  * @property integer $id
+ * @property integer $usuario_id
  * @property string $rol_usuario
  * @property string $nombre_url
  * @property string $url
@@ -37,8 +38,9 @@ class Ruta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['usuario_id'], 'required'],
+            [['usuario_id', 'estado'], 'integer'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
-            [['estado'], 'integer'],
             [['rol_usuario', 'ip'], 'string', 'max' => 30],
             [['nombre_url', 'url'], 'string', 'max' => 150],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
@@ -53,6 +55,7 @@ class Ruta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'usuario_id' => 'Usuario ID',
             'rol_usuario' => 'Rol Usuario',
             'nombre_url' => 'Nombre Url',
             'url' => 'Url',
