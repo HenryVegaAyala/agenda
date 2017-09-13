@@ -77,6 +77,7 @@ class ClienteSearch extends Cliente
         }
 
         $query->andFilterWhere([
+            'id' => $this->id,
             'dni' => $this->dni,
             'estado' => $this->estado,
         ]);
