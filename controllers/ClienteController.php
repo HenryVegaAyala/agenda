@@ -112,7 +112,17 @@ class ClienteController extends Controller
      */
     public function actionImport()
     {
-        return $this->redirect(['import']);
+        $model = new Cliente();
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->save();
+
+            return $this->redirect(['details']);
+        } else {
+            return $this->render('import', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
