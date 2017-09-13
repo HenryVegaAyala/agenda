@@ -23,7 +23,6 @@ class AppAsset extends AssetBundle
         'css/custom.scss',
     ];
     public $js = [
-        //'js/ticket.js',
         'js/agenda.min.js',
         'repository/bootstrap/dist/js/bootstrap.min.js',
         'js/custom.min.js',
