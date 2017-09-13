@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
-$descripcion = "Importar Cliente";
+$descripcion = "Importar/Exportar Clientes";
 ?>
 <div class="clearfix"></div>
 <div class="row">
@@ -32,27 +32,25 @@ $descripcion = "Importar Cliente";
                     <div class="item form-group">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'nombres')->textInput(['maxlength' => true]) ?>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
-                                </div>
+                                <center>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img src="<?php echo Yii::getAlias('@ExcelImport') ?>" alt="Excel Import"
+                                             class="img-responsive">
+                                        <?= Html::submitButton('<i class="fa fa-cloud-upload fa-lg"></i> ' . ' Importar',
+                                            ['class' => 'btn btn-success']) ?>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img src="<?php echo Yii::getAlias('@ExcelDownload') ?>" alt="Excel Download"
+                                             class="img-responsive">
+                                        <?= Html::submitButton('<i class="fa fa-cloud-download fa-lg"></i> ' . ' Exportar',
+                                            ['class' => 'btn btn-success']) ?>
+                                    </div>
+                                </center>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="ln_solid"></div>
-                <div class="form-group">
-                    <center>
-                        <div class="col-md-6 col-xs-12 col-md-offset-3">
-                            <?= Html::submitButton('<i class="fa fa-cloud-upload fa-lg"></i> ' . ' Importar',
-                                ['class' => 'btn btn-success']) ?>
-                            <?= Html::resetButton('<i class="fa fa-times fa-lg"></i> ' . ' Cancelar',
-                                ['class' => 'btn btn-primary', 'id' => 'cancelar']) ?>
-                        </div>
-                    </center>
-                </div>
             </div>
             <?php ActiveForm::end(); ?>
             <?php Pjax::end(); ?>
