@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -37,10 +38,11 @@ $descripcion = "Importar/Exportar Clientes";
                                         <img src="<?php echo Yii::getAlias('@ExcelImport') ?>" alt="Excel Import"
                                              class="img-responsive">
                                         <?= Html::submitButton('<i class="fa fa-cloud-upload fa-lg"></i> ' . ' Importar',
-                                            ['class' => 'btn btn-success']) ?>
+                                            ['class' => 'btn btn-success', 'id' => 'import']) ?>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <img src="<?php echo Yii::getAlias('@ExcelDownload') ?>" alt="Excel Download"
+                                        <img src="<?php echo Yii::getAlias('@ExcelDownload') ?>"
+                                             alt="Excel Download"
                                              class="img-responsive">
                                         <?= Html::submitButton('<i class="fa fa-cloud-download fa-lg"></i> ' . ' Exportar',
                                             ['class' => 'btn btn-success']) ?>
@@ -57,3 +59,16 @@ $descripcion = "Importar/Exportar Clientes";
         </div>
     </div>
 </div>
+<?php
+Modal::begin([
+    'header' => '<h4>Destination</h4>',
+    'id' => 'model',
+    'size' => 'model-lg',
+]);
+
+echo "<div id='modelContent'></div>";
+
+Modal::end();
+
+?>
+

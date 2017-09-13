@@ -12,3 +12,11 @@ function DoFullScreen () {
     }
   }
 }
+
+$(function(){
+  $('#import').click(function(){
+    $('.modal').modal('show')
+      .find('#modelContent')
+      .load($(this).attr('value'));
+  });
+});
