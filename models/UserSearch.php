@@ -67,7 +67,6 @@ class UserSearch extends User
             ])
                 ->orderBy(['id' => SORT_ASC]);
         }, 3600, $dependency);
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -76,11 +75,9 @@ class UserSearch extends User
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'estado' => $this->estado,

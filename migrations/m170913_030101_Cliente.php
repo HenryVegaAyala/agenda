@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m170912_040101_Cliente extends \yii\db\Migration
+class m170913_030101_Cliente extends \yii\db\Migration
 {
     public function up()
     {
@@ -12,7 +12,7 @@ class m170912_040101_Cliente extends \yii\db\Migration
         }
         
         $this->createTable('cliente', [
-            'id' => $this->integer(99)->notNull(),
+            'id' => $this->primaryKey(),
             'nombres' => $this->string(150)->notNull(),
             'apellidos' => $this->string(150)->notNull(),
             'email' => $this->string(150)->notNull(),
@@ -29,7 +29,6 @@ class m170912_040101_Cliente extends \yii\db\Migration
             'estado' => $this->smallInteger(1),
             'ip' => $this->string(30),
             'host' => $this->string(150),
-            'PRIMARY KEY ([[id]])',
             ], $tableOptions);
                 
     }

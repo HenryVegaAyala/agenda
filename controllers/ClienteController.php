@@ -134,7 +134,21 @@ class ClienteController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Cliente::findOne($id)) !== null) {
+        if (($model = Cliente::find()->select([
+                'id',
+                'nombres',
+                'apellidos',
+                'email',
+                'dni',
+                'numero_celular',
+                'area',
+                'cargo',
+                'estado',
+            ])
+                ->where('id = :id', [':id' => $id])
+                ->one()
+            ) !== null
+        ) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
