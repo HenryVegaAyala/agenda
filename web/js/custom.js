@@ -70,7 +70,6 @@ var setContentHeight = function () {
 };
 
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
-	  console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
@@ -101,8 +100,6 @@ var setContentHeight = function () {
 
 // toggle small or large menu 
 $MENU_TOGGLE.on('click', function() {
-		console.log('clicked - menu toggle');
-		
 		if ($BODY.hasClass('nav-md')) {
 			$SIDEBAR_MENU.find('li.active ul').hide();
 			$SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
@@ -341,11 +338,7 @@ if (typeof NProgress != 'undefined') {
 	function init_flot_chart(){
 		
 		if( typeof ($.plot) === 'undefined'){ return; }
-		
-		console.log('init_flot_chart');
-		
-		
-		
+
 		var arr_data1 = [
 			[gd(2012, 1, 1), 17],
 			[gd(2012, 1, 2), 74],
@@ -548,15 +541,13 @@ if (typeof NProgress != 'undefined') {
         
 		
         if ($("#chart_plot_01").length){
-			console.log('Plot1');
-			
+
 			$.plot( $("#chart_plot_01"), [ arr_data1, arr_data2 ],  chart_plot_01_settings );
 		}
 		
 		
 		if ($("#chart_plot_02").length){
-			console.log('Plot2');
-			
+
 			$.plot( $("#chart_plot_02"), 
 			[{ 
 				label: "Email Sent", 
@@ -571,8 +562,6 @@ if (typeof NProgress != 'undefined') {
 		}
 		
 		if ($("#chart_plot_03").length){
-			console.log('Plot3');
-			
 			
 			$.plot($("#chart_plot_03"), [{
 				label: "Registrations",
@@ -595,8 +584,7 @@ if (typeof NProgress != 'undefined') {
 	function init_starrr() {
 		
 		if( typeof (starrr) === 'undefined'){ return; }
-		console.log('init_starrr');
-		
+
 		$(".stars").starrr();
 
 		$('.stars-existing').starrr({
@@ -616,12 +604,8 @@ if (typeof NProgress != 'undefined') {
 	
 	function init_JQVmap(){
 
-		//console.log('check init_JQVmap [' + typeof (VectorCanvas) + '][' + typeof (jQuery.fn.vectorMap) + ']' );	
-		
 		if(typeof (jQuery.fn.vectorMap) === 'undefined'){ return; }
-		
-		console.log('init_JQVmap');
-	     
+
 			if ($('#world-map-gdp').length ){
 		 
 				$('#world-map-gdp').vectorMap({
@@ -662,8 +646,7 @@ if (typeof NProgress != 'undefined') {
 	function init_skycons(){
 				
 			if( typeof (Skycons) === 'undefined'){ return; }
-			console.log('init_skycons');
-		
+
 			var icons = new Skycons({
 				"color": "#73879C"
 			  }),
@@ -685,9 +668,7 @@ if (typeof NProgress != 'undefined') {
 	function init_chart_doughnut(){
 				
 		if( typeof (Chart) === 'undefined'){ return; }
-		
-		console.log('init_chart_doughnut');
-	 
+
 		if ($('.canvasDoughnut').length){
 			
 		var chart_doughnut_settings = {
@@ -739,11 +720,6 @@ if (typeof NProgress != 'undefined') {
 	function init_gauge() {
 			
 		if( typeof (Gauge) === 'undefined'){ return; }
-		
-		console.log('init_gauge [' + $('.gauge-chart').length + ']');
-		
-		console.log('init_gauge');
-		
 
 		  var chart_gauge_settings = {
 		  lines: 12,
@@ -804,9 +780,7 @@ if (typeof NProgress != 'undefined') {
 		function init_sparklines() {
 			
 			if(typeof (jQuery.fn.sparkline) === 'undefined'){ return; }
-			console.log('init_sparklines'); 
-			
-			
+
 			$(".sparkline_one").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 4, 5, 6, 3, 5, 4, 5, 4, 5, 4, 3, 4, 5, 6, 7, 5, 4, 3, 5, 6], {
 				type: 'bar',
 				height: '125',

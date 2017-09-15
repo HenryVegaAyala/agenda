@@ -95,6 +95,7 @@ $config = [
             'rules' => [
                 /**Sesion**/
                 ['pattern' => '/login', 'route' => '/site/login', 'suffix' => '.php'],
+                ['pattern' => '/logout/<id:\d+>', 'route' => '/site/logout'],
 
                 /**home**/
                 ['pattern' => '/', 'route' => '/site/index', 'suffix' => ''],
@@ -116,6 +117,7 @@ $config = [
                 ['pattern' => '/nuevo-cliente', 'route' => '/cliente/create', 'suffix' => '.php'],
                 ['pattern' => '/lista-cliente', 'route' => '/cliente/index', 'suffix' => '.php'],
                 ['pattern' => '/importar-cliente', 'route' => '/cliente/import', 'suffix' => '.php'],
+                ['pattern' => '/exportar-cliente', 'route' => '/cliente/export', 'suffix' => '.php'],
                 ['pattern' => '/actualizar-cliente/<id:\d+>', 'route' => '/cliente/update'],
                 ['pattern' => '/eliminar-cliente/<id:\d+>', 'route' => '/cliente/delete'],
             ],

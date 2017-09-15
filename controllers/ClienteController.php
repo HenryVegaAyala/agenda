@@ -8,6 +8,7 @@ use app\models\ClienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ClienteController implements the CRUD actions for Cliente model.
@@ -115,14 +116,34 @@ class ClienteController extends Controller
         $model = new Cliente();
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->save();
+            $model->excel_import = UploadedFile::getInstance($model, 'excel_import');
+            var_dump($model->excel_import);
+            exit();
 
-            return $this->redirect(['details']);
+            //$model->save();
+
+            return $this->render('details');
         } else {
             return $this->render('import', [
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Import Cliente model.
+     * If is successful, the browser will be redirected to the 'details' page.
+     */
+    public function actionExport()
+    {
+        $model = new Cliente();
+
+        var_dump("Hola");
+        exit();
+
+        return $this->render('import', [
+            'model' => $model,
+        ]);
     }
 
     /**

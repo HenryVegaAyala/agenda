@@ -19,11 +19,13 @@ $descripcion = "Importar/Exportar Clientes";
                 <?php $form = ActiveForm::begin(
                     [
                         'enableAjaxValidation' => false,
+                        'id' => 'process_excel',
                         'enableClientValidation' => true,
                         'validateOnChange' => false,
                         'method' => 'post',
                         'options' => [
                             'class' => 'form-horizontal form-label-left',
+                            'enctype' => "multipart/form-data",
                             'data-pjax' => true,
                         ],
                     ]
@@ -37,15 +39,22 @@ $descripcion = "Importar/Exportar Clientes";
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <img src="<?php echo Yii::getAlias('@ExcelImport') ?>" alt="Excel Import"
                                              class="img-responsive">
-                                        <?= Html::submitButton('<i class="fa fa-cloud-upload fa-lg"></i> ' . ' Importar',
-                                            ['class' => 'btn btn-success', 'id' => 'import']) ?>
+                                        <div class="fileinput" data-provides="fileinput">
+                                            <span class="btn btn-success btn-file">
+                                                    <i class="fa fa-cloud-upload fa-lg"></i> Importar
+                                                    <input type="hidden" name="Cliente[excel_import]" value="">
+                                                    <input type="file" id="Cliente[excel_import]"
+                                                           onchange="this.form.submit()" name="Cliente[excel_import]"
+                                                           class="form-control" multiple="" aria-invalid="false">
+                                            </span>
+                                        </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                         <img src="<?php echo Yii::getAlias('@ExcelDownload') ?>"
                                              alt="Excel Download"
                                              class="img-responsive">
-                                        <?= Html::submitButton('<i class="fa fa-cloud-download fa-lg"></i> ' . ' Exportar',
-                                            ['class' => 'btn btn-success']) ?>
+                                        <?= Html::a('<i class="fa fa-cloud-download fa-lg"></i> ' . Yii::t('app', 'Exportar'),
+                                            ['/cliente/export'], ['class' => 'btn btn-success']) ?>
                                     </div>
                                 </center>
                             </div>
@@ -59,16 +68,3 @@ $descripcion = "Importar/Exportar Clientes";
         </div>
     </div>
 </div>
-<?php
-Modal::begin([
-    'header' => '<h4>Destination</h4>',
-    'id' => 'model',
-    'size' => 'model-lg',
-]);
-
-echo "<div id='modelContent'></div>";
-
-Modal::end();
-
-?>
-

@@ -33,31 +33,38 @@ $descripcion = "Registrar Cliente";
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'nombres')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field($model,
+                                        'nombres')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'apellidos')->textInput(['maxlength' => true]) ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'dni')->textInput() ?>
+                                    <?= $form->field($model,
+                                        'apellidos')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'numero_celular')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field($model,
+                                        'email')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'area')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field($model,
+                                        'dni')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <?= $form->field($model, 'cargo')->textInput(['maxlength' => true]) ?>
+                                    <?= $form->field($model,
+                                        'numero_celular')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model,
+                                        'area')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $form->field($model,
+                                        'cargo')->textInput(['class' => 'form-control col-md-7 col-xs-12']) ?>
                                 </div>
                             </div>
                         </div>

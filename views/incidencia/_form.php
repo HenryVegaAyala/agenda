@@ -129,3 +129,4 @@ $descripcion = "Registrar Incidencia";
             <?php Pjax::end(); ?>
         </div>
     </div>
+</div>

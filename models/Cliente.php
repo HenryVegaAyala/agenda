@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cliente".
@@ -24,9 +24,12 @@ use Yii;
  * @property integer $estado
  * @property string $ip
  * @property string $host
+ * @property string $excel_import
  */
-class Cliente extends \yii\db\ActiveRecord
+class Cliente extends ActiveRecord
 {
+    public $excel_import;
+
     /**
      * @inheritdoc
      */
@@ -44,7 +47,11 @@ class Cliente extends \yii\db\ActiveRecord
             [['id', 'nombres', 'apellidos', 'email', 'dni', 'numero_celular', 'area', 'cargo'], 'required'],
             [['id', 'dni', 'estado'], 'integer'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
-            [['nombres', 'apellidos', 'email', 'numero_celular', 'area', 'cargo', 'host'], 'string', 'max' => 150],
+            [
+                ['nombres', 'apellidos', 'email', 'numero_celular', 'area', 'cargo', 'host', 'excel_import'],
+                'string',
+                'max' => 150,
+            ],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
             [['ip'], 'string', 'max' => 30],
         ];
@@ -73,6 +80,7 @@ class Cliente extends \yii\db\ActiveRecord
             'estado' => 'Estado',
             'ip' => 'Ip',
             'host' => 'Host',
+            'excel_import' => 'Excel',
         ];
     }
 }

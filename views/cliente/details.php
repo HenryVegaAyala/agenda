@@ -1,7 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: hpveg
- * Date: 12/09/2017
- * Time: 9:55 PM
- */
+/* @var $this yii\web\View */
+/* @var $model app\models\Cliente */
+
+$this->title = 'Ticket - Detalle de la Importación';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="right_col" role="main">
+
+
+</div>
