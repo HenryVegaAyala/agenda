@@ -6,9 +6,6 @@
 
 $this->title = 'Sistema de Ticket - Crear Nuevo Usuario';
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="right_col" role="main">
-    <?= $this->render('_form', [
+?> <div class="right_col" role="main"> <?= $this->render('_form', [
         'model' => $model,
-    ]) ?>
-</div>
+    ]) ?> </div>
