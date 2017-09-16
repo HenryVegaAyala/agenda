@@ -138,9 +138,6 @@ class ClienteController extends Controller
     {
         $model = new Cliente();
 
-        var_dump("Hola");
-        exit();
-
         return $this->render('import', [
             'model' => $model,
         ]);
