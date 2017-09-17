@@ -27,12 +27,14 @@
         "wbraganca/yii2-dynamicform": "dev-master",
         "kartik-v/yii2-date-range": "dev-master",
         "mbrowniebytes/yii2-clean-vendors": "dev-master",
-        "bryglen/yii2-sendgrid": "*"
+        "bryglen/yii2-sendgrid": "*",
+        "undefinedor/yii2-cached-active-record": "^0.0.3",
+        "yiisoft/yii2-faker": "^2.0",
+        "tebazil/yii2-console-runner": "^0.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
-        "yiisoft/yii2-faker": "~2.0.0",
 
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1",
@@ -40,7 +42,7 @@
     },
     "config": {
         "fxp-asset": {
-            "installer-paths": {
+            "asset-installer-paths": {
                 "npm-asset-library": "vendor/npm",
                 "bower-asset-library": "vendor/bower"
             }

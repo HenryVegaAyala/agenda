@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\commands\CommandController;
+use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use app\models\Cliente;
 use app\models\ClienteSearch;
@@ -137,6 +139,11 @@ class ClienteController extends Controller
     public function actionExport()
     {
         $model = new Cliente();
+
+        //CommandController::actionIndex();
+        $runner = new ConsoleCommandRunner();
+        $runner->run('command/index');
+
 
         return $this->render('import', [
             'model' => $model,
