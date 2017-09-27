@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\commands\CommandController;
+use app\helpers\Utils;
 use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use app\models\Cliente;
@@ -118,9 +118,9 @@ class ClienteController extends Controller
         $model = new Cliente();
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->excel_import = UploadedFile::getInstance($model, 'excel_import');
-            var_dump($model->excel_import);
-            exit();
+            //$model->excel_import = UploadedFile::getInstance($model, 'excel_import');
+            //var_dump($model->excel_import);
+            //exit();
 
             //$model->save();
 
@@ -138,16 +138,13 @@ class ClienteController extends Controller
      */
     public function actionExport()
     {
-        $model = new Cliente();
-
-        //CommandController::actionIndex();
         $runner = new ConsoleCommandRunner();
-        $runner->run('command/index');
+        $runner->run('command/export');
 
+        $xlsName = 'Clientes.xlsx';
+        Utils::Download('reporte/' . $xlsName);
 
-        return $this->render('import', [
-            'model' => $model,
-        ]);
+        return $this->redirect(['cliente/import']);
     }
 
     /**

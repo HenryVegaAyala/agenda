@@ -16,6 +16,7 @@ use yii\filters\VerbFilter;
 class UserController extends Controller
 {
     const DATE_FORMAT = 'Y-MM-dd';
+    const TABLE = 'usuario';
     const INDEX = 'index';
     const SUCCESS = 'success';
 
@@ -59,7 +60,7 @@ class UserController extends Controller
         $model = new User();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id = (int)$model->getIdTable();
+            $model->id = (int)Utils::idTable(self::TABLE);
             $model->authKey = md5(rand(1, 9999));
             $model->accessToken = md5(rand(1, 9999));
             $model->fecha_digitada = Utils::zonaHoraria();
@@ -68,10 +69,8 @@ class UserController extends Controller
             $model->host = strval(php_uname());
             $model->estado = (int)$model->estado;
             $model->genero = (string)$model->genero;
-            $model->fecha_inicio = ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio),
-                self::DATE_FORMAT);
-            $model->fecha_cumpleanos = ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos),
-                self::DATE_FORMAT);
+            $model->fecha_inicio = ($model->fecha_inicio == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_inicio), self::DATE_FORMAT);
+            $model->fecha_cumpleanos = ($model->fecha_cumpleanos == '') ? '' : Yii::$app->formatter->asDate(strtotime($model->fecha_cumpleanos), self::DATE_FORMAT);
             $model->save();
             $this->encryptPassword($model->id, $model->contrasena);
             $names = $model->nombre . ' ' . $model->apellido;
@@ -99,7 +98,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 
             $connection->createCommand()
-                ->update('usuario',
+                ->update(self::TABLE,
                     [
                         'fecha_modificada' => Utils::zonaHoraria(),
                         'usuario_modificado' => Yii::$app->user->identity->correo,
@@ -273,7 +272,7 @@ class UserController extends Controller
     {
         $transaction = Yii::$app->db;
         $transaction->createCommand()
-            ->update('usuario',
+            ->update(self::TABLE,
                 [
                     'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash($password),
                 ],

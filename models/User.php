@@ -303,19 +303,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return false|null|string
-     */
-    public function getIdTable()
-    {
-        $query = new Query();
-        $sentence = new Expression('IFNULL(MAX(id), 0) + 1');
-        $query->select($sentence)->from('usuario');
-        $command = $query->createCommand();
-
-        return $command->queryScalar();
-    }
-
-    /**
      * @param $value
      * @return string
      */
