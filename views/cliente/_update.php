@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
-$descripcion = "Registrar Cliente";
+$descripcion = "Actualizar Cliente";
 ?>
 <div class="clearfix"></div>
 <div class="row">
