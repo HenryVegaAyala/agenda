@@ -2,7 +2,6 @@
 
 namespace app\helpers;
 
-
 use Yii;
 use yii\db\Expression;
 use yii\db\Query;
@@ -32,49 +31,35 @@ class Utils
         return $query->createCommand()->queryScalar();
     }
 
+    /**
+     * @param $dir
+     * @param $file
+     * @return bool
+     */
+    public static function downloadFile($dir, $file)
+    {
+        if (is_dir($dir)) {
+            $path = $dir . '/' . $file;
+            if (is_file($path)) {
+                $size = filesize($path);
+                header("Content-Type: application/force-download");
+                header("Content-Disposition: attachment; filename=$file");
+                header("Content-Transfer-Encoding: binary");
+                header("Content-Length: " . $size);
+                readfile($path);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function fileReporte()
     {
         $reporte = Yii::getAlias('@PathReporteDownload');
         if (!file_exists($reporte)) {
             mkdir($reporte, 0777, true);
         }
-    }
-
-    /**
-     * @param $path
-     * @param null $speed
-     * @return bool
-     */
-    public static function Download($path, $speed = null)
-    {
-        if (is_file($path) === true) {
-            $file = @fopen($path, 'rb');
-            $speed = (isset($speed) === true) ? round($speed * 1024) : 524288;
-            if (is_resource($file) === true) {
-                set_time_limit(0);
-                ignore_user_abort(false);
-                while (ob_get_level() > 0) {
-                    ob_end_clean();
-                }
-                header('Expires: 0');
-                header('Pragma: public');
-                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-                header('Content-Type: application/octet-stream');
-                header('Content-Length: ' . sprintf('%u', filesize($path)));
-                header('Content-Disposition: attachment; filename="' . basename($path) . '"');
-                header('Content-Transfer-Encoding: binary');
-                while (feof($file) !== true) {
-                    echo fread($file, $speed);
-                    while (ob_get_level() > 0) {
-                        ob_end_flush();
-                    }
-                    flush();
-                    sleep(1);
-                }
-                fclose($file);
-            }
-            exit();
-        }
-        return false;
     }
 }

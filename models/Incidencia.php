@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "incidencia".
@@ -32,7 +33,7 @@ use Yii;
  * @property string $ip
  * @property string $host
  */
-class Incidencia extends \yii\db\ActiveRecord
+class Incidencia extends ActiveRecord
 {
     /**
      * @inheritdoc

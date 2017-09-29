@@ -140,9 +140,11 @@ class ClienteController extends Controller
     {
         $runner = new ConsoleCommandRunner();
         $runner->run('command/export');
+        $runner->getExitCode();
 
-        $xlsName = 'Clientes.xlsx';
-        Utils::Download('reporte/' . $xlsName);
+        $path = Yii::getAlias('@PathReporteDownload');
+        $file = 'Colaboradores.xlsx';
+        Utils::downloadFile($path, $file);
 
         return $this->redirect(['cliente/import']);
     }

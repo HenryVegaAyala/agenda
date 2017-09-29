@@ -1,9 +1,7 @@
 <?php
 
-use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
@@ -15,7 +13,6 @@ $descripcion = "Importar/Exportar Clientes";
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <?php Pjax::begin(); ?>
                 <?php $form = ActiveForm::begin(
                     [
                         'enableAjaxValidation' => false,
@@ -64,7 +61,6 @@ $descripcion = "Importar/Exportar Clientes";
                 <div class="ln_solid"></div>
             </div>
             <?php ActiveForm::end(); ?>
-            <?php Pjax::end(); ?>
         </div>
     </div>
 </div>
