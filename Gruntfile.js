@@ -32,7 +32,8 @@ module.exports = function (grunt) {
           'web/images/excel_download.png': 'web/images/excel_download.png',
           'web/images/excel_import.png': 'web/images/excel_import.png',
           'web/images/usuario_hombre.png': 'web/images/usuario_hombre.png',
-          'web/images/usuario_mujer.png': 'web/images/usuario_mujer.png'
+          'web/images/usuario_mujer.png': 'web/images/usuario_mujer.png',
+          'web/images/usuario_default.png': 'web/images/usuario_default.png',
         }
       },
       dynamic: {

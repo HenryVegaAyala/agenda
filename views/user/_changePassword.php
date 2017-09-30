@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $model app\models\User */
 /* @var $form yii\widgets\ActiveForm */
 
-$descripcion = "Actualizar Perfil";
+$descripcion = "Mi Cuenta";
 ?>
 <div class="clearfix"></div>
 <div class="row">

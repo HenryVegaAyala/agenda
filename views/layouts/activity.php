@@ -19,17 +19,17 @@ use yii\helpers\Url;
                 <div class="profile clearfix">
                     <div class="profile_pic">
                         <img src="<?php
-                        if (Yii::$app->user->identity->genero === 'M') {
-                            echo Url::to(Yii::getAlias('@LogoHombreDefault'), '');
-                        } else {
-                            echo Url::to(Yii::getAlias('@LogoMujerDefault'), '');
-                        }
+                        //if (Yii::$app->user->identity->genero === 'M') {
+                        //    echo Url::to(Yii::getAlias('@LogoHombreDefault'), '');
+                        //} else {
+                        //    echo Url::to(Yii::getAlias('@LogoMujerDefault'), '');
+                        //}
                         ?>" alt="Usuario Default"
                              class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Bienvenido,</span>
-                        <h2><?php echo ucwords(Yii::$app->user->identity->nombre); ?></h2>
+                        <h2><?php echo ucwords(Yii::$app->user->identity->nombres); ?></h2>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@ use yii\helpers\Url;
                     <div class="menu_section">
                         <h3>Menú General</h3>
                         <ul class="nav side-menu">
-                            <?php if (Yii::$app->user->identity->privilegio === 'G') { ?>
+                            <?php //if (Yii::$app->user->identity->privilegio === 'G') { ?>
                                 <li><a><i class="fa fa-list-alt"></i> Incidencia <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -57,11 +57,11 @@ use yii\helpers\Url;
                                 <li><a><i class="fa fa-list-alt"></i> Usuario <span
                                                 class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
+                                        <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a></li>
                                         <li><a href="<?php echo Url::to(['/user/create']) ?>">Registrar Usuario</a></li>
-                                        <li><a href="<?php echo Url::to(['/user/index']) ?>">Listar Privilegios</a></li>
                                     </ul>
                                 </li>
-                            <?php } ?>
+                            <?php //} ?>
                         </ul>
                     </div>
                     <div class="sidebar-footer hidden-small">

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\User;
+use app\helpers\Utils;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -11,7 +11,6 @@ use yii\widgets\Pjax;
 
 $this->title = 'Sistema de Ticket - Listas de Usuario';
 $this->params['breadcrumbs'][] = $this->title;
-$usuario = new User();
 ?>
 
 <div class="right_col" role="main">
@@ -23,7 +22,7 @@ $usuario = new User();
                 'enablePushState' => false,
                 'clientOptions' => ['method' => 'POST'],
             ]); ?>
-            <div class="table table-striped table-responsive jambo_table bulk_action">
+            <div class="table table-striped table-responsive">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><?= $this->title ?></h3>
@@ -35,53 +34,47 @@ $usuario = new User();
                             'filterModel' => $searchModel,
                             'columns' => [
                                 ['class' => 'yii\grid\SerialColumn'],
-                                'nombre',
-                                'apellido',
-                                'correo',
                                 [
-                                    'attribute' => 'privilegio',
-                                    'label' => 'Privilegio',
-                                    'filter' => $usuario->rol(),
-                                    'value' => function ($data) {
-                                        $usuario = new User();
-                                        $rol = $usuario->getRol($data->privilegio);
-
-                                        return $rol;
-                                    },
+                                    'attribute' => 'nombres',
+                                    'label' => 'Nombres y Apellidos',
+                                    'value' => 'nombres',
                                 ],
+                                'correo',
                                 [
                                     'attribute' => 'estado',
                                     'label' => 'Estado',
-                                    'filter' => $usuario->status(),
+                                    'filter' => Utils::status(),
                                     'value' => function ($data) {
-                                        $usuario = new User();
-                                        $rol = $usuario->getStatus($data->estado);
-
-                                        return $rol;
+                                        return Utils::getStatus($data->estado);
                                     },
                                 ],
-
                                 [
                                     'class' => 'yii\grid\ActionColumn',
-                                    'header' => 'Detalle',
-                                    'template' => ' {update} {delete} ',
+                                    'header' => 'Opciones',
+                                    'template' => ' {update} {delete} {cancel}',
                                     'headerOptions' => ['class' => 'itemHide'],
                                     'contentOptions' => ['class' => 'itemHide'],
                                     'buttons' => [
                                         'update' => function ($url, $model) {
-                                            return Html::a('<span class="fa fa-pencil-square-o fa-lg"></span>',
+                                            return Html::a('<span class="fa fa-pencil-square-o fa-lg-icon"></span>',
                                                 Yii::$app->urlManager->createUrl(['actualizar-usuario/' . $model->id]),
                                                 ['title' => Yii::t('yii', 'Actualizar'),]
                                             );
                                         },
                                         'delete' => function ($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-trash"></span>',
+                                            return Html::a('<i class="fa fa-trash-o fa-lg-icon" aria-hidden="true"></i>',
                                                 ['eliminar-usuario/' . $model['id']], [
                                                     'title' => Yii::t('app', 'Eliminar'),
                                                     'data-confirm' => Yii::t('app',
                                                         '¿Esta Seguro de eliminar este usuario?'),
                                                     'data-method' => 'post',
                                                 ]);
+                                        },
+                                        'cancel' => function ($url, $model) {
+                                            return Html::a('<i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>',
+                                                Yii::$app->urlManager->createUrl(['inactivar/' . $model->id]),
+                                                ['title' => Yii::t('yii', 'Inactivar Usuario'),]
+                                            );
                                         },
                                     ],
                                 ],

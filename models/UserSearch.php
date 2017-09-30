@@ -8,7 +8,8 @@ use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
 
 /**
- * UserSearch represents the model behind the search form about `app\models\User`.
+ * Class UserSearch
+ * @package app\models
  */
 class UserSearch extends User
 {
@@ -21,10 +22,8 @@ class UserSearch extends User
             [['id', 'estado'], 'integer'],
             [
                 [
-                    'nombre',
-                    'apellido',
+                    'nombres',
                     'correo',
-                    'privilegio',
                 ],
                 'safe',
             ],
@@ -32,19 +31,15 @@ class UserSearch extends User
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
+     * @param $params
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -54,16 +49,9 @@ class UserSearch extends User
         $query = User::getDb()->cache(function ($db) {
             return User::find()->select([
                 'id',
-                'nombre',
-                'apellido',
-                'telefono',
-                'dni',
+                'nombres',
                 'correo',
-                'privilegio',
                 'estado',
-                'genero',
-                'date_format(fecha_inicio, \'%d-%m-%Y\') AS fecha_inicio',
-                'date_format(fecha_cumpleanos, \'%d-%m-%Y\') AS fecha_cumpleanos',
             ])
                 ->orderBy(['id' => SORT_ASC]);
         }, 3600, $dependency);
@@ -83,10 +71,8 @@ class UserSearch extends User
             'estado' => $this->estado,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'apellido', $this->apellido])
-            ->andFilterWhere(['like', 'correo', $this->correo])
-            ->andFilterWhere(['like', 'privilegio', $this->privilegio]);
+        $query->andFilterWhere(['like', 'nombres', $this->nombres])
+            ->andFilterWhere(['like', 'correo', $this->correo]);
 
         return $dataProvider;
     }

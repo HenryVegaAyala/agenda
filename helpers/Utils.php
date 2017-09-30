@@ -62,4 +62,64 @@ class Utils
             mkdir($reporte, 0777, true);
         }
     }
+
+
+    /**
+     * @return array
+     */
+    public static function status()
+    {
+        return [
+            '1' => 'Activo',
+            '0' => 'Inactivo',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function genero()
+    {
+        return [
+            'M' => 'Masculino',
+            'F' => 'Femenino',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function rol()
+    {
+        return [
+            'G' => 'Administrador',
+            'S' => 'Secretaria',
+        ];
+    }
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public static function getRol($value)
+    {
+        if ($value === 'G') {
+            return 'Administrador';
+        } else {
+            return 'Secretaria';
+        }
+    }
+
+    /**
+     * @param $status
+     * @return string
+     */
+    public static function getStatus($status)
+    {
+        if ($status === 1) {
+            return 'Activo';
+        } else {
+            return 'Inactivo';
+        }
+    }
 }

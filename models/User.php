@@ -5,22 +5,19 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use yii\db\Expression;
-use yii\db\Query;
 
 /**
+ * Class User
  * This is the model class for table "usuario".
- *
+ * @package app\models
  * @property integer $id
- * @property string $nombre
- * @property string $apellido
- * @property string $telefono
- * @property string $dni
+ * @property integer $cliente_id
+ * @property string $nombres
  * @property string $correo
- * @property string $privilegio
  * @property string $contrasena
  * @property string $authKey
  * @property string $accessToken
+ * @property integer $estado
  * @property string $fecha_digitada
  * @property string $fecha_modificada
  * @property string $fecha_eliminada
@@ -29,21 +26,20 @@ use yii\db\Query;
  * @property string $usuario_eliminado
  * @property string $ip
  * @property string $host
- * @property integer $estado
- * @property string $genero
- * @property string $fecha_inicio
- * @property string $fecha_cumpleanos
- *
- * @property null|string|false $idTable
- * @property mixed $password
  */
+
 class User extends ActiveRecord implements IdentityInterface
 {
+    const MESSAGE_MIN_6_PW = "Mínimo 6 digitos para la contraseña.";
+    const MESSAGE_MIN_6_PW_REP = "Mínimo 6 digitos para la contraseña repetida.";
+    const MESSAGE_COMPARE = "Las contraseñas no coinciden.";
+    const FIELD_VALID = "El campo correo debe de ser válido.";
+    const MESSAGE_MIN_3 = "Mínimo 3 caracteres del correo corporativo.";
 
     public $contrasena_desc;
 
     /**
-     * @inheritdoc
+     * @return string
      */
     public static function tableName()
     {
@@ -51,82 +47,37 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function rules()
     {
         return [
-            [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada', 'fecha_inicio', 'fecha_cumpleanos'], 'safe'],
             [['estado'], 'integer'],
-            [['nombre', 'apellido'], 'string', 'max' => 80],
-            [['telefono'], 'string', 'max' => 15],
-            [['dni'], 'string', 'max' => 8],
-            [['correo'], 'string', 'max' => 40],
-            [['privilegio', 'genero'], 'string', 'max' => 1],
-            [['contrasena', 'authKey', 'accessToken', 'host'], 'string', 'max' => 150],
-            [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
-            [['ip'], 'string', 'max' => 30],
-
-            [
-                ['dni', 'nombre', 'apellido', 'privilegio', 'contrasena', 'contrasena_desc', 'correo', 'estado'],
-                'required',
-            ],
-
-            [['fecha_inicio'], 'required'],
-            [['fecha_cumpleanos'], 'required'],
-
-            [['correo'], 'match', 'pattern' => "/^.{3,45}$/", 'message' => 'Mínimo 3 caracteres del correo.'],
-            [['correo'], 'email', 'message' => 'El campo correo debe de ser válido.'],
-
-            [['telefono'], 'match', 'pattern' => "/^.{3,15}$/", 'message' => 'Mínimo 5 caracteres'],
-            [['dni', 'telefono'], 'integer', 'message' => 'El campo debe de ser númerico.'],
-
-            [
-                'dni',
-                'match',
-                'pattern' => "/^.{8,8}$/",
-                'message' => 'El DNI requiere 8 digitos.',
-            ],
-            [
-                'contrasena',
-                'match',
-                'pattern' => "/^.{6,255}$/",
-                'message' => 'Mínimo 6 digitos para la contraseña',
-            ],
-
-            [
-                'contrasena_desc',
-                'match',
-                'pattern' => "/^.{6,255}$/",
-                'message' => 'Mínimo 6 digitos para la contraseña',
-            ],
-
-            [
-                'contrasena_desc',
-                'compare',
-                'compareAttribute' => 'contrasena',
-                'message' => 'Las contraseñas no coinciden.',
-            ],
+            [['nombres', 'contrasena', 'contrasena_desc', 'correo', 'estado'], 'required'],
+            ['correo', 'unique'],
+            [['correo'], 'match', 'pattern' => "/^.{3,45}$/", 'message' => self::MESSAGE_MIN_3],
+            [['correo'], 'email', 'message' => self::FIELD_VALID],
+            ['contrasena', 'match', 'pattern' => "/^.{6,255}$/", 'message' => self::MESSAGE_MIN_6_PW],
+            ['contrasena_desc', 'match', 'pattern' => "/^.{6,255}$/", 'message' => self::MESSAGE_MIN_6_PW_REP],
+            ['contrasena_desc', 'compare', 'compareAttribute' => 'contrasena', 'message' => self::MESSAGE_COMPARE],
         ];
     }
 
     /**
-     * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'nombre' => 'Nombres',
-            'apellido' => 'Apellidos',
-            'telefono' => 'Telefono',
-            'dni' => 'DNI',
-            'correo' => 'Email',
-            'privilegio' => 'Roles',
+            'cliente_id' => 'Cliente ID',
+            'nombres' => 'Nombres',
+            'correo' => 'Correo Corporativo',
             'contrasena' => 'Contraseña',
             'contrasena_desc' => 'Repetir Contraseña',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
+            'estado' => 'Estado',
             'fecha_digitada' => 'Fecha Digitada',
             'fecha_modificada' => 'Fecha Modificada',
             'fecha_eliminada' => 'Fecha Eliminada',
@@ -135,10 +86,6 @@ class User extends ActiveRecord implements IdentityInterface
             'usuario_eliminado' => 'Usuario Eliminado',
             'ip' => 'Ip',
             'host' => 'Host',
-            'estado' => 'Estado',
-            'genero' => 'Género',
-            'fecha_inicio' => 'Fecha de Inicio',
-            'fecha_cumpleanos' => 'Fecha de Cumpleaños',
         ];
     }
 
@@ -151,50 +98,36 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds an identity by the given ID.
-     * @param string|int $id the ID to be looked for
-     * @return array|ActiveRecord|IdentityInterface
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
+     * @param int|string $id
+     * @return User|array|null|ActiveRecord
      */
     public static function findIdentity($id)
     {
         return static::find()->select([
             'id',
-            'nombre',
-            'apellido',
+            'nombres',
             'correo',
-            'privilegio',
-            'genero',
             'contrasena',
         ])->where('id = :id', [':id' => $id])->one();
     }
 
     /**
-     * Finds an identity by the given token.
-     * @param mixed $token the token to be looked for
-     * @param mixed $type the type of the token. The value of this parameter depends on the implementation.
-     * For example,[[\yii\filters\auth\HttpBearerAuth]] will set this parameter to be `yii\filters\auth\HttpBearerAuth`.
-     * @return array|ActiveRecord|IdentityInterface
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
+     * @param mixed $token
+     * @param null $type
+     * @return User|array|null|ActiveRecord
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::find()->select([
             'id',
-            'nombre',
-            'apellido',
+            'nombres',
             'correo',
-            'privilegio',
-            'genero',
             'contrasena',
         ])->where('accessToken = :token', [':token' => $token])->one();
     }
 
     /**
-     * Returns an ID that can uniquely identify a user identity.
-     * @return string|int an ID that uniquely identifies a user identity.
+     * @return int
      */
     public function getId()
     {
@@ -202,16 +135,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Returns a key that can be used to check the validity of a given identity ID.
-     *
-     * The key should be unique for each individual user, and should be persistent
-     * so that it can be used to check the validity of the user identity.
-     *
-     * The space of such keys should be big enough to defeat potential identity attacks.
-     *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @return string a key that is used to check the validity of a given identity ID.
-     * @see validateAuthKey()
+     * @return string
      */
     public function getAuthKey()
     {
@@ -219,12 +143,8 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Validates the given auth key.
-     *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @param string $authKey the given auth key
-     * @return bool whether the given auth key is valid.
-     * @see getAuthKey()
+     * @param string $authKey
+     * @return bool
      */
     public function validateAuthKey($authKey)
     {
@@ -234,17 +154,14 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @param $username
      * @param $estado
-     * @return User|array|ActiveRecord
+     * @return User|array|null|ActiveRecord
      */
     public static function findByUsername($username, $estado)
     {
         return self::find()->select([
             'id',
-            'nombre',
-            'apellido',
+            'nombres',
             'correo',
-            'privilegio',
-            'genero',
             'contrasena',
         ])->where([
             'correo' => $username,
@@ -268,63 +185,5 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->contrasena = Yii::$app->getSecurity()->generatePasswordHash($password);
     }
-
-    /**
-     * @return array
-     */
-    public static function status()
-    {
-        return [
-            '1' => 'Activo',
-            '0' => 'Inactivo',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public static function genero()
-    {
-        return [
-            'M' => 'Masculino',
-            'F' => 'Femenino',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public static function rol()
-    {
-        return [
-            'G' => 'Administrador',
-            'S' => 'Secretaria',
-        ];
-    }
-
-    /**
-     * @param $value
-     * @return string
-     */
-    public function getRol($value)
-    {
-        if ($value === 'G') {
-            return 'Administrador';
-        } else {
-            return 'Secretaria';
-        }
-    }
-
-    /**
-     * @param $status
-     * @return string
-     */
-    public function getStatus($status)
-    {
-        if ($status === 1) {
-            return 'Activo';
-        } else {
-            return 'Inactivo';
-        }
-    }
 }
+
