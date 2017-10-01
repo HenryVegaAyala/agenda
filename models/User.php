@@ -75,17 +75,7 @@ class User extends ActiveRecord implements IdentityInterface
             'correo' => 'Correo Corporativo',
             'contrasena' => 'Contraseña',
             'contrasena_desc' => 'Repetir Contraseña',
-            'authKey' => 'Auth Key',
-            'accessToken' => 'Access Token',
             'estado' => 'Estado',
-            'fecha_digitada' => 'Fecha Digitada',
-            'fecha_modificada' => 'Fecha Modificada',
-            'fecha_eliminada' => 'Fecha Eliminada',
-            'usuario_digitado' => 'Usuario Digitado',
-            'usuario_modificado' => 'Usuario Modificado',
-            'usuario_eliminado' => 'Usuario Eliminado',
-            'ip' => 'Ip',
-            'host' => 'Host',
         ];
     }
 
@@ -105,9 +95,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return static::find()->select([
             'id',
+            'cliente_id',
             'nombres',
             'correo',
-            'contrasena',
         ])->where('id = :id', [':id' => $id])->one();
     }
 
@@ -120,9 +110,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return static::find()->select([
             'id',
+            'cliente_id',
             'nombres',
             'correo',
-            'contrasena',
         ])->where('accessToken = :token', [':token' => $token])->one();
     }
 
@@ -162,7 +152,7 @@ class User extends ActiveRecord implements IdentityInterface
             'id',
             'nombres',
             'correo',
-            'contrasena',
+            'cliente_id',
         ])->where([
             'correo' => $username,
             'estado' => (int)$estado,

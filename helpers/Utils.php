@@ -2,9 +2,11 @@
 
 namespace app\helpers;
 
+use app\models\Cliente;
 use Yii;
 use yii\db\Expression;
 use yii\db\Query;
+use yii\helpers\Url;
 
 class Utils
 {
@@ -58,8 +60,13 @@ class Utils
     public static function fileReporte()
     {
         $reporte = Yii::getAlias('@PathReporteDownload');
+        $imagen = Yii::getAlias('@PathImagenColaboradores');
         if (!file_exists($reporte)) {
             mkdir($reporte, 0777, true);
+        }
+
+        if (!file_exists($imagen)) {
+            mkdir($imagen, 0777, true);
         }
     }
 
@@ -120,6 +127,28 @@ class Utils
             return 'Activo';
         } else {
             return 'Inactivo';
+        }
+    }
+
+    /**
+     * @param $idCliente
+     * @return string
+     */
+    public static function imagenCliente($idCliente)
+    {
+        if ($idCliente === 0) {
+            return Url::to(Yii::getAlias('@LogoDefault'), '');
+        } else {
+            $dni = Cliente::find()->select(['dni', 'genero'])->where('id = :id', [':id' => $idCliente])->one();
+            $imgColaborador = Yii::getAlias('@PathImagenColaboradores') . '/' . md5($dni['dni']) . '.jpg';
+            if (file_exists($imgColaborador)) {
+                return Url::to($imgColaborador);
+            } else {
+                $man = Yii::getAlias('@LogoHombreDefault');
+                $woman = Yii::getAlias('@LogoMujerDefault');
+
+                return Url::to(($dni['genero'] === 'M') ? $man : $woman);
+            }
         }
     }
 }

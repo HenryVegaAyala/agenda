@@ -1,4 +1,5 @@
 <?php
+use app\helpers\Utils;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -18,13 +19,8 @@ use yii\helpers\Url;
 
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="<?php
-                        //if (Yii::$app->user->identity->genero === 'M') {
-                        //    echo Url::to(Yii::getAlias('@LogoHombreDefault'), '');
-                        //} else {
-                        //    echo Url::to(Yii::getAlias('@LogoMujerDefault'), '');
-                        //}
-                        ?>" alt="Usuario Default"
+                        <img src="<?php echo Utils::imagenCliente(Yii::$app->user->identity->cliente_id); ?>"
+                             alt="Usuario Default"
                              class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
@@ -40,27 +36,29 @@ use yii\helpers\Url;
                         <h3>Menú General</h3>
                         <ul class="nav side-menu">
                             <?php //if (Yii::$app->user->identity->privilegio === 'G') { ?>
-                                <li><a><i class="fa fa-list-alt"></i> Incidencia <span
-                                                class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar Incidencia</a></li>
-                                        <li><a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de Incidencia</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-list-alt"></i> Clientes <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Cliente</a></li>
-                                        <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de Clientes</a></li>
-                                        <li><a href="<?php echo Url::to(['/cliente/import']) ?>">Importar Clientes</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-list-alt"></i> Usuario <span
-                                                class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a></li>
-                                        <li><a href="<?php echo Url::to(['/user/create']) ?>">Registrar Usuario</a></li>
-                                    </ul>
-                                </li>
+                            <li><a><i class="fa fa-list-alt"></i> Incidencia <span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar Incidencia</a>
+                                    </li>
+                                    <li><a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de Incidencia</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-list-alt"></i> Clientes <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Cliente</a></li>
+                                    <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de Clientes</a></li>
+                                    <li><a href="<?php echo Url::to(['/cliente/import']) ?>">Importar Clientes</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-list-alt"></i> Usuario <span
+                                            class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a></li>
+                                    <li><a href="<?php echo Url::to(['/user/create']) ?>">Registrar Usuario</a></li>
+                                </ul>
+                            </li>
                             <?php //} ?>
                         </ul>
                     </div>

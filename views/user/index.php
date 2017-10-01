@@ -51,7 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'header' => 'Opciones',
-                                    'template' => ' {update} {delete} {cancel}',
+                                    'options' => ['style' => 'width:100px;'],
+                                    'template' => ' {update} / {delete} / {cancel}',
                                     'headerOptions' => ['class' => 'itemHide'],
                                     'contentOptions' => ['class' => 'itemHide'],
                                     'buttons' => [
@@ -73,7 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'cancel' => function ($url, $model) {
                                             return Html::a('<i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>',
                                                 Yii::$app->urlManager->createUrl(['inactivar/' . $model->id]),
-                                                ['title' => Yii::t('yii', 'Inactivar Usuario'),]
+                                                [
+                                                    'title' => Yii::t('yii', 'Inactivar Usuario'),]
                                             );
                                         },
                                     ],

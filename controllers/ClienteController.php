@@ -13,7 +13,8 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * ClienteController implements the CRUD actions for Cliente model.
+ * Class ClienteController
+ * @package app\controllers
  */
 class ClienteController extends Controller
 {
