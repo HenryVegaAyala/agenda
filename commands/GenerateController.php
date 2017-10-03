@@ -28,7 +28,7 @@ class GenerateController extends Controller
                 $faker->randomElement(['Planilla', 'Practicante', 'Gerente']),
                 $faker->email,
                 $faker->phoneNumber,
-                rand(1920, 1998) . '-' . rand(1, 12) . '-' . rand(1, 29),
+                rand(2000, 2017) . '-' . rand(1, 12) . '-' . rand(1, 29),
                 $faker->phoneNumber,
                 $faker->postcode,
                 true,

@@ -3,10 +3,12 @@
 namespace app\commands;
 
 use app\helpers\Utils;
+use app\models\Cliente;
 use PHPExcel;
 use PHPExcel_IOFactory;
 use PHPExcel_Style_Alignment;
 use PHPExcel_Style_Border;
+use PHPExcel_Style_Fill;
 use yii\console\Controller;
 
 class CommandController extends Controller
@@ -34,6 +36,24 @@ class CommandController extends Controller
             ],
         ];
 
+        $styleBody = [
+            'font' => [
+                'color' => ['rgb' => '000000'],
+                'size' => 9,
+                'name' => 'Arial',
+            ],
+            'borders' => [
+                'top' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'right' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'bottom' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'left' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+            ],
+            'alignment' => [
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_JUSTIFY,
+            ],
+        ];
+
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->getProperties()
             ->setCreator("Henry Pablo Vega Ayala")
@@ -44,11 +64,16 @@ class CommandController extends Controller
             ->setKeywords("office 2007 openxml php")
             ->setCategory("Archivo de Resultados");
 
-        $objPHPExcel->setActiveSheetIndex(0)->getStyle('A1:K1')->applyFromArray($styleHeader);
 
-        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+        foreach (range('A', 'K') as $char) {
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle($char . '1')->applyFromArray($styleHeader);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:' . $char . '1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:' . $char . '1')->getFill()->getStartColor()->setRGB('fff200');
+        }
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(27);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(32);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
@@ -71,7 +96,36 @@ class CommandController extends Controller
             ->setCellValue('J1', 'FECHA DE INGRESO')
             ->setCellValue('K1', 'ESTADO CIVIL');
 
-        $objPHPExcel->getActiveSheet()->setTitle('Lista de Colaboradores');
+        $i = 2;
+        foreach (Cliente::listaClientes() as $listaCliente) {
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . $i, $listaCliente['nombres'])
+                ->setCellValue('B' . $i, $listaCliente['apellidos'])
+                ->setCellValue('C' . $i, $listaCliente['email_corp'])
+                ->setCellValue('D' . $i, $listaCliente['dni'])
+                ->setCellValue('E' . $i, $listaCliente['area'])
+                ->setCellValue('F' . $i, $listaCliente['categoria'])
+                ->setCellValue('G' . $i, $listaCliente['puesto'])
+                ->setCellValue('H' . $i, $listaCliente['genero'])
+                ->setCellValue('I' . $i, $listaCliente['fecha_nacimiento'])
+                ->setCellValue('J' . $i, $listaCliente['fecha_ingreso'])
+                ->setCellValue('K' . $i, $listaCliente['estado_civil']);
+
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('A' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('B' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('C' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('D' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('E' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('F' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('G' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('H' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('I' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('J' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('K' . $i)->applyFromArray($styleBody);
+            $i++;
+        }
+
+        $objPHPExcel->getActiveSheet()->setTitle('Lista de Clientes');
         $objPHPExcel->setActiveSheetIndex(0);
 
         $xlsName = 'Colaboradores.xlsx';
