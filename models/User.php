@@ -28,6 +28,10 @@ use yii\web\IdentityInterface;
  * @property string $host
  */
 
+/**
+ * Class User
+ * @package app\models
+ */
 class User extends ActiveRecord implements IdentityInterface
 {
     const MESSAGE_MIN_6_PW = "Mínimo 6 digitos para la contraseña.";
@@ -153,6 +157,7 @@ class User extends ActiveRecord implements IdentityInterface
             'nombres',
             'correo',
             'cliente_id',
+            'contrasena'
         ])->where([
             'correo' => $username,
             'estado' => (int)$estado,

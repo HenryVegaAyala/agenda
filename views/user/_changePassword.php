@@ -1,6 +1,5 @@
 <?php
 
-use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -34,45 +33,26 @@ $descripcion = "Mi Cuenta";
 
                 <div class="row">
                     <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'nombre')->textInput(
+                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model, 'nombres')->textInput(
                                 ['maxlength' => true],
                                 ['class' => 'form-control col-md-7 col-xs-12']
-                            ) ?>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?= $form->field($model, 'apellido')->textInput(
+                            ) ?> </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model, 'correo')->textInput(
                                 ['maxlength' => true],
-                                ['class' => 'form-control col-md-7 col-xs-12']) ?>
-                        </div>
+                                ['class' => 'form-control col-md-7 col-xs-12']) ?> </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?= $form->field($model, 'correo')->textInput(
-                            ['maxlength' => true],
-                            ['class' => 'form-control col-md-7 col-xs-12']) ?>
-                    </div>
-
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?= $form->field($model, 'telefono')->textInput(
-                            ['maxlength' => true],
-                            ['class' => 'form-control col-md-7 col-xs-12']) ?>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?= $form->field($model, 'contrasena')->passwordInput(
-                            ['maxlength' => true, 'value' => '', 'class' => 'form-control col-md-7 col-xs-12']
-                        ) ?>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?= $form->field($model, 'contrasena_desc')->passwordInput(
-                            ['maxlength' => true, 'value' => '', 'class' => 'form-control col-md-7 col-xs-12']
-                        ) ?>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model, 'contrasena')->passwordInput(
+                                ['maxlength' => true],
+                                ['class' => 'form-control col-md-7 col-xs-12']
+                            ) ?> </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                                'contrasena_desc')->passwordInput(
+                                ['maxlength' => true],
+                                ['class' => 'form-control col-md-7 col-xs-12']) ?> </div>
                     </div>
                 </div>
             </div>

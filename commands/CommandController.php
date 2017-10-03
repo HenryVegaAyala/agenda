@@ -19,7 +19,7 @@ class CommandController extends Controller
             'font' => [
                 'bold' => true,
                 'color' => ['rgb' => '000000'],
-                'size' => 12,
+                'size' => 10,
                 'name' => 'Arial',
             ],
             'borders' => [
@@ -44,24 +44,32 @@ class CommandController extends Controller
             ->setKeywords("office 2007 openxml php")
             ->setCategory("Archivo de Resultados");
 
-        $objPHPExcel->setActiveSheetIndex(0)->getStyle('A1:G1')->applyFromArray($styleHeader);
+        $objPHPExcel->setActiveSheetIndex(0)->getStyle('A1:K1')->applyFromArray($styleHeader);
 
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
 
         $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', 'NOMBRES')
             ->setCellValue('B1', 'APELLIDOS')
-            ->setCellValue('C1', 'EMAIL')
+            ->setCellValue('C1', 'EMAIL CORPORATIVO')
             ->setCellValue('D1', 'DNI')
-            ->setCellValue('E1', 'N° CELULAR')
-            ->setCellValue('F1', 'AREA')
-            ->setCellValue('G1', 'CARGO');
+            ->setCellValue('E1', 'AREA')
+            ->setCellValue('F1', 'CATEGORIA')
+            ->setCellValue('G1', 'PUESTO')
+            ->setCellValue('H1', 'GENERO')
+            ->setCellValue('I1', 'FECHA DE NACIMIENTO')
+            ->setCellValue('J1', 'FECHA DE INGRESO')
+            ->setCellValue('K1', 'ESTADO CIVIL');
 
         $objPHPExcel->getActiveSheet()->setTitle('Lista de Colaboradores');
         $objPHPExcel->setActiveSheetIndex(0);
