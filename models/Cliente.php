@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "cliente".
@@ -34,12 +34,9 @@ use yii\db\ActiveRecord;
  * @property string $usuario_eliminado
  * @property string $ip
  * @property string $host
- * @property string $excel_import
  */
-class Cliente extends ActiveRecord
+class Cliente extends \yii\db\ActiveRecord
 {
-    public $excel_import;
-
     /**
      * @inheritdoc
      */
@@ -85,49 +82,14 @@ class Cliente extends ActiveRecord
             'ubicacion' => 'Ubicacion',
             'estado_civil' => 'Estado Civil',
             'numero_celular' => 'Numero Celular',
-            'area' => 'Area',
+            'area' => 'Área',
             'puesto' => 'Puesto',
             'categoria' => 'Categoria',
-            'email_corp' => 'Email Corp',
+            'email_corp' => 'Email',
             'numero_emergencia' => 'Numero Emergencia',
             'fecha_ingreso' => 'Fecha Ingreso',
             'numero_oficina' => 'Numero Oficina',
             'anexo' => 'Anexo',
-            'estado' => 'Estado',
-            'fecha_digitada' => 'Fecha Digitada',
-            'fecha_modificada' => 'Fecha Modificada',
-            'fecha_eliminada' => 'Fecha Eliminada',
-            'usuario_digitado' => 'Usuario Digitado',
-            'usuario_modificado' => 'Usuario Modificado',
-            'usuario_eliminado' => 'Usuario Eliminado',
-            'ip' => 'Ip',
-            'host' => 'Host',
-            'excel_import' => 'Excel',
         ];
-    }
-
-    public static function listaClientes()
-    {
-        return Cliente::find()
-            ->select([
-                'nombres',
-                'apellidos',
-                'email_corp',
-                'dni',
-                'area',
-                'categoria',
-                'puesto',
-                '(CASE WHEN genero = \'M\' THEN \'MASCULINO\' ELSE \'FEMENINO\' END) AS genero',
-                'date_format(fecha_nacimiento, \'%d-%m-%Y\')   AS fecha_nacimiento',
-                'date_format(fecha_ingreso, \'%d-%m-%Y\')   AS fecha_ingreso',
-                '(CASE
-                   WHEN estado_civil = \'CO\' THEN \'COMPROMETIDO\'
-                   WHEN estado_civil = \'CA\' THEN \'CASADO\'
-                   WHEN estado_civil = \'SO\' THEN \'SOLTERO\'
-                   WHEN estado_civil = \'VI\' THEN \'VIUDO\'
-                   ELSE \'FEMENINO\' END) AS estado_civil',
-            ])
-            ->where('estado = :estado', [':estado' => 1])
-            ->all();
     }
 }

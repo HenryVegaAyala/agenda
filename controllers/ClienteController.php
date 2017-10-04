@@ -10,7 +10,6 @@ use app\models\ClienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
  * Class ClienteController
@@ -34,8 +33,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * Lists all Cliente models.
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
@@ -49,9 +47,8 @@ class ClienteController extends Controller
     }
 
     /**
-     * Displays a single Cliente model.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return string
      */
     public function actionView($id)
     {
@@ -61,9 +58,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * Creates a new Cliente model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
@@ -79,10 +74,8 @@ class ClienteController extends Controller
     }
 
     /**
-     * Updates an existing Cliente model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
@@ -98,10 +91,8 @@ class ClienteController extends Controller
     }
 
     /**
-     * Deletes an existing Cliente model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
@@ -111,8 +102,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * Import Cliente model.
-     * If is successful, the browser will be redirected to the 'details' page.
+     * @return string
      */
     public function actionImport()
     {
@@ -134,8 +124,7 @@ class ClienteController extends Controller
     }
 
     /**
-     * Import Cliente model.
-     * If is successful, the browser will be redirected to the 'details' page.
+     * @return \yii\web\Response
      */
     public function actionExport()
     {
@@ -151,11 +140,9 @@ class ClienteController extends Controller
     }
 
     /**
-     * Finds the Cliente model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Cliente the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return static
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
@@ -163,14 +150,24 @@ class ClienteController extends Controller
                 'id',
                 'nombres',
                 'apellidos',
-                'email',
                 'dni',
+                'date_format(fecha_nacimiento, \'%d-%m-%Y\')   AS fecha_nacimiento',
+                'genero',
+                'email_personal',
+                'ubicacion',
+                'estado_civil',
                 'numero_celular',
                 'area',
-                'cargo',
-                'estado',
+                'puesto',
+                'categoria',
+                'email_corp',
+                'numero_emergencia',
+                'date_format(fecha_ingreso, \'%d-%m-%Y\')   AS fecha_ingreso',
+                'numero_oficina',
+                'anexo',
             ])
                 ->where('id = :id', [':id' => $id])
+                ->andwhere('estado = :estado', [':estado' => 1])
                 ->one()
             ) !== null
         ) {

@@ -9,7 +9,6 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Ticket - Lista de Clientes';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="right_col" role="main">
     <div class="clearfix"></div>
@@ -32,11 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'filterModel' => $searchModel,
                             'columns' => [
                                 ['class' => 'yii\grid\SerialColumn'],
+
                                 'nombres',
                                 'apellidos',
-                                'numero_celular',
                                 'area',
-                                'cargo',
+                                'email_corp:email',
+
                                 ['class' => 'yii\grid\ActionColumn'],
                             ],
                         ]); ?>

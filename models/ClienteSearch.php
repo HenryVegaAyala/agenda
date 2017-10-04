@@ -6,25 +6,29 @@ use Yii;
 use yii\base\Model;
 use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
+use app\models\Cliente;
 
 /**
  * ClienteSearch represents the model behind the search form about `app\models\Cliente`.
  */
 class ClienteSearch extends Cliente
 {
+    const CACHE_TIMEOUT = 3600;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['dni', 'estado'], 'integer'],
+            [['id', 'estado'], 'integer'],
             [
                 [
                     'nombres',
                     'apellidos',
+                    'dni',
                     'area',
-                    'cargo',
+                    'email_corp',
                 ],
                 'safe',
             ],
@@ -36,7 +40,6 @@ class ClienteSearch extends Cliente
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
@@ -50,21 +53,18 @@ class ClienteSearch extends Cliente
     public function search($params)
     {
         $db = Yii::$app->db;
-        $dependency = new DbDependency();
+        $dep = new DbDependency();
         $query = Cliente::getDb()->cache(function ($db) {
-            return Cliente::find()->select([
-                'id',
-                'nombres',
-                'apellidos',
-                'email',
-                'dni',
-                'numero_celular',
-                'area',
-                'cargo',
-                'estado',
-            ])
-                ->orderBy(['id' => SORT_ASC]);
-        }, 3600, $dependency);
+
+            return Cliente::find()
+                ->select([
+                    'nombres                  AS nombres',
+                    'apellidos                AS apellidos',
+                    'area                     AS area',
+                    'email_corp               AS email_corp',
+                ])
+                ->orderBy(['apellidos' => SORT_ASC]);
+        }, self::CACHE_TIMEOUT, $dep);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -78,14 +78,13 @@ class ClienteSearch extends Cliente
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'dni' => $this->dni,
-            'estado' => $this->estado,
         ]);
 
         $query->andFilterWhere(['like', 'nombres', $this->nombres])
             ->andFilterWhere(['like', 'apellidos', $this->apellidos])
+            ->andFilterWhere(['like', 'dni', $this->dni])
             ->andFilterWhere(['like', 'area', $this->area])
-            ->andFilterWhere(['like', 'cargo', $this->cargo]);
+            ->andFilterWhere(['like', 'email_corp', $this->email_corp]);
 
         return $dataProvider;
     }
