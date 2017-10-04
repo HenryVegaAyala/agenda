@@ -96,6 +96,19 @@ class Utils
     /**
      * @return array
      */
+    public static function estadoCivil()
+    {
+        return [
+            'SO' => 'Soltero',
+            'CA' => 'Casado',
+            'CO' => 'Comprometido',
+            'VI' => 'Viudo',
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public static function rol()
     {
         return [

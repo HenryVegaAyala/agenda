@@ -58,6 +58,7 @@ class ClienteSearch extends Cliente
 
             return Cliente::find()
                 ->select([
+                    'id                       AS id',
                     'nombres                  AS nombres',
                     'apellidos                AS apellidos',
                     'area                     AS area',

@@ -37,6 +37,8 @@ use Yii;
  */
 class Cliente extends \yii\db\ActiveRecord
 {
+    public $image;
+
     /**
      * @inheritdoc
      */
@@ -53,6 +55,7 @@ class Cliente extends \yii\db\ActiveRecord
         return [
             [['nombres', 'apellidos', 'dni', 'email_corp'], 'required'],
             [['fecha_nacimiento', 'fecha_ingreso', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
+            [['fecha_nacimiento', 'fecha_ingreso'], 'date'],
             [['estado'], 'integer'],
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
@@ -75,21 +78,22 @@ class Cliente extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nombres' => 'Nombres',
             'apellidos' => 'Apellidos',
-            'dni' => 'Dni',
-            'fecha_nacimiento' => 'Fecha Nacimiento',
-            'genero' => 'Genero',
+            'dni' => 'DNI',
+            'fecha_nacimiento' => 'Fecha de Nacimiento',
+            'genero' => 'Género',
             'email_personal' => 'Email Personal',
-            'ubicacion' => 'Ubicacion',
+            'ubicacion' => 'Ubicación',
             'estado_civil' => 'Estado Civil',
-            'numero_celular' => 'Numero Celular',
+            'numero_celular' => 'Número de Celular',
             'area' => 'Área',
             'puesto' => 'Puesto',
-            'categoria' => 'Categoria',
+            'categoria' => 'Categoría',
             'email_corp' => 'Email',
-            'numero_emergencia' => 'Numero Emergencia',
-            'fecha_ingreso' => 'Fecha Ingreso',
-            'numero_oficina' => 'Numero Oficina',
+            'numero_emergencia' => 'Numero de Emergencia',
+            'fecha_ingreso' => 'Fecha de Ingreso',
+            'numero_oficina' => 'Número Oficina',
             'anexo' => 'Anexo',
+            'image' => 'Foto',
         ];
     }
 }
