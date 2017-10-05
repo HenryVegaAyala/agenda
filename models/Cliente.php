@@ -96,4 +96,32 @@ class Cliente extends \yii\db\ActiveRecord
             'image' => 'Foto',
         ];
     }
+
+    /**
+     * @return Cliente[]|array|\yii\db\ActiveRecord[]
+     */
+    public static function listaClientes()
+    {
+        return Cliente::find()
+            ->select([
+                'nombres',
+                'apellidos',
+                'email_corp',
+                'dni',
+                'area',
+                'categoria',
+                'puesto',
+                '(CASE WHEN genero = \'M\' THEN \'MASCULINO\' ELSE \'FEMENINO\' END) AS genero',
+                'date_format(fecha_nacimiento, \'%d-%m-%Y\')   AS fecha_nacimiento',
+                'date_format(fecha_ingreso, \'%d-%m-%Y\')   AS fecha_ingreso',
+                '(CASE
+                   WHEN estado_civil = \'CO\' THEN \'COMPROMETIDO\'
+                   WHEN estado_civil = \'CA\' THEN \'CASADO\'
+                   WHEN estado_civil = \'SO\' THEN \'SOLTERO\'
+                   WHEN estado_civil = \'VI\' THEN \'VIUDO\'
+                   ELSE \'FEMENINO\' END) AS estado_civil',
+            ])
+            ->where('estado = :estado', [':estado' => 1])
+            ->all();
+    }
 }

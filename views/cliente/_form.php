@@ -2,7 +2,6 @@
 
 use app\helpers\Utils;
 use kartik\widgets\DatePicker;
-use kartik\widgets\FileInput;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
