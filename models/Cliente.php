@@ -60,7 +60,7 @@ class Cliente extends \yii\db\ActiveRecord
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
             [['genero'], 'string', 'max' => 1],
-            [['ubicacion'], 'string', 'max' => 250],
+            [['ubicacion','fecha_nacimiento', 'fecha_ingreso'], 'string', 'max' => 250],
             [['estado_civil'], 'string', 'max' => 2],
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
             [['numero_oficina', 'anexo'], 'string', 'max' => 20],

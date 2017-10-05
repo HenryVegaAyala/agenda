@@ -44,7 +44,6 @@ $descripcion = "Registrar Cliente";
                                     <div class="col-md-12 col-sm-6 col-xs-12">
                                         <?= $form->field($model, 'nombres', [
                                             'inputOptions' => [
-                                                'autofocus' => 'autofocus',
                                                 'class' => 'form-control col-md-7 col-xs-12',
                                             ],
                                         ])->textInput()->input('text', ['placeholder' => "Nombres"])->label(false) ?>

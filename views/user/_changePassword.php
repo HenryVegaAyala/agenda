@@ -33,26 +33,25 @@ $descripcion = "Mi Cuenta";
 
                 <div class="row">
                     <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model, 'nombres')->textInput(
-                                ['maxlength' => true],
-                                ['class' => 'form-control col-md-7 col-xs-12']
-                            ) ?> </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model, 'correo')->textInput(
-                                ['maxlength' => true],
-                                ['class' => 'form-control col-md-7 col-xs-12']) ?> </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model, 'nombres')->textInput()->input('text',
+                                ['placeholder' => "Nombres"])->label(false) ?> </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                                'correo')->textInput()->input('text',
+                                ['placeholder' => "Correo"])->label(false) ?></div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model, 'contrasena')->passwordInput(
-                                ['maxlength' => true],
-                                ['class' => 'form-control col-md-7 col-xs-12']
-                            ) ?> </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?= $form->field($model,
+                                'contrasena')->passwordInput()->input('text',
+                                ['placeholder' => "Contraseña"])->label(false) ?>
+                        </div>
                         <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
-                                'contrasena_desc')->passwordInput(
-                                ['maxlength' => true],
-                                ['class' => 'form-control col-md-7 col-xs-12']) ?> </div>
+                                'contrasena_desc')->passwordInput()->input('text',
+                                ['placeholder' => "Repetir Contraseña"])->label(false) ?> </div>
                     </div>
                 </div>
             </div>
