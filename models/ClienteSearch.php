@@ -6,7 +6,6 @@ use Yii;
 use yii\base\Model;
 use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
-use app\models\Cliente;
 
 /**
  * ClienteSearch represents the model behind the search form about `app\models\Cliente`.
