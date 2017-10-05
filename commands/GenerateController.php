@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use app\models\Cliente;
 use Faker\Factory;
 use Yii;
 use yii\console\Controller;
@@ -61,4 +62,45 @@ class GenerateController extends Controller
             $data
         )->execute();
     }
+
+    public static function actionUsuario()
+    {
+        $data = [];
+        $clientes = Cliente::find()->select([
+            'id',
+            'nombres',
+            'apellidos',
+            'dni',
+            'email_corp',
+        ])->where('estado = :estado',
+            [':estado' => 1])->all();
+
+        foreach ($clientes as $cliente) {
+            array_push($data, [
+                $cliente['id'],
+                $cliente['nombres'] . ' ' . $cliente['apellidos'],
+                $cliente['email_corp'],
+                Yii::$app->getSecurity()->generatePasswordHash($cliente['dni']),
+                base64_encode(random_bytes(25)),
+                base64_encode(random_bytes(25)),
+                1,
+            ]);
+        }
+
+        Yii::$app->db->createCommand()->batchInsert(
+            'usuario',
+            [
+                'cliente_id',
+                'nombres',
+                'correo',
+                'contrasena',
+                'authKey',
+                'accessToken',
+                'estado',
+
+            ],
+            $data
+        )->execute();
+    }
+
 }
