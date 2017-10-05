@@ -10,6 +10,7 @@ use app\models\ClienteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * Class ClienteController
@@ -108,10 +109,9 @@ class ClienteController extends Controller
     {
         $model = new Cliente();
         if ($model->load(Yii::$app->request->post())) {
-
-            //$model->excel_import = UploadedFile::getInstance($model, 'excel_import');
-            //var_dump($model->excel_import);
-            //exit();
+            $model->excel_import = UploadedFile::getInstance($model, 'excel_import');
+            var_dump($model->excel_import);
+            exit();
 
             //$model->save();
 
