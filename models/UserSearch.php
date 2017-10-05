@@ -53,7 +53,7 @@ class UserSearch extends User
                 'correo',
                 'estado',
             ])
-                ->orderBy(['id' => SORT_ASC]);
+                ->orderBy(['nombres' => SORT_ASC]);
         }, 3600, $dependency);
 
         $dataProvider = new ActiveDataProvider([
