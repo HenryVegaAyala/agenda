@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Utils;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -24,10 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'apellidos',
                                 'dni',
                                 'fecha_nacimiento',
-                                'genero',
+                                [
+                                    'attribute' => 'genero',
+                                    'label' => 'Género',
+                                    'value' => function ($data) {
+                                        return Utils::generoGet($data->genero);
+                                    },
+                                ],
                                 'email_personal:email',
                                 'ubicacion',
-                                'estado_civil',
+                                [
+                                    'attribute' => 'estado_civil',
+                                    'label' => 'Estado Civil',
+                                    'value' => function ($data) {
+                                        return Utils::estadoCivilGet($data->estado_civil);
+                                    },
+                                ],
                                 'numero_celular',
                                 'area',
                                 'puesto',

@@ -94,6 +94,15 @@ class Utils
     }
 
     /**
+     * @param $genero
+     * @return string
+     */
+    public static function generoGet($genero)
+    {
+        return ($genero === 'M') ? 'Masculino' : 'Femenino';
+    }
+
+    /**
      * @return array
      */
     public static function estadoCivil()
@@ -104,6 +113,26 @@ class Utils
             'CO' => 'Comprometido',
             'VI' => 'Viudo',
         ];
+    }
+
+    /**
+     * @param $estado
+     * @return string
+     */
+    public static function estadoCivilGet($estado)
+    {
+        switch ($estado) {
+            case 'SO':
+                return 'Soltero';
+            case 'CA':
+                return 'Casado';
+            case 'CO':
+                return 'Comprometido';
+            case 'VI':
+                return 'Viudo';
+            default :
+                return 'N.A.';
+        }
     }
 
     /**
