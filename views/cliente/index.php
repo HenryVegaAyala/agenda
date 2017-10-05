@@ -37,7 +37,39 @@ $this->title = 'Ticket - Lista de Clientes';
                                 'area',
                                 'email_corp:email',
 
-                                ['class' => 'yii\grid\ActionColumn'],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Opciones',
+                                    'options' => ['style' => 'width:100px;'],
+                                    'template' => ' {view} / {update} / {delete}',
+                                    'headerOptions' => ['class' => 'itemHide'],
+                                    'contentOptions' => ['class' => 'itemHide'],
+                                    'buttons' => [
+                                        'view' => function ($url, $model) {
+                                            return Html::a('<i class="fa fa-eye fa-lg-icon" aria-hidden="true"></i>',
+                                                Yii::$app->urlManager->createUrl(['ver-cliente/' . $model->id]),
+                                                [
+                                                    'title' => Yii::t('yii', 'Ver Detalle'),
+                                                ]
+                                            );
+                                        },
+                                        'update' => function ($url, $model) {
+                                            return Html::a('<span class="fa fa-pencil-square-o fa-lg-icon"></span>',
+                                                Yii::$app->urlManager->createUrl(['actualizar-cliente/' . $model->id]),
+                                                ['title' => Yii::t('yii', 'Actualizar'),]
+                                            );
+                                        },
+                                        'delete' => function ($url, $model) {
+                                            return Html::a('<i class="fa fa-trash-o fa-lg-icon" aria-hidden="true"></i>',
+                                                ['eliminar-cliente/' . $model['id']], [
+                                                    'title' => Yii::t('app', 'Eliminar'),
+                                                    'data-confirm' => Yii::t('app',
+                                                        '¿Esta Seguro de eliminar este usuario?'),
+                                                    'data-method' => 'post',
+                                                ]);
+                                        },
+                                    ],
+                                ],
                             ],
                         ]); ?>
                     </div>

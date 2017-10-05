@@ -125,6 +125,7 @@ $config = [
                 ['pattern' => '/importar-cliente', 'route' => '/cliente/import', 'suffix' => '.php'],
                 ['pattern' => '/exportar-cliente', 'route' => '/cliente/export', 'suffix' => '.php'],
                 ['pattern' => '/actualizar-cliente/<id:\d+>', 'route' => '/cliente/update'],
+                ['pattern' => '/ver-cliente/<id:\d+>', 'route' => '/cliente/view'],
                 ['pattern' => '/eliminar-cliente/<id:\d+>', 'route' => '/cliente/delete'],
             ],
         ],
