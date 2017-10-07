@@ -89,6 +89,7 @@ class GenerateController extends Controller
                 1,
                 1,
                 1,
+                1,
             ]);
         }
 
@@ -102,6 +103,7 @@ class GenerateController extends Controller
                 'authKey',
                 'accessToken',
                 'estado',
+                'type',
 
             ],
             $data

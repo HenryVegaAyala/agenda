@@ -102,6 +102,7 @@ class User extends ActiveRecord implements IdentityInterface
             'cliente_id',
             'nombres',
             'correo',
+            'type',
         ])->where('id = :id', [':id' => $id])->one();
     }
 
