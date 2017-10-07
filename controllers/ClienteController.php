@@ -3,12 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Utils;
-use emikhalev\SimpleXLSX\SimpleXLSX;
-use PHPExcel_Cell;
 use PHPExcel_IOFactory;
-use Spreadsheet_Excel_Reader;
-use SpreadsheetReader;
-use SpreadsheetReader_XLSX;
 use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use app\models\Cliente;
@@ -20,11 +15,19 @@ use yii\web\UploadedFile;
 
 /**
  * Class ClienteController
+ * @property false|string fecha_nacimiento
+ * @property false|string fecha_ingreso
+ * @property int estado
+ * @property mixed nombres
+ * @property mixed apellidos
+ * @property mixed email_corp
+ * @property mixed dni
  * @package app\controllers
  */
 class ClienteController extends Controller
 {
-    const TABLE = 'cliente';
+    const TABLE_CLIENTE = 'cliente';
+    const TABLE_USUARIO = 'usuario';
 
     /**
      * @inheritdoc
@@ -74,9 +77,10 @@ class ClienteController extends Controller
         $model = new Cliente();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->id = Utils::idTable(self::TABLE);
+            $model->id = Utils::idTable(self::TABLE_CLIENTE);
             $model->fecha_nacimiento = Utils::formatDate($model->fecha_nacimiento);
             $model->fecha_ingreso = Utils::formatDate($model->fecha_ingreso);
+            $model->estado = 1;
             $model->save();
 
             Yii::$app->db->createCommand()->insert(
@@ -109,7 +113,25 @@ class ClienteController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post())) {
+            $model->fecha_nacimiento = (empty($model->fecha_nacimiento) ? '' : Utils::formatDate($model->fecha_nacimiento));
+            $model->fecha_ingreso = (empty($model->fecha_ingreso) ? '' : Utils::formatDate($model->fecha_ingreso));
             $model->save();
+
+            Yii::$app->db->createCommand()
+                ->update(self::TABLE_USUARIO,
+                    [
+                        'fecha_modificada' => Utils::zonaHoraria(),
+                        'usuario_modificado' => Yii::$app->user->identity->correo,
+                        'ip' => Yii::$app->request->userIP,
+                        'host' => strval(php_uname()),
+                        'estado' => (int)$model->estado,
+                        'nombres' => $model->nombres . ' ' . $model->apellidos,
+                        'correo' => $model->email_corp,
+                        'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash($model->dni),
+                    ],
+                    'cliente_id = :cliente_id', [':cliente_id' => $id])
+                ->execute();
+
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [

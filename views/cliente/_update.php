@@ -18,7 +18,6 @@ $descripcion = "Actualizar Cliente";
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_content">
-                <?php Pjax::begin(); ?>
                 <?php $form = ActiveForm::begin(
                     [
                         'enableAjaxValidation' => false,
@@ -250,7 +249,6 @@ $descripcion = "Actualizar Cliente";
                 </div>
             </div>
             <?php ActiveForm::end(); ?>
-            <?php Pjax::end(); ?>
         </div>
     </div>
 </div>

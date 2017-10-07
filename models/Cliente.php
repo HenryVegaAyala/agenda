@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
  * @property false|null|string id
  * @property false|string fecha_nacimiento
  * @property false|string fecha_ingreso
+ * @property false|string estado
  * @package app\models
  */
 class Cliente extends ActiveRecord
