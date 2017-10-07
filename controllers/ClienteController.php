@@ -125,7 +125,7 @@ class ClienteController extends Controller
                         'usuario_modificado' => Yii::$app->user->identity->correo,
                         'ip' => Yii::$app->request->userIP,
                         'host' => strval(php_uname()),
-                        'estado' => (int)$model->estado,
+                        'estado' => 1,
                         'nombres' => $model->nombres . ' ' . $model->apellidos,
                         'correo' => $model->email_corp,
                         'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash($model->dni),
