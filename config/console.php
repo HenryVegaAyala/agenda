@@ -47,6 +47,19 @@ $config = [
         'fixture' => [
             'class' => 'yii\faker\FixtureController',
         ],
+        'migrate' => [
+            'class' => yii\console\controllers\MigrateController::class,
+            'templateFile' => '@jamband/schemadump/template.php',
+        ],
+        'schemadump' => [
+            'class' => jamband\schemadump\SchemaDumpController::class,
+            'db' => [
+                'class' => yii\db\Connection::class,
+                'dsn' => 'mysql:host=localhost;dbname=sis_agenda',
+                'username' => 'root',
+                'password' => '',
+            ],
+        ],
     ],
 
 ];

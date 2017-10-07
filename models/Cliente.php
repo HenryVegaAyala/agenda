@@ -5,39 +5,10 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "cliente".
- *
- * @property integer $id
- * @property string $nombres
- * @property string $apellidos
- * @property string $dni
- * @property string $fecha_nacimiento
- * @property string $genero
- * @property string $email_personal
- * @property string $ubicacion
- * @property string $estado_civil
- * @property string $numero_celular
- * @property string $area
- * @property string $puesto
- * @property string $categoria
- * @property string $email_corp
- * @property string $numero_emergencia
- * @property string $fecha_ingreso
- * @property string $numero_oficina
- * @property string $anexo
- * @property integer $estado
- * @property string $fecha_digitada
- * @property string $fecha_modificada
- * @property string $fecha_eliminada
- * @property string $usuario_digitado
- * @property string $usuario_modificado
- * @property string $usuario_eliminado
- * @property string $ip
- * @property string $host
- */
-
-/**
  * Class Cliente
+ * @property false|null|string id
+ * @property false|string fecha_nacimiento
+ * @property false|string fecha_ingreso
  * @package app\models
  */
 class Cliente extends ActiveRecord
@@ -60,8 +31,8 @@ class Cliente extends ActiveRecord
     {
         return [
             [['nombres', 'apellidos', 'dni', 'email_corp'], 'required'],
-            [['fecha_nacimiento', 'fecha_ingreso', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
-            [['fecha_nacimiento', 'fecha_ingreso'], 'date'],
+            [['fecha_nacimiento', 'fecha_ingreso'], 'safe'],
+            //[['fecha_nacimiento', 'fecha_ingreso'], 'date'],
             [['estado'], 'integer'],
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
@@ -71,7 +42,6 @@ class Cliente extends ActiveRecord
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
             [['numero_oficina', 'anexo'], 'string', 'max' => 20],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
-            [['ip'], 'string', 'max' => 30],
         ];
     }
 

@@ -3,6 +3,12 @@
 namespace app\controllers;
 
 use app\helpers\Utils;
+use emikhalev\SimpleXLSX\SimpleXLSX;
+use PHPExcel_Cell;
+use PHPExcel_IOFactory;
+use Spreadsheet_Excel_Reader;
+use SpreadsheetReader;
+use SpreadsheetReader_XLSX;
 use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use app\models\Cliente;
@@ -18,6 +24,8 @@ use yii\web\UploadedFile;
  */
 class ClienteController extends Controller
 {
+    const TABLE = 'cliente';
+
     /**
      * @inheritdoc
      */
@@ -65,8 +73,27 @@ class ClienteController extends Controller
     {
         $model = new Cliente();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id = Utils::idTable(self::TABLE);
+            $model->fecha_nacimiento = Utils::formatDate($model->fecha_nacimiento);
+            $model->fecha_ingreso = Utils::formatDate($model->fecha_ingreso);
+            $model->save();
+
+            Yii::$app->db->createCommand()->insert(
+                'usuario',
+                [
+                    'cliente_id' => $model->id,
+                    'nombres' => $model->nombres . ' ' . $model->apellidos,
+                    'correo' => $model->email_corp,
+                    'contrasena' => Yii::$app->getSecurity()->generatePasswordHash($model->dni),
+                    'authKey' => 1,
+                    'accessToken' => 1,
+                    'estado' => 1,
+
+                ]
+            )->execute();
+
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -81,9 +108,9 @@ class ClienteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -109,11 +136,60 @@ class ClienteController extends Controller
     {
         $model = new Cliente();
         if ($model->load(Yii::$app->request->post())) {
-            $model->excel_import = UploadedFile::getInstance($model, 'excel_import');
-            var_dump($model->excel_import);
-            exit();
+            $data = [];
+            $file = UploadedFile::getInstance($model, 'excel_import');
+            $filename = 'Data.' . $file->extension;
+            $file->saveAs('temp/' . $filename);
 
-            //$model->save();
+            $fileXlsx = Yii::getAlias('@webroot') . '/temp/' . $filename;
+            $typeFile = PHPExcel_IOFactory::identify($fileXlsx);
+            $readFile = PHPExcel_IOFactory::createReader($typeFile);
+            $readFile->setReadDataOnly(true);
+            $objPHPExcel = $readFile->load($fileXlsx);
+
+            $fileExcel = $objPHPExcel->getSheet(0);
+            $highestRow = $fileExcel->getHighestRow();
+            //$highestCol = $fileExcel->getHighestColumn();
+            //$indexCol = PHPExcel_Cell::columnIndexFromString($highestCol);
+            for ($row = 2; $row <= $highestRow; $row++) {
+                //for ($col = 0; $col <= $indexCol; $col++) {
+                //$batchFile = $fileExcel->getCellByColumnAndRow($col, $row)->getValue();
+                array_push($data, [
+                    $fileExcel->getCellByColumnAndRow(0, $row)->getValue(),
+                    $fileExcel->getCellByColumnAndRow(1, $row)->getValue(),
+                    $fileExcel->getCellByColumnAndRow(2, $row)->getValue(),
+                    $fileExcel->getCellByColumnAndRow(3, $row)->getValue(),
+                    $fileExcel->getCellByColumnAndRow(4, $row)->getValue(),
+                    $fileExcel->getCellByColumnAndRow(5, $row)->getValue(),
+                    $fileExcel->getCellByColumnAndRow(6, $row)->getValue(),
+                    Utils::generoSet($fileExcel->getCellByColumnAndRow(7, $row)->getValue()),
+                    Utils::formatDate($fileExcel->getCellByColumnAndRow(8, $row)->getValue()),
+                    Utils::formatDate($fileExcel->getCellByColumnAndRow(9, $row)->getValue()),
+                    Utils::estadoCivilSet($fileExcel->getCellByColumnAndRow(10, $row)->getValue()),
+                    1,
+                ]);
+                //}
+            }
+
+            Yii::$app->db->createCommand()->batchInsert(
+                'cliente',
+                [
+                    'nombres',
+                    'apellidos',
+                    'email_corp',
+                    'dni',
+                    'area',
+                    'categoria',
+                    'puesto',
+                    'genero',
+                    'fecha_nacimiento',
+                    'fecha_ingreso',
+                    'estado_civil',
+                    'estado',
+
+                ],
+                $data
+            )->execute();
 
             return $this->render('details');
         } else {

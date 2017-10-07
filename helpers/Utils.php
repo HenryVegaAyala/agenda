@@ -103,6 +103,15 @@ class Utils
     }
 
     /**
+     * @param $genero
+     * @return string
+     */
+    public static function generoSet($genero)
+    {
+        return (strtolower($genero) === 'masculino') ? 'M' : 'F';
+    }
+
+    /**
      * @return array
      */
     public static function estadoCivil()
@@ -123,16 +132,57 @@ class Utils
     {
         switch ($estado) {
             case 'SO':
-                return 'Soltero';
+                $estado_civil = 'Soltero';
+                break;
             case 'CA':
-                return 'Casado';
+                $estado_civil = 'Casado';
+                break;
             case 'CO':
-                return 'Comprometido';
+                $estado_civil = 'Comprometido';
+                break;
             case 'VI':
-                return 'Viudo';
+                $estado_civil = 'Viudo';
+                break;
             default :
-                return 'N.A.';
+                $estado_civil = 'N.A.';
         }
+
+        return $estado_civil;
+    }
+
+    /**
+     * @param $date
+     * @return false|string
+     */
+    public static function formatDate($date)
+    {
+        return date('Y-m-d', strtotime($date));
+    }
+
+    /**
+     * @param $estado
+     * @return string
+     */
+    public static function estadoCivilSet($estado)
+    {
+        switch (strtolower($estado)) {
+            case 'soltero':
+                $estado_civil = 'SO';
+                break;
+            case 'casado':
+                $estado_civil = 'CA';
+                break;
+            case 'comprometido':
+                $estado_civil = 'CO';
+                break;
+            case 'viudo':
+                $estado_civil = 'VI';
+                break;
+            default :
+                $estado_civil = 'N.A.';
+        }
+
+        return $estado_civil;
     }
 
     /**

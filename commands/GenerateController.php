@@ -4,6 +4,7 @@ namespace app\commands;
 
 use app\models\Cliente;
 use Faker\Factory;
+use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use yii\console\Controller;
 
@@ -81,8 +82,8 @@ class GenerateController extends Controller
                 $cliente['nombres'] . ' ' . $cliente['apellidos'],
                 $cliente['email_corp'],
                 Yii::$app->getSecurity()->generatePasswordHash($cliente['dni']),
-                base64_encode(random_bytes(25)),
-                base64_encode(random_bytes(25)),
+                1,
+                1,
                 1,
             ]);
         }
@@ -101,6 +102,35 @@ class GenerateController extends Controller
             ],
             $data
         )->execute();
+    }
+
+    public static function actionPiloto()
+    {
+        echo "Creando Usuario." . "\n";
+
+        Yii::$app->db->createCommand()->insert(
+            'cliente',
+            [
+                'nombres' => 'Henry Pablo',
+                'apellidos' => 'Vega Ayala',
+                'dni' => '000000',
+                'genero' => 'M',
+                'email_corp' => 'admin@gmail.com',
+                'ubicacion' => 'Villa El Salvador',
+                'estado_civil' => 'S',
+                'numero_celular' => '955201758',
+                'area' => 'Sistemas',
+                'puesto' => 'Analista',
+                'categoria' => 'Planilla',
+                'estado' => 1,
+            ]
+        )->execute();
+
+        $runner = new ConsoleCommandRunner();
+        $runner->run('generate/usuario');
+        $runner->getExitCode();
+
+        echo "Generado Exitosamente";
     }
 
 }
