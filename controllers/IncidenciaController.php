@@ -10,12 +10,13 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * IncidenciaController implements the CRUD actions for Incidencia model.
+ * Class IncidenciaController
+ * @package app\controllers
  */
 class IncidenciaController extends Controller
 {
     /**
-     * @inheritdoc
+     * @return array
      */
     public function behaviors()
     {
@@ -30,8 +31,7 @@ class IncidenciaController extends Controller
     }
 
     /**
-     * Lists all Incidencia models.
-     * @return mixed
+     * @return string
      */
     public function actionIndex()
     {
@@ -45,9 +45,8 @@ class IncidenciaController extends Controller
     }
 
     /**
-     * Displays a single Incidencia model.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return string
      */
     public function actionView($id)
     {
@@ -57,9 +56,7 @@ class IncidenciaController extends Controller
     }
 
     /**
-     * Creates a new Incidencia model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
@@ -75,10 +72,8 @@ class IncidenciaController extends Controller
     }
 
     /**
-     * Updates an existing Incidencia model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
@@ -94,10 +89,8 @@ class IncidenciaController extends Controller
     }
 
     /**
-     * Deletes an existing Incidencia model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
@@ -107,11 +100,9 @@ class IncidenciaController extends Controller
     }
 
     /**
-     * Finds the Incidencia model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Incidencia the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return static
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {

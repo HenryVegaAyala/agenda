@@ -115,26 +115,16 @@ class GenerateController extends Controller
         echo "Creando Usuario." . "\n";
 
         Yii::$app->db->createCommand()->insert(
-            'cliente',
+            'usuario',
             [
-                'nombres' => 'Henry Pablo',
-                'apellidos' => 'Vega Ayala',
-                'dni' => '000000',
-                'genero' => 'M',
-                'email_corp' => 'admin@gmail.com',
-                'ubicacion' => 'Villa El Salvador',
-                'estado_civil' => 'S',
-                'numero_celular' => '955201758',
-                'area' => 'Sistemas',
-                'puesto' => 'Analista',
-                'categoria' => 'Planilla',
+                'nombres' => 'Henry Pablo Vega Ayala',
+                'correo' => 'admin@gmail.com',
+                'cliente_id' => 0,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
                 'estado' => 1,
+                'type' => 0,
             ]
         )->execute();
-
-        $runner = new ConsoleCommandRunner();
-        $runner->run('generate/usuario');
-        $runner->getExitCode();
 
         echo "Generado Exitosamente";
     }

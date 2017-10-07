@@ -94,6 +94,7 @@ class ClienteController extends Controller
                     'authKey' => 1,
                     'accessToken' => 1,
                     'estado' => 1,
+                    'type' => 1,
 
                 ]
             )->execute();
@@ -191,6 +192,7 @@ class ClienteController extends Controller
                     Utils::formatDate($fileExcel->getCellByColumnAndRow(9, $row)->getValue()),
                     Utils::estadoCivilSet($fileExcel->getCellByColumnAndRow(10, $row)->getValue()),
                     1,
+                    1,
                 ]);
                 //}
             }
@@ -210,6 +212,7 @@ class ClienteController extends Controller
                     'fecha_ingreso',
                     'estado_civil',
                     'estado',
+                    'type',
 
                 ],
                 $data

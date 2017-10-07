@@ -66,6 +66,7 @@ class UserController extends Controller
             $model->ip = Yii::$app->request->userIP;
             $model->host = strval(php_uname());
             $model->estado = (int)$model->estado;
+            $model->type = 0;
             $model->save();
 
             $this->encryptPassword($model->id, $model->contrasena);
