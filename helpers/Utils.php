@@ -61,12 +61,17 @@ class Utils
     {
         $reporte = Yii::getAlias('@PathReporteDownload');
         $imagen = Yii::getAlias('@PathImagenColaboradores');
+        $excel = Yii::getAlias('@PathExcelImport');
         if (!file_exists($reporte)) {
             mkdir($reporte, 0777, true);
         }
 
         if (!file_exists($imagen)) {
             mkdir($imagen, 0777, true);
+        }
+
+        if (!file_exists($excel)) {
+            mkdir($excel, 0777, true);
         }
     }
 

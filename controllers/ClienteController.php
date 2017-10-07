@@ -156,6 +156,7 @@ class ClienteController extends Controller
      */
     public function actionImport()
     {
+        Utils::fileReporte();
         $model = new Cliente();
         if ($model->load(Yii::$app->request->post())) {
             $data = [];
@@ -226,6 +227,7 @@ class ClienteController extends Controller
      */
     public function actionExport()
     {
+        Utils::fileReporte();
         $runner = new ConsoleCommandRunner();
         $runner->run('command/export');
         $runner->getExitCode();

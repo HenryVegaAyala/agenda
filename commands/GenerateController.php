@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use app\helpers\Utils;
 use app\models\Cliente;
 use Faker\Factory;
 use tebazil\runner\ConsoleCommandRunner;
@@ -12,6 +13,7 @@ class GenerateController extends Controller
 {
     public static function actionCliente()
     {
+        Utils::fileReporte();
         $data = [];
         $faker = Factory::create('es_ES');
         for ($i = 0; $i < 100; $i++) {
@@ -66,6 +68,8 @@ class GenerateController extends Controller
 
     public static function actionUsuario()
     {
+        Utils::fileReporte();
+
         $data = [];
         $clientes = Cliente::find()->select([
             'id',
@@ -106,6 +110,8 @@ class GenerateController extends Controller
 
     public static function actionPiloto()
     {
+        Utils::fileReporte();
+
         echo "Creando Usuario." . "\n";
 
         Yii::$app->db->createCommand()->insert(
