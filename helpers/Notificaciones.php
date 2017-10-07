@@ -67,4 +67,17 @@ class Notificaciones
         ]);
     }
 
+    public static function notificationImportSuccess()
+    {
+        return Yii::$app->getSession()->setFlash(self::SUCCESS, [
+            'type' => 'success',
+            'duration' => 6000,
+            'icon' => 'fa fa-cloud-upload fa-lg',
+            'message' => "Se ha importado la lista de colaboradores Exitosamente",
+            'title' => "Importación Exitosa",
+            'positonY' => 'top',
+            'positonX' => 'right',
+        ]);
+    }
+
 }

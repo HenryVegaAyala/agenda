@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\Notificaciones;
 use app\helpers\Utils;
 use PHPExcel_IOFactory;
 use tebazil\runner\ConsoleCommandRunner;
@@ -214,11 +215,11 @@ class ClienteController extends Controller
                 $data
             )->execute();
 
-            return $this->render('details');
+            Notificaciones::notificationImportSuccess();
+
+            return $this->render('import');
         } else {
-            return $this->render('import', [
-                'model' => $model,
-            ]);
+            return $this->render('import');
         }
     }
 

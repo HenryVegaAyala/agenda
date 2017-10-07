@@ -7,5 +7,5 @@ $this->title = 'Ticket - Importar Cliente';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="right_col" role="main">
-    <?= $this->render('_import', ['model' => $model,]) ?>
+    <?= $this->render('_import') ?>
 </div>
