@@ -73,3 +73,4 @@ $descripcion = "Registrar Usuario";
                 </div> <?php ActiveForm::end(); ?> <?php Pjax::end(); ?> </div>
         </div>
     </div>
+</div>
