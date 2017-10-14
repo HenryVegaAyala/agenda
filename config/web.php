@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','assetsAutoCompress'],
     'sourceLanguage' => 'es',
     'language' => 'es',
     'timeZone' => 'America/Lima',
@@ -53,6 +53,31 @@ $config = [
             'class' => 'yii\web\DbSession',
             'sessionTable' => 'session',
         ],
+        'assetsAutoCompress' =>
+            [
+                'class'                         => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+                'enabled'                       => true,
+                'readFileTimeout'               => 3,
+                'jsCompress'                    => true,
+                'jsCompressFlaggedComments'     => true,
+                'cssCompress'                   => true,
+                'cssFileCompile'                => true,
+                'cssFileRemouteCompile'         => false,
+                'cssFileCompress'               => true,
+                'cssFileBottom'                 => false,
+                'cssFileBottomLoadOnJs'         => false,
+                'jsFileCompile'                 => true,
+                'jsFileRemouteCompile'          => false,
+                'jsFileCompress'                => true,
+                'jsFileCompressFlaggedComments' => true,
+                'htmlCompress'                  => true,
+                'noIncludeJsFilesOnPjax'        => true,
+                'htmlCompressOptions'           =>
+                    [
+                        'extra' => false,
+                        'no-comments' => true
+                    ],
+            ],
         'request' => [
             'baseUrl' => str_replace('/web', '', (new \yii\web\Request)->getBaseUrl()),
             'cookieValidationKey' => 'MfUsCsKe7ESAiH25TzeolSVxyAiIyCIV',

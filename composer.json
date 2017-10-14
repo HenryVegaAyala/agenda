@@ -31,7 +31,8 @@
         "undefinedor/yii2-cached-active-record": "^0.0.3",
         "yiisoft/yii2-faker": "^2.0",
         "tebazil/yii2-console-runner": "^0.0.0",
-        "omnilight/yii2-scheduling": "*"
+        "omnilight/yii2-scheduling": "*",
+        "skeeks/yii2-assets-auto-compress": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -2692,6 +2692,20 @@ span.section {
     border-bottom: 1px solid #e5e5e5
 }
 
+.center-left {
+    text-align: left;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: inherit;
+    color: #3e4450;
+    border: 0;
+    border-bottom: 1px solid #e5e5e5
+}
+
+
 .form-control {
     border-radius: 0;
     width: 100%

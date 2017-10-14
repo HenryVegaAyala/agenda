@@ -192,7 +192,6 @@ class ClienteController extends Controller
                     Utils::formatDate($fileExcel->getCellByColumnAndRow(9, $row)->getValue()),
                     Utils::estadoCivilSet($fileExcel->getCellByColumnAndRow(10, $row)->getValue()),
                     1,
-                    1,
                 ]);
                 //}
             }
@@ -212,8 +211,6 @@ class ClienteController extends Controller
                     'fecha_ingreso',
                     'estado_civil',
                     'estado',
-                    'type',
-
                 ],
                 $data
             )->execute();

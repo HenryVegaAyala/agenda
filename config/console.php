@@ -6,7 +6,7 @@ $db = require(__DIR__ . '/db.php');
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','assetsAutoCompress'],
     'controllerNamespace' => 'app\commands',
     'components' => [
         'assetManager' => [
@@ -20,6 +20,31 @@ $config = [
                 ],
             ],
         ],
+        'assetsAutoCompress' =>
+            [
+                'class'                         => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+                'enabled'                       => true,
+                'readFileTimeout'               => 3,
+                'jsCompress'                    => true,
+                'jsCompressFlaggedComments'     => true,
+                'cssCompress'                   => true,
+                'cssFileCompile'                => true,
+                'cssFileRemouteCompile'         => false,
+                'cssFileCompress'               => true,
+                'cssFileBottom'                 => false,
+                'cssFileBottomLoadOnJs'         => false,
+                'jsFileCompile'                 => true,
+                'jsFileRemouteCompile'          => false,
+                'jsFileCompress'                => true,
+                'jsFileCompressFlaggedComments' => true,
+                'htmlCompress'                  => true,
+                'noIncludeJsFilesOnPjax'        => true,
+                'htmlCompressOptions'           =>
+                    [
+                        'extra' => false,
+                        'no-comments' => true
+                    ],
+            ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
