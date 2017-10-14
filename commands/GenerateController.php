@@ -10,13 +10,14 @@ use yii\console\Controller;
 
 class GenerateController extends Controller
 {
-    public static function actionCliente()
+    public static function actionCliente($empresa)
     {
         Utils::fileReporte();
         $data = [];
         $faker = Factory::create('es_ES');
         for ($i = 0; $i < 100; $i++) {
             array_push($data, [
+                $empresa,
                 $faker->name,
                 $faker->lastName . ' ' . $faker->lastName,
                 $faker->dni,
@@ -41,6 +42,7 @@ class GenerateController extends Controller
         Yii::$app->db->createCommand()->batchInsert(
             'cliente',
             [
+                'empresa_id',
                 'nombres',
                 'apellidos',
                 'dni',
@@ -76,12 +78,14 @@ class GenerateController extends Controller
             'apellidos',
             'dni',
             'email_corp',
+            'empresa_id',
         ])->where('estado = :estado',
             [':estado' => 1])->all();
 
         foreach ($clientes as $cliente) {
             array_push($data, [
                 $cliente['id'],
+                $cliente['empresa_id'],
                 $cliente['nombres'] . ' ' . $cliente['apellidos'],
                 $cliente['email_corp'],
                 (string)Yii::$app->getSecurity()->generatePasswordHash($cliente['dni']),
@@ -96,6 +100,7 @@ class GenerateController extends Controller
             'usuario',
             [
                 'cliente_id',
+                'empresa_id',
                 'nombres',
                 'correo',
                 'contrasena',
@@ -103,24 +108,44 @@ class GenerateController extends Controller
                 'accessToken',
                 'estado',
                 'type',
-
             ],
             $data
         )->execute();
     }
 
+    public static function actionEmpresa()
+    {
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Vega', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Mapfre', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Habitat', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Franquicia', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Clínica Ricardo Palma', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+    }
+
     public static function actionPiloto()
     {
-        Utils::fileReporte();
-
-        echo "Creando Usuario." . "\n";
-
+        /** Vega **/
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Super Administrador',
-                'correo' => 'sadmin@gmail.com',
+                'nombres' => 'Analista de Requerimientos',
+                'correo' => 'sadmin@vega.com',
                 'cliente_id' => 0,
+                'empresa_id' => 1,
                 'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
                 'estado' => 1,
                 'authKey' => 1,
@@ -128,13 +153,13 @@ class GenerateController extends Controller
                 'type' => 0,
             ]
         )->execute();
-
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Administrador',
-                'correo' => 'admin@gmail.com',
+                'nombres' => 'Coordinador',
+                'correo' => 'admin@vega.com',
                 'cliente_id' => 0,
+                'empresa_id' => 1,
                 'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
                 'estado' => 1,
                 'authKey' => 1,
@@ -143,7 +168,125 @@ class GenerateController extends Controller
             ]
         )->execute();
 
-        echo "Generado Exitosamente";
+        /** Mapfre **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Analista de Requerimientos',
+                'correo' => 'sadmin@mapfre.com',
+                'cliente_id' => 0,
+                'empresa_id' => 2,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 0,
+            ]
+        )->execute();
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Coordinador',
+                'correo' => 'admin@mapfre.com',
+                'cliente_id' => 0,
+                'empresa_id' => 2,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 1,
+            ]
+        )->execute();
+
+        /** Habitat **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Analista de Requerimientos',
+                'correo' => 'sadmin@habitat.com',
+                'cliente_id' => 0,
+                'empresa_id' => 3,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 0,
+            ]
+        )->execute();
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Coordinador',
+                'correo' => 'admin@habitat.com',
+                'cliente_id' => 0,
+                'empresa_id' => 3,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 1,
+            ]
+        )->execute();
+
+        /** Franquicia **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Analista de Requerimientos',
+                'correo' => 'sadmin@franquicia.com',
+                'cliente_id' => 0,
+                'empresa_id' => 4,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 0,
+            ]
+        )->execute();
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Coordinador',
+                'correo' => 'admin@franquicia.com',
+                'cliente_id' => 0,
+                'empresa_id' => 4,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 1,
+            ]
+        )->execute();
+
+        /** Clínica Ricardo Palma **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Analista de Requerimientos',
+                'correo' => 'sadmin@clinicaricardopalma.com',
+                'cliente_id' => 0,
+                'empresa_id' => 5,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 0,
+            ]
+        )->execute();
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Coordinador',
+                'correo' => 'admin@clinicaricardopalma.com',
+                'cliente_id' => 0,
+                'empresa_id' => 5,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 1,
+            ]
+        )->execute();
     }
 
 }
