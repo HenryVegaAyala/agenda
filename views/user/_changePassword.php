@@ -35,10 +35,10 @@ $descripcion = "Mi Cuenta";
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?= $form->field($model, 'nombres')->textInput()->input('text',
-                                ['placeholder' => "Nombres", 'readonly' => 'true'])->label(false) ?> </div>
+                                ['placeholder' => "Nombres"])->label(false) ?> </div>
                         <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                 'correo')->textInput()->input('text',
-                                ['placeholder' => "Correo", 'readonly' => 'true'])->label(false) ?></div>
+                                ['placeholder' => "Correo"])->label(false) ?></div>
                     </div>
                 </div>
 
