@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m171007_220101_Usuario extends \yii\db\Migration
+class m171015_180101_Usuario extends \yii\db\Migration
 {
     public function safeUp()
     {
@@ -14,6 +14,7 @@ class m171007_220101_Usuario extends \yii\db\Migration
         $this->createTable('usuario', [
             'id' => $this->primaryKey(),
             'cliente_id' => $this->integer(11)->notNull(),
+            'empresa_id' => $this->integer(11)->notNull(),
             'nombres' => $this->string(80),
             'correo' => $this->string(40),
             'contrasena' => $this->string(150),

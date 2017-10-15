@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m171007_220101_Sesion extends \yii\db\Migration
+class m171015_180101_Session extends \yii\db\Migration
 {
     public function safeUp()
     {

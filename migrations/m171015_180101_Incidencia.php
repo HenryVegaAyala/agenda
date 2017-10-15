@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 
-class m171007_220101_Incidencia extends \yii\db\Migration
+class m171015_180101_Incidencia extends \yii\db\Migration
 {
     public function safeUp()
     {
@@ -13,7 +13,8 @@ class m171007_220101_Incidencia extends \yii\db\Migration
         
         $this->createTable('incidencia', [
             'id' => $this->primaryKey(),
-            'usuario_id' => $this->integer(11)->notNull(),
+            'cliente_id' => $this->integer(11)->notNull(),
+            'empresa_id' => $this->integer(11)->notNull(),
             'empresa' => $this->string(150)->notNull(),
             'cliente' => $this->string(150)->notNull(),
             'contacto' => $this->string(150)->notNull(),
@@ -36,6 +37,7 @@ class m171007_220101_Incidencia extends \yii\db\Migration
             'estado' => $this->smallInteger(1),
             'ip' => $this->string(30),
             'host' => $this->string(150),
+            'FOREIGN KEY ([[cliente_id]]) REFERENCES cliente ([[id]]) ON DELETE CASCADE ON UPDATE CASCADE',
             ], $tableOptions);
                 
     }
