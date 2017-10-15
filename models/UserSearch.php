@@ -53,6 +53,7 @@ class UserSearch extends User
                 'correo',
                 'estado',
             ])
+                ->where(['empresa_id' => Yii::$app->user->identity->empresa_id])
                 ->orderBy(['nombres' => SORT_ASC]);
         }, 3600, $dependency);
 

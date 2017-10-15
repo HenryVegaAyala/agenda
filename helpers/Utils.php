@@ -90,6 +90,17 @@ class Utils
     /**
      * @return array
      */
+    public static function typeUser()
+    {
+        return [
+            '0' => 'Analista de Requerimientos',
+            '1' => 'Coordinador',
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public static function genero()
     {
         return [

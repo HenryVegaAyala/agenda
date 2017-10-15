@@ -63,6 +63,7 @@ class ClienteSearch extends Cliente
                     'area                     AS area',
                     'email_corp               AS email_corp',
                 ])
+                ->where(['empresa_id' => Yii::$app->user->identity->empresa_id])
                 ->orderBy(['apellidos' => SORT_ASC]);
         }, self::CACHE_TIMEOUT, $dep);
 

@@ -59,6 +59,7 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->id = (int)Utils::idTable(self::TABLE);
             $model->cliente_id = 0;
+            $model->empresa_id = Yii::$app->user->identity->empresa_id;
             $model->authKey = md5(rand(1, 9999));
             $model->accessToken = md5(rand(1, 9999));
             $model->fecha_digitada = Utils::zonaHoraria();
@@ -97,6 +98,9 @@ class UserController extends Controller
                         'ip' => Yii::$app->request->userIP,
                         'host' => strval(php_uname()),
                         'estado' => (int)$model->estado,
+                        'nombres' => $model->nombres,
+                        'correo' => $model->correo,
+                        'type' => (int)$model->type,
                     ],
                     'id = :id', [':id' => $id])
                 ->execute();
@@ -182,6 +186,7 @@ class UserController extends Controller
                 'nombres',
                 'correo',
                 'estado',
+                'type',
             ])
                 ->where('id = :id', [':id' => $id])
                 ->one()

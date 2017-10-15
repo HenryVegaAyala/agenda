@@ -7,11 +7,11 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * Class User
  * This is the model class for table "usuario".
- * @package app\models
+ *
  * @property integer $id
  * @property integer $cliente_id
+ * @property integer $empresa_id
  * @property string $nombres
  * @property string $correo
  * @property string $contrasena
@@ -26,11 +26,7 @@ use yii\web\IdentityInterface;
  * @property string $usuario_eliminado
  * @property string $ip
  * @property string $host
- */
-
-/**
- * Class User
- * @package app\models
+ * @property integer $type
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -43,7 +39,7 @@ class User extends ActiveRecord implements IdentityInterface
     public $contrasena_desc;
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -51,13 +47,13 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function rules()
     {
         return [
             [['estado'], 'integer'],
-            [['nombres', 'contrasena', 'contrasena_desc', 'correo', 'estado'], 'required'],
+            [['nombres', 'contrasena', 'contrasena_desc', 'correo', 'estado', 'type'], 'required'],
             ['correo', 'unique'],
             [['correo'], 'match', 'pattern' => "/^.{3,45}$/", 'message' => self::MESSAGE_MIN_3],
             [['correo'], 'email', 'message' => self::FIELD_VALID],
@@ -68,27 +64,31 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return array
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'cliente_id' => 'Cliente ID',
+            'empresa_id' => 'Empresa ID',
             'nombres' => 'Nombres',
             'correo' => 'Correo Corporativo',
             'contrasena' => 'Contraseña',
             'contrasena_desc' => 'Repetir Contraseña',
+            'authKey' => 'Auth Key',
+            'accessToken' => 'Access Token',
             'estado' => 'Estado',
+            'fecha_digitada' => 'Fecha Digitada',
+            'fecha_modificada' => 'Fecha Modificada',
+            'fecha_eliminada' => 'Fecha Eliminada',
+            'usuario_digitado' => 'Usuario Digitado',
+            'usuario_modificado' => 'Usuario Modificado',
+            'usuario_eliminado' => 'Usuario Eliminado',
+            'ip' => 'Ip',
+            'host' => 'Host',
+            'type' => 'Tipo de Usuario',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRutas()
-    {
-        return $this->hasMany(Ruta::className(), ['usuario_id' => 'id']);
     }
 
     /**
@@ -100,6 +100,7 @@ class User extends ActiveRecord implements IdentityInterface
         return static::find()->select([
             'id',
             'cliente_id',
+            'empresa_id',
             'nombres',
             'correo',
             'type',
@@ -158,7 +159,7 @@ class User extends ActiveRecord implements IdentityInterface
             'nombres',
             'correo',
             'cliente_id',
-            'contrasena'
+            'contrasena',
         ])->where([
             'correo' => $username,
             'estado' => (int)$estado,
@@ -182,4 +183,3 @@ class User extends ActiveRecord implements IdentityInterface
         $this->contrasena = Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 }
-
