@@ -79,6 +79,7 @@ class ClienteController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->id = Utils::idTable(self::TABLE_CLIENTE);
+            $model->empresa_id = Yii::$app->user->identity->empresa_id;
             $model->fecha_nacimiento = Utils::formatDate($model->fecha_nacimiento);
             $model->fecha_ingreso = Utils::formatDate($model->fecha_ingreso);
             $model->estado = 1;
@@ -88,6 +89,7 @@ class ClienteController extends Controller
                 'usuario',
                 [
                     'cliente_id' => $model->id,
+                    'empresa_id' => Yii::$app->user->identity->empresa_id,
                     'nombres' => $model->nombres . ' ' . $model->apellidos,
                     'correo' => $model->email_corp,
                     'contrasena' => Yii::$app->getSecurity()->generatePasswordHash($model->dni),
@@ -180,10 +182,11 @@ class ClienteController extends Controller
                 //for ($col = 0; $col <= $indexCol; $col++) {
                 //$batchFile = $fileExcel->getCellByColumnAndRow($col, $row)->getValue();
                 array_push($data, [
+                    Yii::$app->user->identity->empresa_id,
                     $fileExcel->getCellByColumnAndRow(0, $row)->getValue(),
                     $fileExcel->getCellByColumnAndRow(1, $row)->getValue(),
                     $fileExcel->getCellByColumnAndRow(2, $row)->getValue(),
-                    $fileExcel->getCellByColumnAndRow(3, $row)->getValue(),
+                    (int)$fileExcel->getCellByColumnAndRow(3, $row)->getValue(),
                     $fileExcel->getCellByColumnAndRow(4, $row)->getValue(),
                     $fileExcel->getCellByColumnAndRow(5, $row)->getValue(),
                     $fileExcel->getCellByColumnAndRow(6, $row)->getValue(),
@@ -199,6 +202,7 @@ class ClienteController extends Controller
             Yii::$app->db->createCommand()->batchInsert(
                 'cliente',
                 [
+                    'empresa_id',
                     'nombres',
                     'apellidos',
                     'email_corp',
@@ -230,7 +234,7 @@ class ClienteController extends Controller
     {
         Utils::fileReporte();
         $runner = new ConsoleCommandRunner();
-        $runner->run('command/export');
+        $runner->run('command/export', [Yii::$app->user->identity->empresa_id]);
         $runner->getExitCode();
 
         $path = Yii::getAlias('@PathReporteDownload');

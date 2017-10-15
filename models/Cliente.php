@@ -5,12 +5,38 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 /**
- * Class Cliente
- * @property false|null|string id
- * @property false|string fecha_nacimiento
- * @property false|string fecha_ingreso
- * @property false|string estado
- * @package app\models
+ * This is the model class for table "cliente".
+ *
+ * @property integer $id
+ * @property integer $empresa_id
+ * @property string $nombres
+ * @property string $apellidos
+ * @property string $dni
+ * @property string $fecha_nacimiento
+ * @property string $genero
+ * @property string $email_personal
+ * @property string $ubicacion
+ * @property string $estado_civil
+ * @property string $numero_celular
+ * @property string $area
+ * @property string $puesto
+ * @property string $categoria
+ * @property string $email_corp
+ * @property string $numero_emergencia
+ * @property string $fecha_ingreso
+ * @property string $numero_oficina
+ * @property string $anexo
+ * @property integer $estado
+ * @property string $fecha_digitada
+ * @property string $fecha_modificada
+ * @property string $fecha_eliminada
+ * @property string $usuario_digitado
+ * @property string $usuario_modificado
+ * @property string $usuario_eliminado
+ * @property string $ip
+ * @property string $host
+ *
+ * @property Incidencia[] $incidencias
  */
 class Cliente extends ActiveRecord
 {
@@ -31,10 +57,9 @@ class Cliente extends ActiveRecord
     public function rules()
     {
         return [
-            [['nombres', 'apellidos', 'dni', 'email_corp'], 'required'],
-            [['fecha_nacimiento', 'fecha_ingreso'], 'safe'],
-            //[['fecha_nacimiento', 'fecha_ingreso'], 'date'],
-            [['estado'], 'integer'],
+            [['empresa_id', 'estado'], 'integer'],
+            [['nombres', 'apellidos', 'dni', 'email_corp','area'], 'required'],
+            [['fecha_nacimiento', 'fecha_ingreso', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
             [['genero'], 'string', 'max' => 1],
@@ -43,6 +68,7 @@ class Cliente extends ActiveRecord
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
             [['numero_oficina', 'anexo'], 'string', 'max' => 20],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
+            [['ip'], 'string', 'max' => 30],
         ];
     }
 
@@ -53,6 +79,7 @@ class Cliente extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'empresa_id' => 'Empresa ID',
             'nombres' => 'Nombres',
             'apellidos' => 'Apellidos',
             'dni' => 'DNI',
@@ -70,15 +97,33 @@ class Cliente extends ActiveRecord
             'fecha_ingreso' => 'Fecha de Ingreso',
             'numero_oficina' => 'Número Oficina',
             'anexo' => 'Anexo',
+            'estado' => 'Estado',
+            'fecha_digitada' => 'Fecha Digitada',
+            'fecha_modificada' => 'Fecha Modificada',
+            'fecha_eliminada' => 'Fecha Eliminada',
+            'usuario_digitado' => 'Usuario Digitado',
+            'usuario_modificado' => 'Usuario Modificado',
+            'usuario_eliminado' => 'Usuario Eliminado',
+            'ip' => 'Ip',
+            'host' => 'Host',
             'image' => 'Foto',
             'excel_import' => 'Excel',
         ];
     }
 
     /**
-     * @return Cliente[]|array|\yii\db\ActiveRecord[]
+     * @return \yii\db\ActiveQuery
      */
-    public static function listaClientes()
+    public function getIncidencias()
+    {
+        return $this->hasMany(Incidencia::className(), ['cliente_id' => 'id']);
+    }
+
+    /**
+     * @param $empresa
+     * @return array|ActiveRecord[]
+     */
+    public static function listaClientes($empresa)
     {
         return Cliente::find()
             ->select([
@@ -100,6 +145,7 @@ class Cliente extends ActiveRecord
                    ELSE \'FEMENINO\' END) AS estado_civil',
             ])
             ->where('estado = :estado', [':estado' => 1])
+            ->andWhere('empresa_id = :empresa', [':empresa' => $empresa])
             ->all();
     }
 }

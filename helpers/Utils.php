@@ -93,9 +93,33 @@ class Utils
     public static function typeUser()
     {
         return [
-            '0' => 'Analista de Requerimientos',
+            '0' => 'Analista',
             '1' => 'Coordinador',
+            '3' => 'Colaborador',
         ];
+    }
+
+    /**
+     * @param $status
+     * @return string
+     */
+    public static function getTypeUser($status)
+    {
+        $value = '';
+        switch ($status) {
+            case 0:
+                $value = 'Analista';
+                break;
+            case 1:
+                $value = 'Coordinador';
+                break;
+            case 3:
+                $value = 'Colaborador';
+                break;
+            default;
+        }
+
+        return $value;
     }
 
     /**
@@ -195,7 +219,7 @@ class Utils
                 $estado_civil = 'VI';
                 break;
             default :
-                $estado_civil = 'N.A.';
+                $estado_civil = 'SO';
         }
 
         return $estado_civil;

@@ -24,6 +24,7 @@ class UserSearch extends User
                 [
                     'nombres',
                     'correo',
+                    'type',
                 ],
                 'safe',
             ],
@@ -51,6 +52,7 @@ class UserSearch extends User
                 'id',
                 'nombres',
                 'correo',
+                'type',
                 'estado',
             ])
                 ->where(['empresa_id' => Yii::$app->user->identity->empresa_id])
@@ -73,7 +75,8 @@ class UserSearch extends User
         ]);
 
         $query->andFilterWhere(['like', 'nombres', $this->nombres])
-            ->andFilterWhere(['like', 'correo', $this->correo]);
+            ->andFilterWhere(['like', 'correo', $this->correo])
+            ->andFilterWhere(['like', 'type', $this->type]);
 
         return $dataProvider;
     }

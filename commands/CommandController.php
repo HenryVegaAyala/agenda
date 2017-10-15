@@ -13,7 +13,7 @@ use yii\console\Controller;
 
 class CommandController extends Controller
 {
-    public static function actionExport()
+    public static function actionExport($empresa)
     {
         Utils::fileReporte();
 
@@ -97,7 +97,7 @@ class CommandController extends Controller
             ->setCellValue('K1', 'ESTADO CIVIL');
 
         $i = 2;
-        foreach (Cliente::listaClientes() as $listaCliente) {
+        foreach (Cliente::listaClientes($empresa) as $listaCliente) {
             $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . $i, $listaCliente['nombres'])
                 ->setCellValue('B' . $i, $listaCliente['apellidos'])
