@@ -1,5 +1,8 @@
 <?php
 
+use app\helpers\Utils;
+use app\models\Incidencia;
+use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
@@ -40,7 +43,7 @@ $descripcion = "Registrar Incidencia";
                                         <?= $form->field($model, 'empresa', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
-                                                'value' => 'Admisnitradora Clinica',
+                                                'value' => Utils::empresaName(Yii::$app->user->identity->empresa_id),
                                                 'readonly' => true,
                                             ],
                                         ])->textInput()->input('text', ['placeholder' => "Empresa"])->label(false) ?>
@@ -87,34 +90,40 @@ $descripcion = "Registrar Incidencia";
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'servico', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Servicio"])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'servico')->dropDownList(Incidencia::servicio(), [
+                                            'prompt' => 'Seleccionar Servicio',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                            'value' => '0',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'ci', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "C.I."])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'ci')->dropDownList(Incidencia::ci(), [
+                                            'prompt' => 'Seleccionar Servicio',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                            'value' => '0',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'fecha_deseada', [
-                                            'inputOptions' => [
+                                        <?= $form->field($model, 'fecha_deseada')->widget(DatePicker::classname(), [
+                                            'options' => ['placeholder' => 'Fecha Deseada'],
+                                            'value' => date('d-M-Y'),
+                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                                            'pluginOptions' => [
+                                                'autoclose' => true,
+                                                'format' => 'dd-mm-yyyy',
+                                                'todayHighlight' => true,
                                                 'class' => 'form-control col-md-7 col-xs-12',
                                             ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Fecha Deseada"])->label(false) ?>
+                                        ])->label(false);
+                                        ?>
                                     </div>
                                 </div>
 

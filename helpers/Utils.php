@@ -3,6 +3,7 @@
 namespace app\helpers;
 
 use app\models\Cliente;
+use app\models\Empresa;
 use Yii;
 use yii\db\Expression;
 use yii\db\Query;
@@ -282,5 +283,15 @@ class Utils
                 return Url::to(($dni['genero'] === 'M') ? $man : $woman);
             }
         }
+    }
+
+    /**
+     * @param $id
+     * @return Empresa
+     */
+    public static function empresaName($id)
+    {
+        $empresa = Empresa::find()->select('nombre')->where(['id' => $id])->one();
+        return $empresa['nombre'];
     }
 }

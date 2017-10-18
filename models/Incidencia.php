@@ -90,8 +90,6 @@ class Incidencia extends ActiveRecord
                 'string',
                 'max' => 150,
             ],
-            [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
-            [['ip'], 'string', 'max' => 30],
         ];
     }
 
@@ -125,6 +123,20 @@ class Incidencia extends ActiveRecord
             'estado' => 'Estado',
             'ip' => 'Ip',
             'host' => 'Host',
+        ];
+    }
+
+    public static function servicio()
+    {
+        return [
+            0 => 'OUTSOURCING DESKTOP',
+        ];
+    }
+
+    public static function ci()
+    {
+        return [
+            0 => 'CI_DUMMY',
         ];
     }
 }
