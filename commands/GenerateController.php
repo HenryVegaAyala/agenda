@@ -167,7 +167,6 @@ class GenerateController extends Controller
                 'type' => 1,
             ]
         )->execute();
-
         /** Mapfre **/
         Yii::$app->db->createCommand()->insert(
             'usuario',
@@ -197,7 +196,6 @@ class GenerateController extends Controller
                 'type' => 1,
             ]
         )->execute();
-
         /** Habitat **/
         Yii::$app->db->createCommand()->insert(
             'usuario',
@@ -227,7 +225,6 @@ class GenerateController extends Controller
                 'type' => 1,
             ]
         )->execute();
-
         /** Franquicia **/
         Yii::$app->db->createCommand()->insert(
             'usuario',
@@ -257,7 +254,6 @@ class GenerateController extends Controller
                 'type' => 1,
             ]
         )->execute();
-
         /** Clínica Ricardo Palma **/
         Yii::$app->db->createCommand()->insert(
             'usuario',
@@ -288,5 +284,4 @@ class GenerateController extends Controller
             ]
         )->execute();
     }
-
 }
