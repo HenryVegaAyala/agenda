@@ -219,6 +219,10 @@ class ClienteController extends Controller
                 $data
             )->execute();
 
+            $runner = new ConsoleCommandRunner();
+            $runner->run('generate/usuario', [Yii::$app->user->identity->empresa_id]);
+            $runner->getExitCode();
+
             Notificaciones::notificationImportSuccess();
 
             return $this->render('import');

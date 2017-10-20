@@ -67,7 +67,7 @@ class GenerateController extends Controller
         )->execute();
     }
 
-    public static function actionUsuario()
+    public static function actionUsuario($empresa)
     {
         Utils::fileReporte();
 
@@ -79,8 +79,10 @@ class GenerateController extends Controller
             'dni',
             'email_corp',
             'empresa_id',
-        ])->where('estado = :estado',
-            [':estado' => 1])->all();
+        ])
+            ->where('estado = :estado', [':estado' => 1])
+            ->andWhere('empresa_id = :empresa_id', [':empresa_id' => $empresa])
+            ->all();
 
         foreach ($clientes as $cliente) {
             array_push($data, [

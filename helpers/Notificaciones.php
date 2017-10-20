@@ -80,4 +80,16 @@ class Notificaciones
         ]);
     }
 
+    public static function notificationExportSuccess()
+    {
+        return Yii::$app->getSession()->setFlash(self::SUCCESS, [
+            'type' => 'success',
+            'duration' => 6000,
+            'icon' => 'fa fa-cloud-download fa-lg',
+            'message' => "Se ha exportado la lista de colaboradores Exitosamente",
+            'title' => "Exportación Exitosa",
+            'positonY' => 'top',
+            'positonX' => 'right',
+        ]);
+    }
 }
