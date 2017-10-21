@@ -105,6 +105,9 @@ use yii\helpers\Url;
                                             </li>
                                             <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a>
                                             </li>
+                                            <li><a href="<?php echo Url::to(['/user/export']) ?>">Exportar
+                                                    Analistas</a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <?php break; ?>

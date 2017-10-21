@@ -58,7 +58,7 @@ class Cliente extends ActiveRecord
     {
         return [
             [['empresa_id', 'estado'], 'integer'],
-            [['nombres', 'apellidos', 'dni', 'email_corp','area'], 'required'],
+            [['nombres', 'apellidos', 'dni', 'email_corp', 'area'], 'required'],
             [['fecha_nacimiento', 'fecha_ingreso', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
@@ -146,6 +146,40 @@ class Cliente extends ActiveRecord
             ])
             ->where('estado = :estado', [':estado' => 1])
             ->andWhere('empresa_id = :empresa', [':empresa' => $empresa])
+            ->all();
+    }
+
+    /**
+     * @param $empresa
+     * @return array|ActiveRecord[]
+     */
+    public static function listaAnalistas($empresa)
+    {
+        return Cliente::find()
+            ->select([
+                'cliente.nombres',
+                'apellidos',
+                'email_corp',
+                'dni',
+                'area',
+                'categoria',
+                'puesto',
+                '(CASE WHEN genero = \'M\' THEN \'MASCULINO\' ELSE \'FEMENINO\' END) AS genero',
+                'date_format(fecha_nacimiento, \'%d-%m-%Y\')   AS fecha_nacimiento',
+                'date_format(fecha_ingreso, \'%d-%m-%Y\')   AS fecha_ingreso',
+                '(CASE
+                   WHEN estado_civil = \'CO\' THEN \'COMPROMETIDO\'
+                   WHEN estado_civil = \'CA\' THEN \'CASADO\'
+                   WHEN estado_civil = \'SO\' THEN \'SOLTERO\'
+                   WHEN estado_civil = \'VI\' THEN \'VIUDO\'
+                   ELSE \'FEMENINO\' END) AS estado_civil',
+            ])
+            ->where('cliente.estado = :estado', [':estado' => 1])
+            ->andWhere('cliente.empresa_id = :empresa', [':empresa' => $empresa])
+            ->andWhere(' usuario.type = :type', [':type' => 2])
+            ->andWhere(' usuario.cliente_id <> :cliente_id', [':cliente_id' => 0])
+            ->leftJoin('usuario', 'cliente.id = usuario.cliente_id')
+            ->orderBy(['cliente.nombres' => SORT_DESC])
             ->all();
     }
 }

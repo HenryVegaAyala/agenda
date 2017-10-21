@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\helpers\Notificaciones;
 use app\helpers\Utils;
+use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use app\models\User;
 use app\models\UserSearch;
@@ -219,5 +220,30 @@ class UserController extends Controller
             ->execute();
 
         return 'ok';
+    }
+
+    /**
+     * @return string
+     */
+    public function actionExport()
+    {
+        return $this->render('export');
+    }
+
+    /**
+     * @return string
+     */
+    public function actionExecute()
+    {
+        Utils::fileReporte();
+        $runner = new ConsoleCommandRunner();
+        $runner->run('command/analista', [Yii::$app->user->identity->empresa_id]);
+        $runner->getExitCode();
+
+        $path = Yii::getAlias('@PathReporteDownload');
+        $file = 'Analistas.xlsx';
+        Utils::downloadFile($path, $file);
+
+        return $this->redirect(['user/export']);
     }
 }

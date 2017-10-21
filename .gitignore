@@ -118,3 +118,6 @@ runtime
 /node_modules/*
 /node_modules/
 /web/reporte/Colaboradores.xlsx
+images/
+reporte/
+temp/
