@@ -10,6 +10,30 @@ use yii\console\Controller;
 
 class GenerateController extends Controller
 {
+
+    public static function actionEmpresa()
+    {
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Vega', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Mapfre', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Habitat', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Franquicia', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+
+        Yii::$app->db->createCommand()->insert('empresa',
+            ['nombre' => 'Clínica Ricardo Palma', 'ruc' => '000000000000', 'estado' => 1]
+        )->execute();
+    }
+
     public static function actionCliente($empresa)
     {
         Utils::fileReporte();
@@ -112,29 +136,6 @@ class GenerateController extends Controller
                 'type',
             ],
             $data
-        )->execute();
-    }
-
-    public static function actionEmpresa()
-    {
-        Yii::$app->db->createCommand()->insert('empresa',
-            ['nombre' => 'Vega', 'ruc' => '000000000000', 'estado' => 1]
-        )->execute();
-
-        Yii::$app->db->createCommand()->insert('empresa',
-            ['nombre' => 'Mapfre', 'ruc' => '000000000000', 'estado' => 1]
-        )->execute();
-
-        Yii::$app->db->createCommand()->insert('empresa',
-            ['nombre' => 'Habitat', 'ruc' => '000000000000', 'estado' => 1]
-        )->execute();
-
-        Yii::$app->db->createCommand()->insert('empresa',
-            ['nombre' => 'Franquicia', 'ruc' => '000000000000', 'estado' => 1]
-        )->execute();
-
-        Yii::$app->db->createCommand()->insert('empresa',
-            ['nombre' => 'Clínica Ricardo Palma', 'ruc' => '000000000000', 'estado' => 1]
         )->execute();
     }
 
