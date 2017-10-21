@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 [
                                     'attribute' => 'type',
                                     'label' => 'Tipo Usuario',
-                                    'filter' => Utils::typeUser(),
+                                    'filter' => Utils::typeUserOption(),
                                     'value' => function ($data) {
                                         return Utils::getTypeUser($data->type);
                                     },

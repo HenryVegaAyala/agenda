@@ -94,9 +94,20 @@ class Utils
     public static function typeUser()
     {
         return [
-            '0' => 'Analista',
-            '1' => 'Coordinador',
-            '3' => 'Colaborador',
+            '0' => 'Administrador',
+            '2' => 'Analista',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function typeUserOption()
+    {
+        return [
+            '0' => 'Administrador',
+            '1' => 'Colaborador',
+            '2' => 'Analista',
         ];
     }
 
@@ -109,13 +120,13 @@ class Utils
         $value = '';
         switch ($status) {
             case 0:
-                $value = 'Analista';
+                $value = 'Administrador';
                 break;
             case 1:
-                $value = 'Coordinador';
-                break;
-            case 3:
                 $value = 'Colaborador';
+                break;
+            case 2:
+                $value = 'Analista';
                 break;
             default;
         }
