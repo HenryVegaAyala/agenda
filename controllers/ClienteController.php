@@ -96,7 +96,7 @@ class ClienteController extends Controller
                     'authKey' => 1,
                     'accessToken' => 1,
                     'estado' => 1,
-                    'type' => 3,
+                    'type' => 1,
 
                 ]
             )->execute();

@@ -46,11 +46,11 @@ $descripcion = "Mi Cuenta";
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?= $form->field($model,
-                                'contrasena')->passwordInput()->input('password',
+                                'change_password')->passwordInput()->input('password',
                                 ['placeholder' => "Contraseña"])->label(false) ?>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
-                                'contrasena_desc')->passwordInput()->input('password',
+                                'change_password_repeat')->passwordInput()->input('password',
                                 ['placeholder' => "Repetir Contraseña"])->label(false) ?> </div>
                     </div>
                 </div>

@@ -124,7 +124,6 @@ class UserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post())) {
-            $password = $model->contrasena;
             $model->fecha_modificada = Utils::zonaHoraria();
             $model->nombres = $model->nombres;
             $model->correo = $model->correo;
@@ -133,7 +132,10 @@ class UserController extends Controller
             $model->host = strval(php_uname());
             $model->update();
 
-            $this->encryptPassword($model->id, $password);
+            if (!empty($model->contrasena_desc)) {
+                $this->encryptPassword($model->id, $model->contrasena_desc);
+            }
+
             Notificaciones::notificacionUsuario(4, $model->nombres);
 
             return $this->redirect([self::INDEX]);

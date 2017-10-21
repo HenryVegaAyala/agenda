@@ -37,6 +37,8 @@ class User extends ActiveRecord implements IdentityInterface
     const MESSAGE_MIN_3 = "Mínimo 3 caracteres del correo corporativo.";
 
     public $contrasena_desc;
+    public $change_password;
+    public $change_password_repeat;
 
     /**
      * @inheritdoc
@@ -61,6 +63,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['contrasena_desc', 'match', 'pattern' => "/^.{6,255}$/", 'message' => self::MESSAGE_MIN_6_PW_REP],
 
             ['contrasena_desc', 'compare', 'compareAttribute' => 'contrasena', 'message' => self::MESSAGE_COMPARE],
+
+            ['change_password_repeat', 'compare', 'compareAttribute' => 'change_password', 'message' => self::MESSAGE_COMPARE],
         ];
     }
 
@@ -76,7 +80,9 @@ class User extends ActiveRecord implements IdentityInterface
             'nombres' => 'Nombres',
             'correo' => 'Correo Corporativo',
             'contrasena' => 'Contraseña',
+            'change_password' => 'Contraseña',
             'contrasena_desc' => 'Repetir Contraseña',
+            'change_password_repeat' => 'Repetir Contraseña',
             'authKey' => 'Auth Key',
             'accessToken' => 'Access Token',
             'estado' => 'Estado',

@@ -94,7 +94,7 @@ class GenerateController extends Controller
                 1,
                 1,
                 1,
-                3,
+                1,
             ]);
         }
 
@@ -144,21 +144,7 @@ class GenerateController extends Controller
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Analista de Requerimientos',
-                'correo' => 'sadmin@vega.com',
-                'cliente_id' => 0,
-                'empresa_id' => 1,
-                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
-                'estado' => 1,
-                'authKey' => 1,
-                'accessToken' => 1,
-                'type' => 0,
-            ]
-        )->execute();
-        Yii::$app->db->createCommand()->insert(
-            'usuario',
-            [
-                'nombres' => 'Coordinador',
+                'nombres' => 'Administrador',
                 'correo' => 'admin@vega.com',
                 'cliente_id' => 0,
                 'empresa_id' => 1,
@@ -166,28 +152,28 @@ class GenerateController extends Controller
                 'estado' => 1,
                 'authKey' => 1,
                 'accessToken' => 1,
-                'type' => 1,
-            ]
-        )->execute();
-        /** Mapfre **/
-        Yii::$app->db->createCommand()->insert(
-            'usuario',
-            [
-                'nombres' => 'Analista de Requerimientos',
-                'correo' => 'sadmin@mapfre.com',
-                'cliente_id' => 0,
-                'empresa_id' => 2,
-                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
-                'estado' => 1,
-                'authKey' => 1,
-                'accessToken' => 1,
                 'type' => 0,
             ]
         )->execute();
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Coordinador',
+                'nombres' => 'Analista',
+                'correo' => 'analista@vega.com',
+                'cliente_id' => 0,
+                'empresa_id' => 1,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 2,
+            ]
+        )->execute();
+        /** Mapfre **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Administrador',
                 'correo' => 'admin@mapfre.com',
                 'cliente_id' => 0,
                 'empresa_id' => 2,
@@ -195,28 +181,28 @@ class GenerateController extends Controller
                 'estado' => 1,
                 'authKey' => 1,
                 'accessToken' => 1,
-                'type' => 1,
-            ]
-        )->execute();
-        /** Habitat **/
-        Yii::$app->db->createCommand()->insert(
-            'usuario',
-            [
-                'nombres' => 'Analista de Requerimientos',
-                'correo' => 'sadmin@habitat.com',
-                'cliente_id' => 0,
-                'empresa_id' => 3,
-                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
-                'estado' => 1,
-                'authKey' => 1,
-                'accessToken' => 1,
                 'type' => 0,
             ]
         )->execute();
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Coordinador',
+                'nombres' => 'Analista',
+                'correo' => 'analista@mapfre.com',
+                'cliente_id' => 0,
+                'empresa_id' => 2,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 2,
+            ]
+        )->execute();
+        /** Habitat **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Administrador',
                 'correo' => 'admin@habitat.com',
                 'cliente_id' => 0,
                 'empresa_id' => 3,
@@ -224,28 +210,28 @@ class GenerateController extends Controller
                 'estado' => 1,
                 'authKey' => 1,
                 'accessToken' => 1,
-                'type' => 1,
-            ]
-        )->execute();
-        /** Franquicia **/
-        Yii::$app->db->createCommand()->insert(
-            'usuario',
-            [
-                'nombres' => 'Analista de Requerimientos',
-                'correo' => 'sadmin@franquicia.com',
-                'cliente_id' => 0,
-                'empresa_id' => 4,
-                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
-                'estado' => 1,
-                'authKey' => 1,
-                'accessToken' => 1,
                 'type' => 0,
             ]
         )->execute();
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Coordinador',
+                'nombres' => 'Analista',
+                'correo' => 'analista@habitat.com',
+                'cliente_id' => 0,
+                'empresa_id' => 3,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 2,
+            ]
+        )->execute();
+        /** Franquicia **/
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Administrador',
                 'correo' => 'admin@franquicia.com',
                 'cliente_id' => 0,
                 'empresa_id' => 4,
@@ -253,15 +239,29 @@ class GenerateController extends Controller
                 'estado' => 1,
                 'authKey' => 1,
                 'accessToken' => 1,
-                'type' => 1,
+                'type' => 0,
+            ]
+        )->execute();
+        Yii::$app->db->createCommand()->insert(
+            'usuario',
+            [
+                'nombres' => 'Analista',
+                'correo' => 'analista@franquicia.com',
+                'cliente_id' => 0,
+                'empresa_id' => 4,
+                'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
+                'estado' => 1,
+                'authKey' => 1,
+                'accessToken' => 1,
+                'type' => 2,
             ]
         )->execute();
         /** Clínica Ricardo Palma **/
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Analista de Requerimientos',
-                'correo' => 'sadmin@clinicaricardopalma.com',
+                'nombres' => 'Administrador',
+                'correo' => 'admin@clinicaricardopalma.com',
                 'cliente_id' => 0,
                 'empresa_id' => 5,
                 'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
@@ -274,15 +274,15 @@ class GenerateController extends Controller
         Yii::$app->db->createCommand()->insert(
             'usuario',
             [
-                'nombres' => 'Coordinador',
-                'correo' => 'admin@clinicaricardopalma.com',
+                'nombres' => 'Analista',
+                'correo' => 'analista@clinicaricardopalma.com',
                 'cliente_id' => 0,
                 'empresa_id' => 5,
                 'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),
                 'estado' => 1,
                 'authKey' => 1,
                 'accessToken' => 1,
-                'type' => 1,
+                'type' => 2,
             ]
         )->execute();
     }

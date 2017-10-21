@@ -35,46 +35,80 @@ use yii\helpers\Url;
                     <div class="menu_section">
                         <h3>Menú General</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-list-alt"></i> Incidencia <span
-                                            class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <?php
-                                    $type = Yii::$app->user->identity->type;
-                                    $cliente_id = Yii::$app->user->identity->cliente_id;
-                                    ?>
-                                    <?php if ($type === 3 || $type === 0 && $cliente_id === 0) { ?>
-                                        <li>
-                                            <a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar
-                                                Incidencia</a>
-                                        </li>
-                                    <?php } ?>
-                                    <?php if ($type === 2 || $type === 0 || $type === 1 && $cliente_id === 0) { ?>
-                                        <li><a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de
-                                                Incidencia</a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </li>
-                            <?php if ($type === 0 && $cliente_id === 0) { ?>
-                                <li><a><i class="fa fa-list-alt"></i> Clientes <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Cliente</a>
-                                        </li>
-                                        <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de Clientes</a>
-                                        </li>
-                                        <li><a href="<?php echo Url::to(['/cliente/import']) ?>">Importar Clientes</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li><a><i class="fa fa-list-alt"></i> Usuario <span
-                                                class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="<?php echo Url::to(['/user/create']) ?>">Registrar Usuario</a></li>
-                                        <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a></li>
-                                    </ul>
-                                </li>
-                            <?php } ?>
+                            <?php switch (Yii::$app->user->identity->type) { ?>
+<?php case 1: ?>
+                                    <li>
+                                        <a>
+                                            <i class="fa fa-list-alt"></i> Requerimiento <span
+                                                    class="fa fa-chevron-down"></span>
+                                        </a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar
+                                                    Requerimiento</a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista dem
+                                                    Requerimiento</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="fa fa-list-alt"></i> Incidencia <span
+                                                    class="fa fa-chevron-down"></span>
+                                        </a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar
+                                                    Incidencia</a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de
+                                                    Incidencia</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <?php break; ?>
+                                <?php case 2: ?>
+                                    <li><a><i class="fa fa-list-alt"></i> Clientes
+                                            <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar
+                                                    Cliente</a>
+                                            </li>
+                                            <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de
+                                                    Clientes</a>
+                                            </li>
+                                            <li><a href="<?php echo Url::to(['/cliente/import']) ?>">Importar
+                                                    Clientes</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-list-alt"></i> Proveedores
+                                            <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar
+                                                    Proveedores</a>
+                                            </li>
+                                            <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de
+                                                    Proveedores</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <?php break; ?>
+                                <?php case 0: ?>
+                                    <li><a><i class="fa fa-list-alt"></i> Usuario <span
+                                                    class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo Url::to(['/user/create']) ?>">Registrar Usuario</a>
+                                            </li>
+                                            <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <?php break; ?>
+                                <?php } ?>
                         </ul>
                     </div>
                     <div class="sidebar-footer hidden-small">
