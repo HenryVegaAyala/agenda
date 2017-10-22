@@ -49,14 +49,18 @@ class UserSearch extends User
         $dependency = new DbDependency();
         $query = User::getDb()->cache(function ($db) {
             return User::find()->select([
-                'id',
-                'nombres',
+                'usuario.id',
+                'usuario.nombres',
                 'correo',
                 'type',
-                'estado',
+                'usuario.estado',
             ])
-                ->where(['empresa_id' => Yii::$app->user->identity->empresa_id])
-                ->orderBy(['nombres' => SORT_ASC]);
+                ->where('usuario.empresa_id = :empresa', [':empresa' => Yii::$app->user->identity->empresa_id])
+                ->andWhere('cliente.estado = :estado', [':estado' => 1])
+                ->andWhere(' usuario.type = :type', [':type' => 2])
+                ->andWhere(' usuario.cliente_id <> :cliente_id', [':cliente_id' => 0])
+                ->leftJoin('cliente', 'cliente.id = usuario.cliente_id')
+                ->orderBy(['usuario.nombres' => SORT_DESC]);
         }, 3600, $dependency);
 
         $dataProvider = new ActiveDataProvider([

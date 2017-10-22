@@ -8,7 +8,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\ClienteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ticket - Lista de Clientes';
+$type = Yii::$app->user->identity->type;
+$this->title = ($type === 0) ? 'Sistema Ticket - Lista de Analistas' : 'Sistema Ticket - Lista de Clientes';
 ?>
 <div class="right_col" role="main">
     <div class="clearfix"></div>
@@ -22,7 +23,7 @@ $this->title = 'Ticket - Lista de Clientes';
             <div class="table table-striped table-responsive jambo_table bulk_action">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?= "Lista de Clientes" ?></h3>
+                        <h3 class="panel-title"><?= ($type === 0) ? "Lista de Analistas" : "Lista de Clientes" ?></h3>
                     </div>
                     <p class="note"></p>
                     <div class="container-fluid">

@@ -241,7 +241,7 @@ class UserController extends Controller
         $runner->getExitCode();
 
         $path = Yii::getAlias('@PathReporteDownload');
-        $file = 'Analistas.xlsx';
+        $file = 'Colaboradores.xlsx';
         Utils::downloadFile($path, $file);
 
         return $this->redirect(['user/export']);

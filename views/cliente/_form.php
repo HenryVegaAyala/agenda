@@ -12,7 +12,7 @@ use yii\widgets\Pjax;
 
 $type = Yii::$app->user->identity->type;
 $descripcion = "Registrar Cliente";
-$descripcion_user = "Registrar Usuario";
+$descripcion_user = "Registrar Analista";
 ?>
 
 <div class="clearfix"></div>

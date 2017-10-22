@@ -50,8 +50,10 @@ class ClienteController extends Controller
      */
     public function actionIndex()
     {
+        $type = Yii::$app->user->identity->type;
         $searchModel = new ClienteSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->post());
+        $dataProvider = ($type === 0) ? $searchModel->searchAnalistas(Yii::$app->request->post()) :
+            $searchModel->search(Yii::$app->request->post());
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -153,6 +155,7 @@ class ClienteController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->db->createCommand()->delete('usuario', ['cliente_id' => $id])->execute();
 
         return $this->redirect(['index']);
     }

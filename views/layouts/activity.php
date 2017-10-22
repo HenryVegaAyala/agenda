@@ -101,7 +101,9 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Usuario <span
                                                     class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Usuario</a>
+                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Analista</a>
+                                            </li>
+                                            <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de Analista</a>
                                             </li>
                                             <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a>
                                             </li>

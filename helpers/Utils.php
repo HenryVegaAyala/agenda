@@ -104,11 +104,19 @@ class Utils
      */
     public static function typeUserOption()
     {
-        return [
-            '0' => 'Administrador',
-            '1' => 'Colaborador',
-            '2' => 'Analista',
-        ];
+        if (Yii::$app->user->identity->type === 0) {
+            $data = [
+                '2' => 'Analista',
+            ];
+        } else {
+            $data = [
+                '0' => 'Administrador',
+                '1' => 'Colaborador',
+                '2' => 'Analista',
+            ];
+        }
+
+        return $data;
     }
 
     /**
@@ -303,6 +311,7 @@ class Utils
     public static function empresaName($id)
     {
         $empresa = Empresa::find()->select('nombre')->where(['id' => $id])->one();
+
         return $empresa['nombre'];
     }
 }
