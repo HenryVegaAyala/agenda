@@ -93,10 +93,18 @@ class Utils
      */
     public static function typeUser()
     {
-        return [
-            '0' => 'Administrador',
-            '2' => 'Analista',
-        ];
+        if (Yii::$app->user->identity->type === 0) {
+            $data = [
+                '2' => 'Analista',
+            ];
+        } else {
+            $data = [
+                '0' => 'Administrador',
+                '2' => 'Analista',
+            ];
+        }
+
+        return $data;
     }
 
     /**
