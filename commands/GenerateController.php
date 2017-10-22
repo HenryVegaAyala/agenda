@@ -10,7 +10,6 @@ use yii\console\Controller;
 
 class GenerateController extends Controller
 {
-
     public static function actionEmpresa()
     {
         Yii::$app->db->createCommand()->insert('empresa',

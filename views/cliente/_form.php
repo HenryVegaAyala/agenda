@@ -10,7 +10,9 @@ use yii\widgets\Pjax;
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
 
+$type = Yii::$app->user->identity->type;
 $descripcion = "Registrar Cliente";
+$descripcion_user = "Registrar Usuario";
 ?>
 
 <div class="clearfix"></div>
@@ -31,7 +33,7 @@ $descripcion = "Registrar Cliente";
                         ],
                     ]
                 ); ?>
-                <span class="section"><?php echo Html::encode($descripcion) ?></span>
+                <span class="section"><?php echo Html::encode(($type === 0) ? $descripcion_user : $descripcion) ?></span>
                 <div class="row">
                     <div class="item form-group">
                         <div class="col-md-6 col-sm-12 col-xs-12">

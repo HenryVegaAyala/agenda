@@ -4,7 +4,6 @@ use app\helpers\Utils;
 use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */

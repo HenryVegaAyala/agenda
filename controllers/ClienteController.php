@@ -78,6 +78,8 @@ class ClienteController extends Controller
         $model = new Cliente();
 
         if ($model->load(Yii::$app->request->post())) {
+            $type = Yii::$app->user->identity->type;
+
             $model->id = Utils::idTable(self::TABLE_CLIENTE);
             $model->empresa_id = Yii::$app->user->identity->empresa_id;
             $model->fecha_nacimiento = Utils::formatDate($model->fecha_nacimiento);
@@ -96,12 +98,12 @@ class ClienteController extends Controller
                     'authKey' => 1,
                     'accessToken' => 1,
                     'estado' => 1,
-                    'type' => 1,
+                    'type' => ($type === 0) ? 2 : 1,
 
                 ]
             )->execute();
 
-            return $this->redirect(['index']);
+            return ($type === 0) ? $this->redirect(['user/index']) : $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
