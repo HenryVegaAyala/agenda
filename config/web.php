@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log','assetsAutoCompress'],
+    'bootstrap' => ['log', 'assetsAutoCompress'],
     'sourceLanguage' => 'es',
     'language' => 'es',
     'timeZone' => 'America/Lima',
@@ -55,27 +55,27 @@ $config = [
         ],
         'assetsAutoCompress' =>
             [
-                'class'                         => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
-                'enabled'                       => true,
-                'readFileTimeout'               => 3,
-                'jsCompress'                    => true,
-                'jsCompressFlaggedComments'     => true,
-                'cssCompress'                   => true,
-                'cssFileCompile'                => true,
-                'cssFileRemouteCompile'         => false,
-                'cssFileCompress'               => true,
-                'cssFileBottom'                 => false,
-                'cssFileBottomLoadOnJs'         => false,
-                'jsFileCompile'                 => true,
-                'jsFileRemouteCompile'          => false,
-                'jsFileCompress'                => true,
+                'class' => '\skeeks\yii2\assetsAuto\AssetsAutoCompressComponent',
+                'enabled' => true,
+                'readFileTimeout' => 3,
+                'jsCompress' => true,
+                'jsCompressFlaggedComments' => true,
+                'cssCompress' => true,
+                'cssFileCompile' => true,
+                'cssFileRemouteCompile' => false,
+                'cssFileCompress' => true,
+                'cssFileBottom' => false,
+                'cssFileBottomLoadOnJs' => false,
+                'jsFileCompile' => true,
+                'jsFileRemouteCompile' => false,
+                'jsFileCompress' => true,
                 'jsFileCompressFlaggedComments' => true,
-                'htmlCompress'                  => true,
-                'noIncludeJsFilesOnPjax'        => true,
-                'htmlCompressOptions'           =>
+                'htmlCompress' => true,
+                'noIncludeJsFilesOnPjax' => true,
+                'htmlCompressOptions' =>
                     [
                         'extra' => false,
-                        'no-comments' => true
+                        'no-comments' => true,
                     ],
             ],
         'request' => [
@@ -119,40 +119,43 @@ $config = [
         'db' => require(__DIR__ . '/db.php'),
 
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+            'baseUrl' => '/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+
                 /**Sesion**/
-                ['pattern' => '/login', 'route' => '/site/login', 'suffix' => '.php'],
-                ['pattern' => '/logout/<id:\d+>', 'route' => '/site/logout'],
+                '/login' => 'site/login',
+                '/logout/<id:\d+>' => '/site/logout',
 
                 /**home**/
-                ['pattern' => '/', 'route' => '/site/index', 'suffix' => ''],
-
-                /**Usuario**/
-                ['pattern' => '/nuevo-usuario', 'route' => '/user/create', 'suffix' => '.php'],
-                ['pattern' => '/lista-usuario', 'route' => '/user/index', 'suffix' => '.php'],
-                ['pattern' => '/actualizar-usuario/<id:\d+>', 'route' => '/user/update'],
-                ['pattern' => '/exportar-analistas', 'route' => '/user/export'],
-                ['pattern' => '/inactivar/<id:\d+>', 'route' => '/user/status'],
-                ['pattern' => '/eliminar-usuario/<id:\d+>', 'route' => '/user/delete'],
-                ['pattern' => '/actualizar/datos/<id:\d+>', 'route' => '/user/change'],
-
-                /**Indicencia**/
-                ['pattern' => '/nueva-incidencia', 'route' => '/incidencia/create', 'suffix' => '.php'],
-                ['pattern' => '/lista-incidencia', 'route' => '/incidencia/index', 'suffix' => '.php'],
-                ['pattern' => '/actualizar-incidencia/<id:\d+>', 'route' => '/incidencia/update'],
-                ['pattern' => '/eliminar-incidencia/<id:\d+>', 'route' => '/incidencia/delete'],
+                '/' => 'site/index',
 
                 /**Cliente**/
-                ['pattern' => '/nuevo-cliente', 'route' => '/cliente/create', 'suffix' => '.php'],
-                ['pattern' => '/lista-cliente', 'route' => '/cliente/index', 'suffix' => '.php'],
-                ['pattern' => '/importar-cliente', 'route' => '/cliente/import', 'suffix' => '.php'],
-                ['pattern' => '/exportar-cliente', 'route' => '/cliente/export', 'suffix' => '.php'],
-                ['pattern' => '/actualizar-cliente/<id:\d+>', 'route' => '/cliente/update'],
-                ['pattern' => '/ver-cliente/<id:\d+>', 'route' => '/cliente/view'],
-                ['pattern' => '/eliminar-cliente/<id:\d+>', 'route' => '/cliente/delete'],
+                '/cliente-nuevo' => '/cliente/create',
+                '/lista-cliente' => '/cliente/index',
+                '/importar-cliente' => '/cliente/import',
+                '/exportar-cliente' => '/cliente/export',
+                '/actualizar-cliente/<id:\d+>' => '/cliente/update',
+                '/ver-cliente/<id:\d+>' => '/cliente/view',
+                '/eliminar-cliente/<id:\d+>' => '/cliente/delete',
+
+                /**Usuario**/
+                '/nuevo-usuario' => '/user/create',
+                '/lista-usuario' => '/user/index',
+                '/actualizar-usuario/<id:\d+>' => '/user/update',
+                '/exportar-analistas' => '/user/export',
+                '/inactivar/<id:\d+>' => '/user/status',
+                '/eliminar-usuario/<id:\d+>' => '/user/delete',
+                '/actualizar/datos/<id:\d+>' => '/user/change',
+
+                /**Indicencia**/
+                '/nueva-incidencia' => '/incidencia/create',
+                '/lista-incidencia' => '/incidencia/index',
+                '/actualizar-incidencia/<id:\d+>' => '/incidencia/update',
+                '/eliminar-incidencia/<id:\d+>' => '/incidencia/delete',
             ],
         ],
 
