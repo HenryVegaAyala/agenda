@@ -89,21 +89,20 @@ class ClienteController extends Controller
             $model->estado = 1;
             $model->save();
 
-            Yii::$app->db->createCommand()->insert(
-                'usuario',
-                [
-                    'cliente_id' => $model->id,
-                    'empresa_id' => Yii::$app->user->identity->empresa_id,
-                    'nombres' => $model->nombres . ' ' . $model->apellidos,
-                    'correo' => $model->email_corp,
-                    'contrasena' => Yii::$app->getSecurity()->generatePasswordHash($model->dni),
-                    'authKey' => 1,
-                    'accessToken' => 1,
-                    'estado' => 1,
-                    'type' => ($type === 0) ? 2 : 1,
+            $data = [
+                'cliente_id' => $model->id,
+                'empresa_id' => Yii::$app->user->identity->empresa_id,
+                'nombres' => $model->nombres . ' ' . $model->apellidos,
+                'correo' => $model->email_corp,
+                'contrasena' => Yii::$app->getSecurity()->generatePasswordHash($model->dni),
+                'authKey' => 1,
+                'accessToken' => 1,
+                'estado' => 1,
+                'type' => ($type === 0) ? 2 : 1,
 
-                ]
-            )->execute();
+            ];
+
+            Yii::$app->db->createCommand()->insert('usuario', $data)->execute();
 
             return ($type === 0) ? $this->redirect(['user/index']) : $this->redirect(['index']);
         } else {
@@ -255,7 +254,7 @@ class ClienteController extends Controller
 
     /**
      * @param $id
-     * @return static
+     * @return Cliente|array|\yii\db\ActiveRecord
      * @throws NotFoundHttpException
      */
     protected function findModel($id)

@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?= Html::a('<i class="fa fa-floppy-o fa-lg"></i> ' . 'Actualizar',
                                         ['update', 'id' => $model->id],
                                         ['class' => 'btn btn-success']) ?>
-                                    <?= Html::a('<i class="fa fa-trash-o fa-lg"></i> ' . 'Delete',
+                                    <?= Html::a('<i class="fa fa-trash-o fa-lg"></i> ' . 'Eliminar',
                                         ['delete', 'id' => $model->id], [
                                             'class' => 'btn btn-danger',
                                             'data' => [

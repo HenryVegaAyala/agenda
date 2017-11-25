@@ -23,7 +23,7 @@ $this->title = ($type === 0) ? 'Sistema Ticket - Lista de Analistas' : 'Sistema 
             <div class="table table-striped table-responsive jambo_table bulk_action">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?= ($type === 0) ? "Lista de Analistas" : "Lista de Clientes" ?></h3>
+                        <h3 class="panel-title"><?= ($type === 0) ? "Sistema Ticket - Lista de Analistas" : "Sistema Ticket - Lista de Clientes" ?></h3>
                     </div>
                     <p class="note"></p>
                     <div class="container-fluid">

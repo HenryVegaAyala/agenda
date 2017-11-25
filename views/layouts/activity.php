@@ -39,22 +39,6 @@ use yii\helpers\Url;
 <?php case 1: ?>
                                     <li>
                                         <a>
-                                            <i class="fa fa-list-alt"></i> Requerimiento <span
-                                                    class="fa fa-chevron-down"></span>
-                                        </a>
-                                        <ul class="nav child_menu">
-                                            <li>
-                                                <a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar
-                                                    Requerimiento</a>
-                                            </li>
-                                            <li>
-                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista dem
-                                                    Requerimiento</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a>
                                             <i class="fa fa-list-alt"></i> Incidencia <span
                                                     class="fa fa-chevron-down"></span>
                                         </a>
@@ -66,6 +50,22 @@ use yii\helpers\Url;
                                             <li>
                                                 <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de
                                                     Incidencia</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <i class="fa fa-list-alt"></i> Requerimiento <span
+                                                    class="fa fa-chevron-down"></span>
+                                        </a>
+                                        <ul class="nav child_menu">
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar
+                                                    Requerimiento</a>
+                                            </li>
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista dem
+                                                    Requerimiento</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -88,11 +88,37 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Proveedores
                                             <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar
+                                            <li><a href="<?php echo '1' ?>">Registrar
                                                     Proveedores</a>
                                             </li>
-                                            <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de
+                                            <li><a href="<?php echo '2' ?>">Lista de
                                                     Proveedores</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-list-alt"></i> Análisis de Inc. y Req.
+                                            <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo '3' ?>">Priorizar Incidencias</a>
+                                            </li>
+                                            <li><a href="<?php echo '4' ?>">Priorizar Requerimientos</a>
+                                            </li>
+                                            <li><a href="<?php echo '5' ?>">Asignar Técnicos</a>
+                                            </li>
+                                            <li><a href="<?php echo '6' ?>">Asignar Proveedor</a>
+                                            </li>
+                                            <li><a href="<?php echo '7' ?>">Realizar Pedido al Proveedor</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-list-alt"></i> Reporte
+                                            <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo '8' ?>">Reporte General</a>
+                                            </li>
+                                            <li><a href="<?php echo '9' ?>">Buscar Inc. y Req.</a>
+                                            </li>
+                                            <li><a href="<?php echo '10' ?>">Exportar Inc. y Req.</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -101,9 +127,11 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Usuario <span
                                                     class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar Analista</a>
+                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar
+                                                    Analista</a>
                                             </li>
-                                            <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de Analista</a>
+                                            <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de
+                                                    Analista</a>
                                             </li>
                                             <li><a href="<?php echo Url::to(['/user/index']) ?>">Lista de Usuarios</a>
                                             </li>

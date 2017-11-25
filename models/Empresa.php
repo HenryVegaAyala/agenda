@@ -2,17 +2,9 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
-/**
- * This is the model class for table "empresa".
- *
- * @property integer $id
- * @property string $nombre
- * @property string $ruc
- * @property integer $estado
- */
-class Empresa extends \yii\db\ActiveRecord
+class Empresa extends ActiveRecord
 {
     /**
      * @inheritdoc

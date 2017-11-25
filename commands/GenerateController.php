@@ -159,7 +159,7 @@ class GenerateController extends Controller
             'usuario',
             [
                 'nombres' => 'Analista',
-                'correo' => 'analista@vega.com',
+                    'correo' => 'analista@vega.com',
                 'cliente_id' => 0,
                 'empresa_id' => 1,
                 'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash('000000'),

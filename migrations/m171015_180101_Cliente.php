@@ -32,6 +32,7 @@ class m171015_180101_Cliente extends \yii\db\Migration
             'numero_oficina' => $this->string(20),
             'anexo' => $this->string(20),
             'estado' => $this->smallInteger(1),
+            'tipo' => $this->string(150)->null(),
             'fecha_digitada' => $this->datetime(),
             'fecha_modificada' => $this->datetime(),
             'fecha_eliminada' => $this->datetime(),
