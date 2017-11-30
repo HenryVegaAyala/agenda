@@ -17,7 +17,31 @@ class IncidenciaSearch extends Incidencia
     {
         return [
             [['id', 'estado'], 'integer'],
-            [['empresa', 'cliente', 'contacto', 'notas', 'resumen', 'servico', 'ci', 'fecha_deseada', 'impacto', 'urgencia', 'prioridad', 'tipo_incidencia', 'fuente_reportada', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada', 'usuario_digitado', 'usuario_modificado', 'usuario_eliminado', 'ip', 'host'], 'safe'],
+            [
+                [
+                    'cliente',
+                    'contacto',
+                    'notas',
+                    'resumen',
+                    'servico',
+                    'ci',
+                    'fecha_deseada',
+                    'impacto',
+                    'urgencia',
+                    'prioridad',
+                    'tipo_incidencia',
+                    'fuente_reportada',
+                    'fecha_digitada',
+                    'fecha_modificada',
+                    'fecha_eliminada',
+                    'usuario_digitado',
+                    'usuario_modificado',
+                    'usuario_eliminado',
+                    'ip',
+                    'host',
+                ],
+                'safe',
+            ],
         ];
     }
 

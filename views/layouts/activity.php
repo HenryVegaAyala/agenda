@@ -19,7 +19,7 @@ use yii\helpers\Url;
 
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="<?php echo Utils::imagenCliente(Yii::$app->user->identity->cliente_id); ?>"
+                        <img src="<?php echo Utils::url_completa() . Utils::imagenCliente(Yii::$app->user->identity->cliente_id); ?>"
                              alt="Usuario Default"
                              class="img-circle profile_img">
                     </div>

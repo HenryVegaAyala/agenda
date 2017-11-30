@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\helpers\Utils;
+use Carbon\Carbon;
 use Yii;
 use app\models\Incidencia;
 use app\models\IncidenciaSearch;
@@ -62,8 +64,18 @@ class IncidenciaController extends Controller
     {
         $model = new Incidencia();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->cliente_id = Yii::$app->user->identity->cliente_id;
+            $model->empresa_id = Yii::$app->user->identity->empresa_id;
+            $model->fecha_deseada = Carbon::parse($model->fecha_deseada)->format('Y-m-d');
+            $model->estado = true;
+            $model->fecha_digitada = Carbon::now('America/Lima');
+            $model->usuario_digitado = Yii::$app->user->identity->id;
+            $model->host = strval(php_uname());
+            $model->ip = Utils::getRealIpAddr();
+            $model->save();
+
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -101,7 +113,7 @@ class IncidenciaController extends Controller
 
     /**
      * @param $id
-     * @return static
+     * @return Incidencia
      * @throws NotFoundHttpException
      */
     protected function findModel($id)

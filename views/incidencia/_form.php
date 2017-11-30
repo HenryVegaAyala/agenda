@@ -2,6 +2,7 @@
 
 use app\helpers\Utils;
 use app\models\Incidencia;
+use kartik\tabs\TabsX;
 use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -129,58 +130,89 @@ $descripcion = "Registrar Incidencia";
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'impacto', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Impacto"])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'impacto')->dropDownList(Incidencia::impacto(), [
+                                            'prompt' => 'Seleccionar Impacto',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'urgencia', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Urgencia"])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'urgencia')->dropDownList(Incidencia::urgencia(), [
+                                            'prompt' => 'Seleccionar Urgencia',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'prioridad', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Prioridad"])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'prioridad')->dropDownList(Incidencia::prioridad(), [
+                                            'prompt' => 'Seleccionar Prioridad',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'tipo_incidencia', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Tipo de Incidencia"])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'tipo_incidencia')->dropDownList(Incidencia::tipoIncidencia(), [
+                                            'prompt' => 'Seleccionar Tipo de Incidencia',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'fuente_reportada', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Fuente Reportada"])->label(false) ?>
+                                        <?= $form->field($model,
+                                            'fuente_reportada')->dropDownList(Incidencia::fuenteReportada(), [
+                                            'prompt' => 'Seleccionar Fuente Reportada',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                        ])->label(false) ?>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="container-fluid">
+                                <?php
+                                $items = [
+                                    [
+                                        'label' => 'Categorización',
+                                        'content' => 'Hola',
+                                        'headerOptions' => [
+                                            'style' => 'font-weight:bold',
+                                            'id' => 'elemento1',
+                                            'value' => '1',
+                                        ],
+                                        'options' => ['id' => '1'],
+                                    ],
+                                    [
+                                        'label' => 'Tareas',
+                                        'content' => 'Hola',
+                                        'headerOptions' => [
+                                            'style' => 'font-weight:bold',
+                                            'id' => 'elemento1',
+                                            'value' => '1',
+                                        ],
+                                        'options' => ['id' => '2'],
+                                    ],
+                                ];
+
+                                echo TabsX::widget([
+                                    'position' => TabsX::POS_ABOVE,
+                                    'items' => $items,
+                                    'height' => TabsX::SIZE_LARGE,
+                                    'bordered' => false,
+                                    'encodeLabels' => true,
+                                ]);
+                                ?>
                             </div>
                         </div>
                     </div>

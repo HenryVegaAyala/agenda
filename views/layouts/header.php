@@ -10,7 +10,7 @@ use yii\helpers\Html;
             <ul class="nav navbar-nav navbar-right">
                 <li class=""><a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                 aria-expanded="false"><img src="<?php
-                        echo Utils::imagenCliente(Yii::$app->user->identity->cliente_id);
+                        echo Utils::url_completa() . Utils::imagenCliente(Yii::$app->user->identity->cliente_id);
                         ?>" alt="Usuario Default"> <?php echo ucwords(Yii::$app->user->identity->nombres); ?> <span
                                 class="fa fa-angle-down"></span></a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">

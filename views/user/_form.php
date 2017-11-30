@@ -10,12 +10,7 @@ use yii\widgets\Pjax;
 /* @var $form yii\widgets\ActiveForm */
 
 $descripcion = "Registrar Usuario";
-?>
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_content"> <?php Pjax::begin(); ?> <?php $form = ActiveForm::begin(
+?> <div class="clearfix"></div><div class="row"><div class="col-md-12 col-sm-12 col-xs-12"><div class="x_panel"><div class="x_content"> <?php Pjax::begin(); ?> <?php $form = ActiveForm::begin(
                     [
                         'enableAjaxValidation' => false,
                         'enableClientValidation' => true,
@@ -26,51 +21,22 @@ $descripcion = "Registrar Usuario";
                             'data-pjax' => true,
                         ],
                     ]
-                ); ?> <span class="section"><?php echo Html::encode($descripcion) ?></span>
-                <div class="row">
-                    <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                ); ?> <span class="section"><?php echo Html::encode($descripcion) ?></span><div class="row"><div class="item form-group"><div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                 'nombres')->textInput()->input('text',
-                                ['placeholder' => "Nombres"])->label(false) ?> </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                                ['placeholder' => "Nombres"])->label(false) ?> </div><div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                 'correo')->textInput()->input('text',
-                                ['placeholder' => "Correo"])->label(false) ?> </div>
-                    </div>
-                    <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                                ['placeholder' => "Correo"])->label(false) ?> </div></div><div class="item form-group"><div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                 'contrasena')->passwordInput()->input('password',
-                                ['placeholder' => "Contraseña"])->label(false) ?> </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                                ['placeholder' => "Contraseña"])->label(false) ?> </div><div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                 'contrasena_desc')->passwordInput()->input('password',
-                                ['placeholder' => "Repetir Contraseña"])->label(false) ?> </div>
-                    </div>
-                    <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                                ['placeholder' => "Repetir Contraseña"])->label(false) ?> </div></div><div class="item form-group"><div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                 'estado')->dropDownList(Utils::status(), [
                                 'prompt' => 'Seleccionar Estado',
                                 'class' => 'form-control col-md-7 col-xs-12',
-                            ])->label(false) ?>
-                        </div>
-                        <div>
-                            <div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
+                            ])->label(false) ?> </div><div><div class="col-md-6 col-sm-6 col-xs-12"> <?= $form->field($model,
                                     'type')->dropDownList(Utils::typeUser(), [
                                     'prompt' => 'Tipo de Usuario',
                                     'class' => 'form-control col-md-7 col-xs-12',
-                                ])->label(false) ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ln_solid"></div>
-                <div class="container-fluid">
-                    <div class="form-group">
-                        <center>
-                            <div class="col-md-6 col-md-offset-3"> <?= Html::submitButton('<i class="fa fa-floppy-o fa-lg"></i> ' . ' Guardar',
+                                ])->label(false) ?> </div></div></div></div><div class="ln_solid"></div><div class="container-fluid"><div class="form-group"><center><div class="col-md-6 col-md-offset-3"> <?= Html::submitButton('<i class="fa fa-floppy-o fa-lg"></i> ' . ' Guardar',
                                     ['class' => 'btn btn-success']) ?> <?= Html::resetButton('<i class="fa fa-times fa-lg"></i> ' . ' Cancelar',
-                                    ['class' => 'btn btn-primary']) ?> </div>
-                        </center>
-                    </div>
-                </div> <?php ActiveForm::end(); ?> <?php Pjax::end(); ?> </div>
-        </div>
-    </div>
-</div>
+                                    ['class' => 'btn btn-primary']) ?> </div></center></div></div> <?php ActiveForm::end(); ?> <?php Pjax::end(); ?> </div></div></div></div>
