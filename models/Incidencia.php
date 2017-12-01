@@ -2,37 +2,37 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "incidencia".
  *
- * @property integer id
- * @property integer cliente_id
- * @property integer empresa_id
- * @property string notas
- * @property string resumen
- * @property string servico
- * @property string ci
- * @property string fecha_deseada
- * @property string impacto
- * @property string urgencia
- * @property string prioridad
- * @property string tipo_incidencia
- * @property string fuente_reportada
- * @property string fecha_digitada
- * @property string fecha_modificada
- * @property string fecha_eliminada
- * @property string usuario_digitado
- * @property string usuario_modificado
- * @property string usuario_eliminado
- * @property integer estado
- * @property string ip
- * @property string host
+ * @property integer $id
+ * @property integer $cliente_id
+ * @property integer $empresa_id
+ * @property string $notas
+ * @property string $resumen
+ * @property string $servico
+ * @property string $ci
+ * @property string $fecha_deseada
+ * @property string $impacto
+ * @property string $urgencia
+ * @property string $prioridad
+ * @property string $tipo_incidencia
+ * @property string $fuente_reportada
+ * @property string $fecha_digitada
+ * @property string $fecha_modificada
+ * @property string $fecha_eliminada
+ * @property string $usuario_digitado
+ * @property string $usuario_modificado
+ * @property string $usuario_eliminado
+ * @property integer $estado
+ * @property string $ip
+ * @property string $host
  *
  * @property Cliente $cliente
  */
-class Incidencia extends ActiveRecord
+class Incidencia extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -174,10 +174,10 @@ class Incidencia extends ActiveRecord
     public static function urgencia()
     {
         return [
-            0 => 'Urgente',
-            1 => 'Alta',
-            2 => 'Media',
-            3 => 'Baja',
+            'Urgente' => 'Urgente',
+            'Alta' => 'Alta',
+            'Media' => 'Media',
+            'Baja' => 'Baja',
         ];
     }
 
@@ -187,10 +187,10 @@ class Incidencia extends ActiveRecord
     public static function prioridad()
     {
         return [
-            0 => 'Urgente',
-            1 => 'Alta',
-            2 => 'Media',
-            3 => 'Baja',
+            'Urgente' => 'Urgente',
+            'Alta' => 'Alta',
+            'Media' => 'Media',
+            'Baja' => 'Baja',
         ];
     }
 
@@ -200,7 +200,8 @@ class Incidencia extends ActiveRecord
     public static function tipoIncidencia()
     {
         return [
-            0 => 'Petición de serv.',
+            0 => 'Petición de Servicio',
+            1 => 'Restauración de Servicio',
         ];
     }
 

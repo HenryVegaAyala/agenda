@@ -70,7 +70,7 @@ class IncidenciaController extends Controller
             $model->fecha_deseada = Carbon::parse($model->fecha_deseada)->format('Y-m-d');
             $model->estado = true;
             $model->fecha_digitada = Carbon::now('America/Lima');
-            $model->usuario_digitado = Yii::$app->user->identity->id;
+            $model->usuario_digitado = Yii::$app->user->identity->nombres;
             $model->host = strval(php_uname());
             $model->ip = Utils::getRealIpAddr();
             $model->save();

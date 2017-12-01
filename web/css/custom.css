@@ -1,5 +1,5 @@
 html, body {
-    height: 100%;
+    height: auto;
 }
 
 .fa-lg-icon {
@@ -4346,7 +4346,7 @@ form:after {
     box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
     border: 1px solid #e60a0a;
     color: #777;
-    margin: 0 0 20px;
+    margin: 0 0 0;
     width: 100%
 }
 

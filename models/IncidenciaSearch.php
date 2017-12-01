@@ -16,11 +16,9 @@ class IncidenciaSearch extends Incidencia
     public function rules()
     {
         return [
-            [['id', 'estado'], 'integer'],
+            [['id', 'cliente_id', 'empresa_id', 'estado'], 'integer'],
             [
                 [
-                    'cliente',
-                    'contacto',
                     'notas',
                     'resumen',
                     'servico',
@@ -82,16 +80,15 @@ class IncidenciaSearch extends Incidencia
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'cliente_id' => $this->cliente_id,
+            'empresa_id' => $this->empresa_id,
             'fecha_digitada' => $this->fecha_digitada,
             'fecha_modificada' => $this->fecha_modificada,
             'fecha_eliminada' => $this->fecha_eliminada,
             'estado' => $this->estado,
         ]);
 
-        $query->andFilterWhere(['like', 'empresa', $this->empresa])
-            ->andFilterWhere(['like', 'cliente', $this->cliente])
-            ->andFilterWhere(['like', 'contacto', $this->contacto])
-            ->andFilterWhere(['like', 'notas', $this->notas])
+        $query->andFilterWhere(['like', 'notas', $this->notas])
             ->andFilterWhere(['like', 'resumen', $this->resumen])
             ->andFilterWhere(['like', 'servico', $this->servico])
             ->andFilterWhere(['like', 'ci', $this->ci])
