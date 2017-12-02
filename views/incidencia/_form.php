@@ -185,7 +185,103 @@ $descripcion = "Registrar Incidencia";
                                 $items = [
                                     [
                                         'label' => 'Categorización',
-                                        'content' => 'Hola',
+                                        'content' =>
+                                        "
+                                        <div class='col-md-12 col-sm-12 col-xs-12'>
+                                            <div class='container-fluid'>
+                                                <span class='center-left'>* Categorización Operacional</span>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                         $form->field($model,
+                                                        'fuente_reportada')->dropDownList(Incidencia::CatNivelOpeUno(), [
+                                                        'prompt' => 'Seleccionar Categoria Operacional Nivel 1',
+                                                        'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                        $form->field($model,
+                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelOpeDos(), [
+                                                            'prompt' => 'Seleccionar Categoria Operacional Nivel 2',
+                                                            'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                        $form->field($model,
+                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelOpeTres(), [
+                                                            'prompt' => 'Seleccionar Categoria Operacional Nivel 3',
+                                                            'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <span class='center-left'>* Categorización de Producto</span>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                        $form->field($model,
+                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelProUno(), [
+                                                            'prompt' => 'Seleccionar Categoria de Prodcuto Nivel 1',
+                                                            'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                        $form->field($model,
+                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelProDos(), [
+                                                            'prompt' => 'Seleccionar Categoria de Prodcuto Nivel 2',
+                                                            'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                        $form->field($model,
+                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelProTres(), [
+                                                            'prompt' => 'Seleccionar Categoria de Prodcuto Nivel 3',
+                                                            'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                                       ".
+                                                        $form->field($model,
+                                                            'fuente_reportada')->dropDownList(Incidencia::nombreDelProducto(), [
+                                                            'prompt' => 'Nombre del Producto',
+                                                            'class' => 'form-control col-md-7 col-xs-12',
+                                                        ])->label(false)
+                                                        ."
+                                                    </div>
+                                                </div>
+                                                <div class='row'>
+                                                    <div class=\"col-md-12 col-sm-6 col-xs-12\">
+                                                    ".
+                                                     $form->field($model, 'fuente_reportada', [
+                                                         'inputOptions' => [
+                                                             'class' => 'form-control col-md-7 col-xs-12',
+                                                         ],
+                                                     ])->textInput()->input('text', ['placeholder' => 'Modelo ó Version'])->label(false)
+                                                     ."
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        ",
                                         'headerOptions' => [
                                             'style' => 'font-weight:bold',
                                             'id' => 'elemento1',
@@ -195,7 +291,8 @@ $descripcion = "Registrar Incidencia";
                                     ],
                                     [
                                         'label' => 'Tareas',
-                                        'content' => 'Hola',
+                                        'content' => '
+                                        ',
                                         'headerOptions' => [
                                             'style' => 'font-weight:bold',
                                             'id' => 'elemento1',

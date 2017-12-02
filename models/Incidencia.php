@@ -214,4 +214,53 @@ class Incidencia extends \yii\db\ActiveRecord
             0 => 'Correo Electronico',
         ];
     }
+
+    public static function CatNivelOpeUno()
+    {
+        return [
+            0 => 'Outsourcing',
+        ];
+    }
+
+    public static function CatNivelOpeDos()
+    {
+        return [
+            0 => 'Solicitud',
+        ];
+    }
+
+    public static function CatNivelOpeTres()
+    {
+        return [
+            0 => 'Permisos/Habilitar',
+        ];
+    }
+
+    public static function CatNivelProUno()
+    {
+        return [
+            0 => 'Software',
+        ];
+    }
+
+    public static function CatNivelProDos()
+    {
+        return [
+            0 => 'Software de Aplicación',
+        ];
+    }
+
+    public static function CatNivelProTres()
+    {
+        return [
+            0 => 'Aplicaciones de Informatica',
+        ];
+    }
+
+    public static function nombreDelProducto()
+    {
+        return [
+            0 => 'Internet Explorer',
+        ];
+    }
 }
