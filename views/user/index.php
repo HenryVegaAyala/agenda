@@ -83,7 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                             return Html::a('<i class="fa fa-ban fa-lg-icon" aria-hidden="true"></i>',
                                                 Yii::$app->urlManager->createUrl(['inactivar/' . $model->id]),
                                                 [
-                                                    'title' => Yii::t('yii', 'Inactivar Usuario'),]
+                                                    'title' => Yii::t('yii', 'Inactivar Usuario'),
+                                                ]
                                             );
                                         },
                                     ],

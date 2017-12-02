@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'enablePushState' => false,
                 'clientOptions' => ['method' => 'POST'],
             ]); ?>
-            <div class="table table-striped table-responsive jambo_table bulk_action">
+            <div class="table table-striped table-responsive">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?= "Lista de Indicencias" ?></h3>
+                        <h3 class="panel-title"><?= $this->title ?></h3>
                     </div>
                     <p class="note"></p>
                     <div class="container-fluid">
@@ -42,7 +42,31 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'prioridad',
                                 'tipo_incidencia',
                                 'estado',
-                                ['class' => 'yii\grid\ActionColumn'],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'header' => 'Opciones',
+                                    'options' => ['style' => 'width:80px;'],
+                                    'template' => ' {update} / {delete}',
+                                    'headerOptions' => ['class' => 'itemHide'],
+                                    'contentOptions' => ['class' => 'itemHide'],
+                                    'buttons' => [
+                                        'update' => function ($url, $model) {
+                                            return Html::a('<span class="fa fa-pencil-square-o fa-lg-icon"></span>',
+                                                Yii::$app->urlManager->createUrl(['actualizar-incidencia/' . $model->id]),
+                                                ['title' => Yii::t('yii', 'Actualizar'),]
+                                            );
+                                        },
+                                        'delete' => function ($url, $model) {
+                                            return Html::a('<i class="fa fa-trash-o fa-lg-icon" aria-hidden="true"></i>',
+                                                ['eliminar-incidencia/' . $model['id']], [
+                                                    'title' => Yii::t('app', 'Eliminar'),
+                                                    'data-confirm' => Yii::t('app',
+                                                        '¿Esta Seguro de eliminar esta incidencia?'),
+                                                    'data-method' => 'post',
+                                                ]);
+                                        },
+                                    ],
+                                ],
                             ],
                         ]); ?>
                     </div>

@@ -63,8 +63,6 @@ class IncidenciaSearch extends Incidencia
     {
         $query = Incidencia::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -72,19 +70,15 @@ class IncidenciaSearch extends Incidencia
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+
             // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'cliente_id' => $this->cliente_id,
             'empresa_id' => $this->empresa_id,
-            'fecha_digitada' => $this->fecha_digitada,
-            'fecha_modificada' => $this->fecha_modificada,
-            'fecha_eliminada' => $this->fecha_eliminada,
             'estado' => $this->estado,
         ]);
 
@@ -97,12 +91,7 @@ class IncidenciaSearch extends Incidencia
             ->andFilterWhere(['like', 'urgencia', $this->urgencia])
             ->andFilterWhere(['like', 'prioridad', $this->prioridad])
             ->andFilterWhere(['like', 'tipo_incidencia', $this->tipo_incidencia])
-            ->andFilterWhere(['like', 'fuente_reportada', $this->fuente_reportada])
-            ->andFilterWhere(['like', 'usuario_digitado', $this->usuario_digitado])
-            ->andFilterWhere(['like', 'usuario_modificado', $this->usuario_modificado])
-            ->andFilterWhere(['like', 'usuario_eliminado', $this->usuario_eliminado])
-            ->andFilterWhere(['like', 'ip', $this->ip])
-            ->andFilterWhere(['like', 'host', $this->host]);
+            ->andFilterWhere(['like', 'fuente_reportada', $this->fuente_reportada]);
 
         return $dataProvider;
     }
