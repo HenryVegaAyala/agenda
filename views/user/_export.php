@@ -1,5 +1,6 @@
 <?php
 
+use app\helpers\Utils;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -34,7 +35,7 @@ $descripcion = "Exportar Analistas  ";
                             <div class="row">
                                 <center>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <img src="<?php echo Yii::getAlias('@ExcelDownload') ?>"
+                                        <img src="<?php echo Utils::url(). Yii::getAlias('@ExcelDownload') ?>"
                                              alt="Excel Download"
                                              class="img-responsive">
                                         <?= Html::a('<i class="fa fa-cloud-download fa-lg"></i> ' . Yii::t('app',

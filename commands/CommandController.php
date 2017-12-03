@@ -248,7 +248,7 @@ class CommandController extends Controller
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('Lista de Clientes');
+        $objPHPExcel->getActiveSheet()->setTitle('Lista de Analistas');
         $objPHPExcel->setActiveSheetIndex(0);
 
         $xlsName = 'Analistas.xlsx';

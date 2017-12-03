@@ -56,6 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="form-group">
                             <center>
                                 <div class="col-md-6 col-xs-12 col-md-offset-3">
+                                    <?= Html::a('<i class="fa fa-arrow-left fa-lg"></i> ' . 'Atras',
+                                        ['index'],
+                                        ['class' => 'btn btn-primary']) ?>
                                     <?= Html::a('<i class="fa fa-floppy-o fa-lg"></i> ' . 'Actualizar',
                                         ['update', 'id' => $model->id],
                                         ['class' => 'btn btn-success']) ?>

@@ -11,6 +11,9 @@ use yii\helpers\Url;
 
 class Utils
 {
+    const  HTTPS = 'https://';
+    const  HTTP = 'http://';
+
     /**
      * @return false|string
      */
@@ -323,24 +326,15 @@ class Utils
         return $empresa['nombre'];
     }
 
-    public static function url_completa($forwarded_host = false)
+    public static function url(): string
     {
-        $ssl = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on';
-        $proto = strtolower($_SERVER['SERVER_PROTOCOL']);
-        $proto = substr($proto, 0, strpos($proto, '/')) . ($ssl ? 's' : '');
-        if ($forwarded_host && isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
-            $host = $_SERVER['HTTP_X_FORWARDED_HOST'];
+        if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] === 443) {
+            $protocol = self::HTTPS;
         } else {
-            if (isset($_SERVER['HTTP_HOST'])) {
-                $host = $_SERVER['HTTP_HOST'];
-            } else {
-                $port = $_SERVER['SERVER_PORT'];
-                $port = ((!$ssl && $port == '80') || ($ssl && $port == '443')) ? '' : ':' . $port;
-                $host = $_SERVER['SERVER_NAME'] . $port;
-            }
+            $protocol = self::HTTP;
         }
 
-        return $proto . '://' . $host . '/agenda/';
+        return $protocol . $_SERVER['HTTP_HOST'] . '/';
     }
 
     /**
