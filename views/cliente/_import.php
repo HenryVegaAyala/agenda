@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
-$descripcion = "Importar/Exportar Clientes";
+$descripcion = "Exportar Clientes";
 ?>
 <div class="clearfix"></div>
 <div class="row">
@@ -34,26 +34,30 @@ $descripcion = "Importar/Exportar Clientes";
                         <div class="container-fluid">
                             <div class="row">
                                 <center>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <img src="<?php echo Yii::getAlias('@ExcelImport') ?>" alt="Excel Import"
-                                             class="img-responsive">
-                                        <div class="fileinput" data-provides="fileinput">
-                                            <span class="btn btn-success btn-file">
-                                                    <i class="fa fa-cloud-upload fa-lg"></i> Importar
-                                                    <input type="hidden" name="Cliente[excel_import]" value="">
-                                                    <input type="file" id="Cliente[excel_import]"
-                                                           onchange="this.form.submit()" name="Cliente[excel_import]"
-                                                           class="form-control" multiple="" aria-invalid="false">
-                                            </span>
+                                    <!--<div class="col-md-6 col-sm-6 col-xs-6">-->
+                                    <!--    <img src="-->
+                                    <?php //echo Utils::url(). Yii::getAlias('@ExcelImport') ?><!--" alt="Excel Import"-->
+                                    <!--         class="img-responsive">-->
+                                    <!--    <div class="fileinput" data-provides="fileinput">-->
+                                    <!--        <span class="btn btn-success btn-file">-->
+                                    <!--                <i class="fa fa-cloud-upload fa-lg"></i> Importar-->
+                                    <!--                <input type="hidden" name="Cliente[excel_import]" value="">-->
+                                    <!--                <input type="file" id="Cliente[excel_import]"-->
+                                    <!--                       onchange="this.form.submit()" name="Cliente[excel_import]"-->
+                                    <!--                       class="form-control" multiple="" aria-invalid="false">-->
+                                    <!--        </span>-->
+                                    <!--    </div>-->
+                                    <!--</div>-->
+                                    <center>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <img src="<?php echo Utils::url() . Yii::getAlias('@ExcelDownload') ?>"
+                                                 alt="Excel Download"
+                                                 class="img-responsive">
+                                            <?= Html::a('<i class="fa fa-cloud-download fa-lg"></i> ' . Yii::t('app',
+                                                    'Exportar'),
+                                                ['/cliente/export'], ['class' => 'btn btn-success']) ?>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <img src="<?php echo Utils::url(). Yii::getAlias('@ExcelDownload') ?>"
-                                             alt="Excel Download"
-                                             class="img-responsive">
-                                        <?= Html::a('<i class="fa fa-cloud-download fa-lg"></i> ' . Yii::t('app', 'Exportar'),
-                                            ['/cliente/export'], ['class' => 'btn btn-success']) ?>
-                                    </div>
+                                    </center>
                                 </center>
                             </div>
                         </div>
