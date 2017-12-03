@@ -2,9 +2,9 @@
 
 use yii\db\Schema;
 
-class m171015_180101_Cliente extends \yii\db\Migration
+class m171203_000101_cliente extends \yii\db\Migration
 {
-    public function safeUp()
+    public function up()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -32,7 +32,6 @@ class m171015_180101_Cliente extends \yii\db\Migration
             'numero_oficina' => $this->string(20),
             'anexo' => $this->string(20),
             'estado' => $this->smallInteger(1),
-            'tipo' => $this->string(150)->null(),
             'fecha_digitada' => $this->datetime(),
             'fecha_modificada' => $this->datetime(),
             'fecha_eliminada' => $this->datetime(),
@@ -45,7 +44,7 @@ class m171015_180101_Cliente extends \yii\db\Migration
                 
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('cliente');
     }

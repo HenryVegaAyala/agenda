@@ -2,9 +2,9 @@
 
 use yii\db\Schema;
 
-class m171015_180101_Incidencia extends \yii\db\Migration
+class m171203_000101_incidencia extends \yii\db\Migration
 {
-    public function safeUp()
+    public function up()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -15,9 +15,6 @@ class m171015_180101_Incidencia extends \yii\db\Migration
             'id' => $this->primaryKey(),
             'cliente_id' => $this->integer(11)->notNull(),
             'empresa_id' => $this->integer(11)->notNull(),
-            'empresa' => $this->string(150)->notNull(),
-            'cliente' => $this->string(150)->notNull(),
-            'contacto' => $this->string(150)->notNull(),
             'notas' => $this->string(150)->notNull(),
             'resumen' => $this->string(150)->notNull(),
             'servico' => $this->string(150)->notNull(),
@@ -42,7 +39,7 @@ class m171015_180101_Incidencia extends \yii\db\Migration
                 
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('incidencia');
     }

@@ -2,9 +2,9 @@
 
 use yii\db\Schema;
 
-class m171015_180101_Empresa extends \yii\db\Migration
+class m171203_000101_empresa extends \yii\db\Migration
 {
-    public function safeUp()
+    public function up()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -20,7 +20,7 @@ class m171015_180101_Empresa extends \yii\db\Migration
                 
     }
 
-    public function safeDown()
+    public function down()
     {
         $this->dropTable('empresa');
     }
