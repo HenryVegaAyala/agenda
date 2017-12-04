@@ -289,4 +289,80 @@ class ClienteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionPersonal()
+    {
+        $model = new Cliente();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id = Utils::idTable(self::TABLE_CLIENTE);
+            $model->empresa_id = Yii::$app->user->identity->empresa_id;
+            $model->fecha_nacimiento = Utils::formatDate($model->fecha_nacimiento);
+            $model->fecha_ingreso = Utils::formatDate($model->fecha_ingreso);
+            $model->estado = 1;
+            $model->tipo = 'PROVEEDOR';
+            $model->save();
+
+            return $this->redirect(['lista']);
+        }
+
+        return $this->render('personal', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws \yii\web\NotFoundHttpException
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionPersonalu($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->fecha_nacimiento = (empty($model->fecha_nacimiento) ? '' : Utils::formatDate($model->fecha_nacimiento));
+            $model->fecha_ingreso = (empty($model->fecha_ingreso) ? '' : Utils::formatDate($model->fecha_ingreso));
+            $model->save();
+
+            return $this->redirect(['lista']);
+        }
+
+        return $this->render('personalu', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionLista(): string
+    {
+
+        $searchModel = new ClienteSearch();
+        $dataProvider = $searchModel->searchProveedor(Yii::$app->request->post());
+
+        return $this->render('lista', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\web\NotFoundHttpException
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionPersonalview($id): string
+    {
+        return $this->render('personalv', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 }

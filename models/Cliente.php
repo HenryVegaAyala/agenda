@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -35,6 +36,8 @@ use yii\db\ActiveRecord;
  * @property string $usuario_eliminado
  * @property string $ip
  * @property string $host
+ * @property string tipo
+ * @property string empresa
  *
  * @property Incidencia[] $incidencias
  */
@@ -46,7 +49,7 @@ class Cliente extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'cliente';
     }
@@ -63,7 +66,8 @@ class Cliente extends ActiveRecord
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
             [['genero'], 'string', 'max' => 1],
-            [['ubicacion', 'fecha_nacimiento', 'fecha_ingreso'], 'string', 'max' => 250],
+            [['ubicacion', 'fecha_nacimiento', 'fecha_ingreso','empresa'], 'string', 'max' => 250],
+            [['tipo'], 'string', 'max' => 200],
             [['estado_civil'], 'string', 'max' => 2],
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
             [['numero_oficina', 'anexo'], 'string', 'max' => 20],
@@ -75,7 +79,7 @@ class Cliente extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => 'ID',
@@ -108,13 +112,15 @@ class Cliente extends ActiveRecord
             'host' => 'Host',
             'image' => 'Foto',
             'excel_import' => 'Excel',
+            'tipo' => 'Tipo',
+            'empresa' => 'Empresa',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIncidencias()
+    public function getIncidencias():ActiveQuery
     {
         return $this->hasMany(Incidencia::className(), ['cliente_id' => 'id']);
     }
@@ -123,7 +129,7 @@ class Cliente extends ActiveRecord
      * @param $empresa
      * @return array|ActiveRecord[]
      */
-    public static function listaClientes($empresa)
+    public static function listaClientes($empresa): array
     {
         return Cliente::find()
             ->select([

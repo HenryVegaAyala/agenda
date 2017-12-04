@@ -45,13 +45,13 @@ class ClienteSearch extends Cliente
     /**
      * @param $params
      * @return ActiveDataProvider
+     * @throws \Exception
      */
-    public function search($params)
+    public function search($params): ActiveDataProvider
     {
         $db = Yii::$app->db;
         $dep = new DbDependency();
         $query = Cliente::getDb()->cache(function ($db) {
-
             return Cliente::find()
                 ->select([
                     'id                       AS id',
@@ -90,13 +90,13 @@ class ClienteSearch extends Cliente
     /**
      * @param $params
      * @return ActiveDataProvider
+     * @throws \Exception
      */
-    public function searchAnalistas($params)
+    public function searchAnalistas($params): ActiveDataProvider
     {
         $db = Yii::$app->db;
         $dep = new DbDependency();
         $query = Cliente::getDb()->cache(function ($db) {
-
             return Cliente::find()
                 ->select([
                     'cliente.id                       AS id',
@@ -111,6 +111,51 @@ class ClienteSearch extends Cliente
                 ->andWhere(' usuario.cliente_id <> :cliente_id', [':cliente_id' => 0])
                 ->leftJoin('usuario', 'cliente.id = usuario.cliente_id')
                 ->orderBy(['usuario.nombres' => SORT_DESC]);
+        }, self::CACHE_TIMEOUT, $dep);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'nombres', $this->nombres])
+            ->andFilterWhere(['like', 'apellidos', $this->apellidos])
+            ->andFilterWhere(['like', 'dni', $this->dni])
+            ->andFilterWhere(['like', 'area', $this->area])
+            ->andFilterWhere(['like', 'email_corp', $this->email_corp]);
+
+        return $dataProvider;
+    }
+
+    /**
+     * @param $params
+     * @return ActiveDataProvider
+     * @throws \Exception
+     */
+    public function searchProveedor($params): ActiveDataProvider
+    {
+        $db = Yii::$app->db;
+        $dep = new DbDependency();
+        $query = Cliente::getDb()->cache(function ($db) {
+            return Cliente::find()
+                ->select([
+                    'id                       AS id',
+                    'nombres                  AS nombres',
+                    'apellidos                AS apellidos',
+                    'area                     AS area',
+                    'email_corp               AS email_corp',
+                ])
+                ->where('cliente.tipo = :tipo', [':tipo' => 'PROVEEDOR'])
+                ->orderBy(['nombres' => SORT_DESC]);
         }, self::CACHE_TIMEOUT, $dep);
 
         $dataProvider = new ActiveDataProvider([

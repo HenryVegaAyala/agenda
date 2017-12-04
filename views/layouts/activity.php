@@ -80,7 +80,7 @@ use yii\helpers\Url;
                                             <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de
                                                     Clientes</a>
                                             </li>
-                                            <li><a href="<?php echo Url::to(['/cliente/import']) ?>">Importar
+                                            <li><a href="<?php echo Url::to(['/cliente/import']) ?>">Exportar
                                                     Clientes</a>
                                             </li>
                                         </ul>
@@ -88,10 +88,13 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Proveedores
                                             <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo '1' ?>">Registrar
+                                            <li><a href="<?php echo  Url::to(['/cliente/personal']) ?>">Registrar
                                                     Proveedores</a>
                                             </li>
-                                            <li><a href="<?php echo '2' ?>">Lista de
+                                            <li><a href="<?php echo  Url::to(['/cliente/lista']) ?>">Lista de
+                                                    Proveedores</a>
+                                            </li>
+                                            <li><a href="<?php echo  Url::to(['/cliente/create']) ?>">Exportar
                                                     Proveedores</a>
                                             </li>
                                         </ul>
