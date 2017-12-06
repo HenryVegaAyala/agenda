@@ -365,4 +365,27 @@ class ClienteController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionProveedor()
+    {
+        return $this->render('proveedor');
+    }
+
+    public function actionExecute()
+    {
+        Utils::fileReporte();
+        $runner = new ConsoleCommandRunner();
+        $runner->run('command/proveedor', [Yii::$app->user->identity->empresa_id]);
+        $runner->getExitCode();
+
+        $path = Yii::getAlias('@PathReporteDownload');
+        $file = 'Proveedor.xlsx';
+        Utils::downloadFile($path, $file);
+
+        return $this->refresh();
+    }
 }

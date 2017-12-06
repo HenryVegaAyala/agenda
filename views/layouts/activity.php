@@ -94,7 +94,7 @@ use yii\helpers\Url;
                                             <li><a href="<?php echo  Url::to(['/cliente/lista']) ?>">Lista de
                                                     Proveedores</a>
                                             </li>
-                                            <li><a href="<?php echo  Url::to(['/cliente/create']) ?>">Exportar
+                                            <li><a href="<?php echo  Url::to(['/cliente/proveedor']) ?>">Exportar
                                                     Proveedores</a>
                                             </li>
                                         </ul>

@@ -165,6 +165,7 @@ $config = [
                 '/actualizar-proveedor/<id:\d+>' => '/cliente/personalu',
                 '/lista-proveedor' => '/cliente/index',
                 '/ver-proveedor/<id:\d+>' => '/cliente/personalview',
+                '/exportar-proveedor' => '/cliente/proveedor',
             ],
         ],
 
