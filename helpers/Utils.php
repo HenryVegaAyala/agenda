@@ -300,19 +300,6 @@ class Utils
      */
     public static function imagenCliente($idCliente): string
     {
-        //if ($idCliente === 0) {
-        //    //return self::url() . Url::to(Yii::getAlias('@LogoDefault'), '');
-        //}
-        //
-        //$dni = Cliente::find()->select(['dni', 'genero'])->where('id = :id', [':id' => $idCliente])->one();
-        //$imgColaborador = Yii::getAlias('@PathImagenColaboradores') . '/' . md5($dni['dni']) . '.jpg';
-        //if (file_exists($imgColaborador)) {
-        //    return self::url() . Url::to($imgColaborador);
-        //}
-        //
-        //$man = Yii::getAlias('@LogoHombreDefault');
-        //$woman = Yii::getAlias('@LogoMujerDefault');
-
         return Url::to(Yii::getAlias('@LogoDefault'), '');
     }
 

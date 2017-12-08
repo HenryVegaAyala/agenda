@@ -64,7 +64,7 @@ use yii\helpers\Url;
                                                     Requerimiento</a>
                                             </li>
                                             <li>
-                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista dem
+                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de
                                                     Requerimiento</a>
                                             </li>
                                         </ul>

@@ -2,6 +2,7 @@
 
 use app\helpers\Utils;
 use app\models\Incidencia;
+use dosamigos\tinymce\TinyMce;
 use kartik\tabs\TabsX;
 use kartik\widgets\DatePicker;
 use yii\helpers\Html;
@@ -37,7 +38,7 @@ $descripcion = "Registrar Incidencia";
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="container-fluid">
 
-                                <span class="center-left">* Datos Empresarial</span>
+                                <span class="center-left">* Datos Personales</span>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
@@ -66,250 +67,29 @@ $descripcion = "Registrar Incidencia";
 
                                 <span class="center-left">* Resumen</span>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'notas', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textarea(['rows' => '2', 'placeholder' => "Notas"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'resumen', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Resumen"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <span class="center-left">* Servicio</span>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'servico')->dropDownList(Incidencia::servicio(), [
-                                            'prompt' => 'Seleccionar Servicio',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                            'value' => '0',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'ci')->dropDownList(Incidencia::ci(), [
-                                            'prompt' => 'Seleccionar Servicio',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                            'value' => '0',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'fecha_deseada')->widget(DatePicker::classname(), [
-                                            'options' => ['placeholder' => 'Fecha Deseada'],
-                                            'value' => date('d-M-Y'),
-                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-                                            'pluginOptions' => [
-                                                'autoclose' => true,
-                                                'format' => 'dd-mm-yyyy',
-                                                'todayHighlight' => true,
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->label(false);
-                                        ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'impacto')->dropDownList(Incidencia::impacto(), [
-                                            'prompt' => 'Seleccionar Impacto',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'urgencia')->dropDownList(Incidencia::urgencia(), [
-                                            'prompt' => 'Seleccionar Urgencia',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'prioridad')->dropDownList(Incidencia::prioridad(), [
-                                            'prompt' => 'Seleccionar Prioridad',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'tipo_incidencia')->dropDownList(Incidencia::tipoIncidencia(), [
-                                            'prompt' => 'Seleccionar Tipo de Incidencia',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'fuente_reportada')->dropDownList(Incidencia::fuenteReportada(), [
-                                            'prompt' => 'Seleccionar Fuente Reportada',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
+                                <?= $form->field($model, 'resumen')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 8],
+                                    'language' => 'es',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            'advlist autolink lists link charmap print preview anchor',
+                                            'searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table contextmenu paste',
+                                            "textcolor colorpicker",
+                                        ],
+                                        'toolbar' => 'undo redo | 
+                                                      styleselect  fontselect fontsizeselect forecolor backcolor | 
+                                                      bold italic | 
+                                                      alignleft aligncenter alignright alignjustify | 
+                                                      bullist numlist outdent indent | 
+                                                      link image',
+                                    ],
+                                ]); ?>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="container-fluid">
-                                <?php
-                                $items = [
-                                    [
-                                        'label' => 'Categorización',
-                                        'content' =>
-                                        "
-                                        <div class='col-md-12 col-sm-12 col-xs-12'>
-                                            <div class='container-fluid'>
-                                                <span class='center-left'>* Categorización Operacional</span>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                         $form->field($model,
-                                                        'fuente_reportada')->dropDownList(Incidencia::CatNivelOpeUno(), [
-                                                        'prompt' => 'Seleccionar Categoria Operacional Nivel 1',
-                                                        'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                        $form->field($model,
-                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelOpeDos(), [
-                                                            'prompt' => 'Seleccionar Categoria Operacional Nivel 2',
-                                                            'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                        $form->field($model,
-                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelOpeTres(), [
-                                                            'prompt' => 'Seleccionar Categoria Operacional Nivel 3',
-                                                            'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <span class='center-left'>* Categorización de Producto</span>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                        $form->field($model,
-                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelProUno(), [
-                                                            'prompt' => 'Seleccionar Categoria de Prodcuto Nivel 1',
-                                                            'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                        $form->field($model,
-                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelProDos(), [
-                                                            'prompt' => 'Seleccionar Categoria de Prodcuto Nivel 2',
-                                                            'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                        $form->field($model,
-                                                            'fuente_reportada')->dropDownList(Incidencia::CatNivelProTres(), [
-                                                            'prompt' => 'Seleccionar Categoria de Prodcuto Nivel 3',
-                                                            'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col-md-12 col-sm-6 col-xs-12'>
-                                                       ".
-                                                        $form->field($model,
-                                                            'fuente_reportada')->dropDownList(Incidencia::nombreDelProducto(), [
-                                                            'prompt' => 'Nombre del Producto',
-                                                            'class' => 'form-control col-md-7 col-xs-12',
-                                                        ])->label(false)
-                                                        ."
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class=\"col-md-12 col-sm-6 col-xs-12\">
-                                                    ".
-                                                     $form->field($model, 'fuente_reportada', [
-                                                         'inputOptions' => [
-                                                             'class' => 'form-control col-md-7 col-xs-12',
-                                                         ],
-                                                     ])->textInput()->input('text', ['placeholder' => 'Modelo ó Version'])->label(false)
-                                                     ."
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        ",
-                                        'headerOptions' => [
-                                            'style' => 'font-weight:bold',
-                                            'id' => 'elemento1',
-                                            'value' => '1',
-                                        ],
-                                        'options' => ['id' => '1'],
-                                    ],
-                                    [
-                                        'label' => 'Tareas',
-                                        'content' => '
-                                        ',
-                                        'headerOptions' => [
-                                            'style' => 'font-weight:bold',
-                                            'id' => 'elemento1',
-                                            'value' => '1',
-                                        ],
-                                        'options' => ['id' => '2'],
-                                    ],
-                                ];
 
-                                echo TabsX::widget([
-                                    'position' => TabsX::POS_ABOVE,
-                                    'items' => $items,
-                                    'height' => TabsX::SIZE_LARGE,
-                                    'bordered' => false,
-                                    'encodeLabels' => true,
-                                ]);
-                                ?>
                             </div>
                         </div>
                     </div>
@@ -330,3 +110,4 @@ $descripcion = "Registrar Incidencia";
             </div>
         </div>
     </div>
+</div>

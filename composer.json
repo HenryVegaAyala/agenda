@@ -33,7 +33,8 @@
         "tebazil/yii2-console-runner": "^0.0.0",
         "omnilight/yii2-scheduling": "*",
         "skeeks/yii2-assets-auto-compress": "*",
-        "nesbot/carbon": "^1.22"
+        "nesbot/carbon": "^1.22",
+        "2amigos/yii2-tinymce-widget": "~1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
