@@ -47,8 +47,9 @@ class ClienteController extends Controller
 
     /**
      * @return string
+     * @throws \Exception
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $type = Yii::$app->user->identity->type;
         $searchModel = new ClienteSearch();
@@ -64,6 +65,7 @@ class ClienteController extends Controller
     /**
      * @param $id
      * @return string
+     * @throws \yii\base\InvalidParamException
      */
     public function actionView($id)
     {
@@ -115,6 +117,7 @@ class ClienteController extends Controller
     /**
      * @param $id
      * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
      */
     public function actionUpdate($id)
     {

@@ -48,6 +48,7 @@ class IncidenciaSearch extends Incidencia
                     'usuario_eliminado',
                     'ip',
                     'host',
+                    'status',
                 ],
                 'safe',
             ],
@@ -81,11 +82,12 @@ class IncidenciaSearch extends Incidencia
 
             return Incidencia::find()
                 ->select([
-                    'incidencia.numero                                AS numero',
-                    'empresa.nombre                                   AS empresa',
-                    'incidencia.producto                              AS producto',
-                    'incidencia.prioridad                             AS prioridad',
-                    'incidencia.fecha_deseada                         AS fecha_deseada',
+                    'incidencia.numero                                     AS numero',
+                    'empresa.nombre                                        AS empresa',
+                    'incidencia.producto                                   AS producto',
+                    'incidencia.prioridad                                  AS prioridad',
+                    'date_format(incidencia.fecha_deseada, \'%d-%m-%Y\')   AS fecha_deseada',
+                    'incidencia.status                                     AS status',
                 ])
                 ->addSelect([new Expression($sentence)])
                 ->leftJoin('cliente', 'cliente.id = incidencia.cliente_id')
@@ -117,6 +119,7 @@ class IncidenciaSearch extends Incidencia
             'fecha_modificada' => $this->fecha_modificada,
             'fecha_eliminada' => $this->fecha_eliminada,
             'estado' => $this->estado,
+            'status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'notas', $this->notas])

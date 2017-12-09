@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'empresa',
                                 'prioridad',
                                 'fecha_deseada',
+                                'status',
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'header' => 'Opciones',

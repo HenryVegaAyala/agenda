@@ -33,7 +33,9 @@ use yii\db\ActiveRecord;
  * @property integer $estado
  * @property string $ip
  * @property string $host
+ * @property string $status
  *
+ * @property Cliente $cliente
  */
 class Incidencia extends ActiveRecord
 {
@@ -60,7 +62,7 @@ class Incidencia extends ActiveRecord
     {
         return [
             [['cliente_id', 'empresa_id', 'estado'], 'integer'],
-            [['resumen','empresa', 'num_ticket', 'area', 'cargo', 'anexo'], 'string'],
+            [['resumen'], 'string'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [
                 [
@@ -74,12 +76,15 @@ class Incidencia extends ActiveRecord
                     'tipo_incidencia',
                     'fuente_reportada',
                     'host',
-                    'cliente',
                 ],
                 'string',
                 'max' => 150,
             ],
-            [['numero', 'tipo', 'usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
+            [
+                ['numero', 'tipo', 'usuario_digitado', 'usuario_modificado', 'usuario_eliminado', 'status'],
+                'string',
+                'max' => 50,
+            ],
             [['producto'], 'string', 'max' => 100],
             [['producto'], 'required', 'message' => 'El producto es requerido.'],
             [['resumen'], 'required', 'message' => 'El resumen es requerido.'],
@@ -104,12 +109,12 @@ class Incidencia extends ActiveRecord
             'cliente_id' => 'Cliente ID',
             'empresa_id' => 'Empresa ID',
             'notas' => 'Notas',
-            'numero' => 'Numero',
+            'numero' => 'N° de Ticket',
             'resumen' => 'Resumen',
             'producto' => 'Producto',
             'servico' => 'Servico',
             'ci' => 'Ci',
-            'fecha_deseada' => 'Fecha Deseada',
+            'fecha_deseada' => 'Fecha Creada',
             'impacto' => 'Impacto',
             'urgencia' => 'Urgencia',
             'prioridad' => 'Prioridad',
@@ -125,12 +130,14 @@ class Incidencia extends ActiveRecord
             'estado' => 'Estado',
             'ip' => 'Ip',
             'host' => 'Host',
+            'status' => 'Status',
             'num_ticket' => 'N° de Ticket',
             'area' => 'Area',
             'cargo' => 'Cargo',
             'anexo' => 'Anexo',
-            'cliente' => 'cliente',
+            'cliente' => 'Usuario',
             'empresa' => 'Empresa',
+            'status' => 'Estado',
         ];
     }
 

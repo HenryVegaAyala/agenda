@@ -64,7 +64,6 @@ class IncidenciaController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->cliente_id = Yii::$app->user->identity->cliente_id;
             $model->empresa_id = Yii::$app->user->identity->empresa_id;
-            $model->estado = true;
             $model->fecha_digitada = Carbon::now('America/Lima');
             $model->usuario_digitado = Yii::$app->user->identity->nombres;
             $model->host = (string)php_uname();
@@ -72,6 +71,8 @@ class IncidenciaController extends Controller
             $model->ip = Utils::getRealIpAddr();
             $model->numero = $ticket;
             $model->tipo = 'CLIENTE';
+            $model->estado = true;
+            $model->status = 'CREADO';
             $model->save();
 
             return $this->redirect(['index']);
