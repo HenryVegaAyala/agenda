@@ -42,6 +42,7 @@ class UserSearch extends User
     /**
      * @param $params
      * @return ActiveDataProvider
+     * @throws \Exception
      */
     public function search($params)
     {

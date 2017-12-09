@@ -43,6 +43,7 @@ class Incidencia extends ActiveRecord
     public $cargo;
     public $anexo;
     public $cliente;
+    public $empresa;
 
     /**
      * @inheritdoc
@@ -59,7 +60,7 @@ class Incidencia extends ActiveRecord
     {
         return [
             [['cliente_id', 'empresa_id', 'estado'], 'integer'],
-            [['resumen', 'num_ticket', 'area', 'cargo', 'anexo'], 'string'],
+            [['resumen','empresa', 'num_ticket', 'area', 'cargo', 'anexo'], 'string'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [
                 [
@@ -129,6 +130,7 @@ class Incidencia extends ActiveRecord
             'cargo' => 'Cargo',
             'anexo' => 'Anexo',
             'cliente' => 'cliente',
+            'empresa' => 'Empresa',
         ];
     }
 

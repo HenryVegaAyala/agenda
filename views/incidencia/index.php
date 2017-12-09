@@ -1,5 +1,6 @@
 <?php
 
+use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -31,17 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             'dataProvider' => $dataProvider,
                             'filterModel' => $searchModel,
                             'columns' => [
-                                ['class' => 'yii\grid\SerialColumn'],
+                                ['class' => SerialColumn::class],
 
-                                //'empresa',
-                                //'cliente',
-                                //'contacto',
-                                'notas',
-                                'impacto',
-                                'urgencia',
+                                'numero',
+                                'cliente',
+                                'empresa',
                                 'prioridad',
-                                'tipo_incidencia',
-                                'estado',
+                                'fecha_deseada',
                                 [
                                     'class' => 'yii\grid\ActionColumn',
                                     'header' => 'Opciones',

@@ -36,12 +36,13 @@ class IncidenciaController extends Controller
 
     /**
      * @return string
+     * @throws \Exception
      * @throws \yii\base\InvalidParamException
      */
     public function actionIndex(): string
     {
         $searchModel = new IncidenciaSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->post());
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -67,6 +68,7 @@ class IncidenciaController extends Controller
             $model->fecha_digitada = Carbon::now('America/Lima');
             $model->usuario_digitado = Yii::$app->user->identity->nombres;
             $model->host = (string)php_uname();
+            $model->fecha_deseada = Carbon::now()->format('Y-m-d');
             $model->ip = Utils::getRealIpAddr();
             $model->numero = $ticket;
             $model->tipo = 'CLIENTE';

@@ -46,13 +46,13 @@
         "jamband/yii2-schemadump": "*"
     },
     "config": {
+        "process-timeout": 1800,
         "fxp-asset": {
-            "asset-installer-paths": {
+            "installer-paths": {
                 "npm-asset-library": "vendor/npm",
                 "bower-asset-library": "vendor/bower"
             }
-        },
-        "process-timeout": 1800
+        }
     },
     "scripts": {
         "post-create-project-cmd": [
@@ -74,10 +74,6 @@
             "generateCookieValidationKey": [
                 "config/web.php"
             ]
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
         }
     }
 }

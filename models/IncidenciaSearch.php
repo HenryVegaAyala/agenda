@@ -2,14 +2,20 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
+use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
+use app\models\Incidencia;
+use yii\db\Expression;
 
 /**
  * IncidenciaSearch represents the model behind the search form about `app\models\Incidencia`.
  */
 class IncidenciaSearch extends Incidencia
 {
+    const CACHE_TIMEOUT = 3600;
+
     /**
      * @inheritdoc
      */
@@ -20,7 +26,9 @@ class IncidenciaSearch extends Incidencia
             [
                 [
                     'notas',
+                    'numero',
                     'resumen',
+                    'producto',
                     'servico',
                     'ci',
                     'fecha_deseada',
@@ -28,6 +36,9 @@ class IncidenciaSearch extends Incidencia
                     'urgencia',
                     'prioridad',
                     'tipo_incidencia',
+                    'tipo',
+                    'empresa',
+                    'cliente',
                     'fuente_reportada',
                     'fecha_digitada',
                     'fecha_modificada',
@@ -58,10 +69,31 @@ class IncidenciaSearch extends Incidencia
      * @param array $params
      *
      * @return ActiveDataProvider
+     * @throws \Exception
+     * @throws \yii\base\InvalidParamException
      */
     public function search($params)
     {
-        $query = Incidencia::find();
+        $db = Yii::$app->db;
+        $dep = new DbDependency();
+        $query = Incidencia::getDb()->cache(function ($db) {
+            $sentence = new Expression('concat(cliente.nombres, \' \', cliente.apellidos) AS cliente');
+
+            return Incidencia::find()
+                ->select([
+                    'incidencia.numero                                AS numero',
+                    'empresa.nombre                                   AS empresa',
+                    'incidencia.producto                              AS producto',
+                    'incidencia.prioridad                             AS prioridad',
+                    'incidencia.fecha_deseada                         AS fecha_deseada',
+                ])
+                ->addSelect([new Expression($sentence)])
+                ->leftJoin('cliente', 'cliente.id = incidencia.cliente_id')
+                ->leftJoin('empresa', 'empresa.id = incidencia.empresa_id')
+                ->where('cliente_id = :cliente', [':cliente' => Yii::$app->user->identity->cliente_id])
+                ->andWhere('incidencia.estado = :estado', [':estado' => 1])
+                ->orderBy(['numero' => SORT_ASC]);
+        }, self::CACHE_TIMEOUT, $dep);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -70,20 +102,27 @@ class IncidenciaSearch extends Incidencia
         $this->load($params);
 
         if (!$this->validate()) {
-
+            // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'cliente_id' => $this->cliente_id,
             'empresa_id' => $this->empresa_id,
+            'fecha_digitada' => $this->fecha_digitada,
+            'empresa' => $this->empresa,
+            'fecha_modificada' => $this->fecha_modificada,
+            'fecha_eliminada' => $this->fecha_eliminada,
             'estado' => $this->estado,
         ]);
 
         $query->andFilterWhere(['like', 'notas', $this->notas])
+            ->andFilterWhere(['like', 'numero', $this->numero])
             ->andFilterWhere(['like', 'resumen', $this->resumen])
+            ->andFilterWhere(['like', 'producto', $this->producto])
             ->andFilterWhere(['like', 'servico', $this->servico])
             ->andFilterWhere(['like', 'ci', $this->ci])
             ->andFilterWhere(['like', 'fecha_deseada', $this->fecha_deseada])
@@ -91,7 +130,13 @@ class IncidenciaSearch extends Incidencia
             ->andFilterWhere(['like', 'urgencia', $this->urgencia])
             ->andFilterWhere(['like', 'prioridad', $this->prioridad])
             ->andFilterWhere(['like', 'tipo_incidencia', $this->tipo_incidencia])
-            ->andFilterWhere(['like', 'fuente_reportada', $this->fuente_reportada]);
+            ->andFilterWhere(['like', 'tipo', $this->tipo])
+            ->andFilterWhere(['like', 'fuente_reportada', $this->fuente_reportada])
+            ->andFilterWhere(['like', 'usuario_digitado', $this->usuario_digitado])
+            ->andFilterWhere(['like', 'usuario_modificado', $this->usuario_modificado])
+            ->andFilterWhere(['like', 'usuario_eliminado', $this->usuario_eliminado])
+            ->andFilterWhere(['like', 'ip', $this->ip])
+            ->andFilterWhere(['like', 'host', $this->host]);
 
         return $dataProvider;
     }
