@@ -60,11 +60,11 @@ use yii\helpers\Url;
                                         </a>
                                         <ul class="nav child_menu">
                                             <li>
-                                                <a href="<?php echo Url::to(['/incidencia/create']) ?>">Registrar
+                                                <a href="<?php echo '11' ?>">Registrar
                                                     Requerimiento</a>
                                             </li>
                                             <li>
-                                                <a href="<?php echo Url::to(['/incidencia/index']) ?>">Lista de
+                                                <a href="<?php echo '12' ?>">Lista de
                                                     Requerimiento</a>
                                             </li>
                                         </ul>
