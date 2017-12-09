@@ -291,4 +291,17 @@ class Incidencia extends ActiveRecord
             'Otros' => 'Otros',
         ];
     }
+
+    /**
+     * @return array
+     */
+    public static function estado(): array
+    {
+        return [
+            'CREADO' => 'CREADO',
+            'PENDIENTE' => 'PENDIENTE',
+            'EN PROCESO' => 'EN PROCESO',
+            'TERMINADO' => 'TERMINADO',
+        ];
+    }
 }

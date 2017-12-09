@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Carbon\Carbon;
 use Yii;
 use yii\base\Model;
 use yii\caching\DbDependency;
@@ -82,6 +83,7 @@ class IncidenciaSearch extends Incidencia
 
             return Incidencia::find()
                 ->select([
+                    'incidencia.id                                         AS id',
                     'incidencia.numero                                     AS numero',
                     'empresa.nombre                                        AS empresa',
                     'incidencia.producto                                   AS producto',
@@ -94,7 +96,7 @@ class IncidenciaSearch extends Incidencia
                 ->leftJoin('empresa', 'empresa.id = incidencia.empresa_id')
                 ->where('cliente_id = :cliente', [':cliente' => Yii::$app->user->identity->cliente_id])
                 ->andWhere('incidencia.estado = :estado', [':estado' => 1])
-                ->orderBy(['numero' => SORT_ASC]);
+                ->orderBy(['numero' => SORT_DESC]);
         }, self::CACHE_TIMEOUT, $dep);
 
         $dataProvider = new ActiveDataProvider([
@@ -128,7 +130,6 @@ class IncidenciaSearch extends Incidencia
             ->andFilterWhere(['like', 'producto', $this->producto])
             ->andFilterWhere(['like', 'servico', $this->servico])
             ->andFilterWhere(['like', 'ci', $this->ci])
-            ->andFilterWhere(['like', 'fecha_deseada', $this->fecha_deseada])
             ->andFilterWhere(['like', 'impacto', $this->impacto])
             ->andFilterWhere(['like', 'urgencia', $this->urgencia])
             ->andFilterWhere(['like', 'prioridad', $this->prioridad])
@@ -140,6 +141,11 @@ class IncidenciaSearch extends Incidencia
             ->andFilterWhere(['like', 'usuario_eliminado', $this->usuario_eliminado])
             ->andFilterWhere(['like', 'ip', $this->ip])
             ->andFilterWhere(['like', 'host', $this->host]);
+
+        if (!empty($this->fecha_deseada)) {
+            $query->andFilterWhere(['like', 'fecha_deseada', Carbon::parse($this->fecha_deseada)->format('Y-m-d')]);
+        }
+
 
         return $dataProvider;
     }

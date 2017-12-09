@@ -1,5 +1,9 @@
 <?php
 
+use kartik\date\DatePicker;
+use kartik\daterange\DateRangePicker;
+use kartik\widgets\Select2;
+use yii\grid\ActionColumn;
 use yii\grid\SerialColumn;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -11,6 +15,7 @@ use yii\widgets\Pjax;
 
 $this->title = 'Ticket - Lista de Incidencias';
 $this->params['breadcrumbs'][] = $this->title;
+$indencia = new \app\models\Incidencia()
 ?>
 <div class="right_col" role="main">
     <div class="clearfix"></div>
@@ -33,15 +38,41 @@ $this->params['breadcrumbs'][] = $this->title;
                             'filterModel' => $searchModel,
                             'columns' => [
                                 ['class' => SerialColumn::class],
-
                                 'numero',
                                 'cliente',
-                                'empresa',
-                                'prioridad',
-                                'fecha_deseada',
-                                'status',
                                 [
-                                    'class' => 'yii\grid\ActionColumn',
+                                    'attribute' => 'prioridad',
+                                    'value' => 'prioridad',
+                                    'filter' => Html::activeDropDownList($searchModel, 'prioridad',
+                                        $indencia::prioridad(),
+                                        ['class' => 'form-control', 'prompt' => '']),
+                                ],
+                                [
+                                    'attribute' => 'fecha_deseada',
+                                    'value' => 'fecha_deseada',
+                                    'format' => ['date', 'php:d-m-Y'],
+                                    'options' => ['style' => 'width: 20%;'],
+                                    'filter' => DatePicker::widget([
+                                        'model' => $searchModel,
+                                        'attribute' => 'fecha_deseada',
+                                        'options' => ['placeholder' => ''],
+                                        'pluginOptions' => [
+                                            'id' => 'fecha_deseada',
+                                            'autoclose' => true,
+                                            'format' => 'dd-mm-yyyy',
+                                            'startView' => 'days',
+                                        ],
+                                    ]),
+                                ],
+                                [
+                                    'attribute' => 'status',
+                                    'value' => 'status',
+                                    'filter' => Html::activeDropDownList($searchModel, 'status',
+                                        $indencia::estado(),
+                                        ['class' => 'form-control', 'prompt' => '']),
+                                ],
+                                [
+                                    'class' => ActionColumn::class,
                                     'header' => 'Opciones',
                                     'options' => ['style' => 'width:80px;'],
                                     'template' => ' {update} / {delete}',
