@@ -27,6 +27,7 @@ class Utils
     /**
      * @param $table
      * @return false|null|string
+     * @throws \yii\db\Exception
      */
     public static function idTable($table)
     {
@@ -339,5 +340,18 @@ class Utils
         }
 
         return $ip;
+    }
+
+    /**
+     * @return false|null|string
+     * @throws \yii\db\Exception
+     */
+    public static function numeroTicket()
+    {
+        $query = new Query();
+        $sentence = new Expression('IFNULL(COUNT(numero), 0) + 1');
+        $query->select($sentence)->from('incidencia');
+
+        return $query->createCommand()->queryScalar();
     }
 }

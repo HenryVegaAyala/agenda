@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "incidencia".
@@ -11,7 +12,9 @@ use Yii;
  * @property integer $cliente_id
  * @property integer $empresa_id
  * @property string $notas
+ * @property string $numero
  * @property string $resumen
+ * @property string $producto
  * @property string $servico
  * @property string $ci
  * @property string $fecha_deseada
@@ -19,6 +22,7 @@ use Yii;
  * @property string $urgencia
  * @property string $prioridad
  * @property string $tipo_incidencia
+ * @property string $tipo
  * @property string $fuente_reportada
  * @property string $fecha_digitada
  * @property string $fecha_modificada
@@ -30,14 +34,20 @@ use Yii;
  * @property string $ip
  * @property string $host
  *
- * @property Cliente $cliente
  */
-class Incidencia extends \yii\db\ActiveRecord
+class Incidencia extends ActiveRecord
 {
+
+    public $num_ticket;
+    public $area;
+    public $cargo;
+    public $anexo;
+    public $cliente;
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'incidencia';
     }
@@ -48,29 +58,12 @@ class Incidencia extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [
-                [
-                    'cliente_id',
-                    'empresa_id',
-                    'notas',
-                    'resumen',
-                    'servico',
-                    'ci',
-                    'fecha_deseada',
-                    'impacto',
-                    'urgencia',
-                    'prioridad',
-                    'tipo_incidencia',
-                    'fuente_reportada',
-                ],
-                'required',
-            ],
             [['cliente_id', 'empresa_id', 'estado'], 'integer'],
+            [['resumen', 'num_ticket', 'area', 'cargo', 'anexo'], 'string'],
             [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [
                 [
                     'notas',
-                    'resumen',
                     'servico',
                     'ci',
                     'fecha_deseada',
@@ -80,11 +73,15 @@ class Incidencia extends \yii\db\ActiveRecord
                     'tipo_incidencia',
                     'fuente_reportada',
                     'host',
+                    'cliente',
                 ],
                 'string',
                 'max' => 150,
             ],
-            [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
+            [['numero', 'tipo', 'usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
+            [['producto'], 'string', 'max' => 100],
+            [['producto'], 'required', 'message' => 'El producto es requerido.'],
+            [['resumen'], 'required', 'message' => 'El resumen es requerido.'],
             [['ip'], 'string', 'max' => 30],
             [
                 ['cliente_id'],
@@ -106,7 +103,9 @@ class Incidencia extends \yii\db\ActiveRecord
             'cliente_id' => 'Cliente ID',
             'empresa_id' => 'Empresa ID',
             'notas' => 'Notas',
+            'numero' => 'Numero',
             'resumen' => 'Resumen',
+            'producto' => 'Producto',
             'servico' => 'Servico',
             'ci' => 'Ci',
             'fecha_deseada' => 'Fecha Deseada',
@@ -114,6 +113,7 @@ class Incidencia extends \yii\db\ActiveRecord
             'urgencia' => 'Urgencia',
             'prioridad' => 'Prioridad',
             'tipo_incidencia' => 'Tipo Incidencia',
+            'tipo' => 'Tipo',
             'fuente_reportada' => 'Fuente Reportada',
             'fecha_digitada' => 'Fecha Digitada',
             'fecha_modificada' => 'Fecha Modificada',
@@ -124,6 +124,11 @@ class Incidencia extends \yii\db\ActiveRecord
             'estado' => 'Estado',
             'ip' => 'Ip',
             'host' => 'Host',
+            'num_ticket' => 'N° de Ticket',
+            'area' => 'Area',
+            'cargo' => 'Cargo',
+            'anexo' => 'Anexo',
+            'cliente' => 'cliente',
         ];
     }
 
@@ -261,6 +266,20 @@ class Incidencia extends \yii\db\ActiveRecord
     {
         return [
             0 => 'Internet Explorer',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function producto(): array
+    {
+        return [
+            'Impresora' => 'Impresora',
+            'Laptop' => 'Laptop',
+            'Computadora' => 'Computadora',
+            'Proyector' => 'Proyector',
+            'Otros' => 'Otros',
         ];
     }
 }

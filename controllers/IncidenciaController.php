@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\helpers\Utils;
+use app\models\Cliente;
 use Carbon\Carbon;
 use Yii;
 use app\models\Incidencia;
@@ -50,21 +51,25 @@ class IncidenciaController extends Controller
 
     /**
      * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
      * @throws \yii\base\InvalidParamException
      */
     public function actionCreate()
     {
         $model = new Incidencia();
+        $cliente = Cliente::find()->where(['id' => Yii::$app->user->identity->cliente_id])->one();
+        $ticket = 'INC-' . str_pad(Utils::numeroTicket(), 10, '0', STR_PAD_LEFT);
 
         if ($model->load(Yii::$app->request->post())) {
             $model->cliente_id = Yii::$app->user->identity->cliente_id;
             $model->empresa_id = Yii::$app->user->identity->empresa_id;
-            $model->fecha_deseada = Carbon::parse($model->fecha_deseada)->format('Y-m-d');
             $model->estado = true;
             $model->fecha_digitada = Carbon::now('America/Lima');
             $model->usuario_digitado = Yii::$app->user->identity->nombres;
-            $model->host = (string)PHP_OS;
+            $model->host = (string)php_uname();
             $model->ip = Utils::getRealIpAddr();
+            $model->numero = $ticket;
+            $model->tipo = 'CLIENTE';
             $model->save();
 
             return $this->redirect(['index']);
@@ -72,6 +77,8 @@ class IncidenciaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'cliente' => $cliente,
+            'ticket' => $ticket,
         ]);
     }
 
@@ -84,6 +91,7 @@ class IncidenciaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $cliente = Cliente::find()->where(['id' => Yii::$app->user->identity->cliente_id])->one();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->fecha_modificada = Carbon::now('America/Lima');
@@ -97,6 +105,7 @@ class IncidenciaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'cliente' => $cliente,
         ]);
     }
 

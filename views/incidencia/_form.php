@@ -1,24 +1,24 @@
 <?php
 
-use app\helpers\Utils;
 use app\models\Incidencia;
 use dosamigos\tinymce\TinyMce;
-use kartik\tabs\TabsX;
-use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Incidencia */
+/* @var $cliente app\models\Incidencia */
+/* @var $ticket app\models\Incidencia */
 /* @var $form yii\widgets\ActiveForm */
-$descripcion = "Registrar Incidencia";
+
+$descripcion = 'Registrar Incidencia';
 ?>
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_content">
+<div class='clearfix'></div>
+<div class='row'>
+    <div class='col-md-12 col-sm-12 col-xs-12'>
+        <div class='x_panel'>
+            <div class='x_content'>
                 <?php Pjax::begin(); ?>
                 <?php $form = ActiveForm::begin(
                     [
@@ -32,40 +32,95 @@ $descripcion = "Registrar Incidencia";
                         ],
                     ]
                 ); ?>
-                <span class="section"><?php echo Html::encode($descripcion) ?></span>
-                <div class="row">
-                    <div class="item form-group">
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="container-fluid">
+                <span class='section'><?php echo Html::encode($descripcion) ?></span>
+                <div class='row'>
+                    <div class='item form-group'>
+                        <div class='col-md-6 col-sm-12 col-xs-12'>
+                            <div class='container-fluid'>
 
-                                <span class="center-left">* Datos Personales</span>
+                                <span class='center-left'>* Datos Personales</span>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'empresa', [
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'num_ticket', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
-                                                'value' => Utils::empresaName(Yii::$app->user->identity->empresa_id),
+                                                'value' => $ticket,
                                                 'readonly' => true,
                                             ],
-                                        ])->textInput()->input('text', ['placeholder' => "Empresa"])->label(false) ?>
+                                        ])->textInput()->input('text', ['placeholder' => 'N° de Ticket'])->label(false) ?>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
                                         <?= $form->field($model, 'cliente', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
-                                                'value' => Yii::$app->user->identity->nombres,
+                                                'value' => $cliente->nombres . ' ' . $cliente->apellidos,
                                                 'readonly' => true,
                                             ],
                                         ])->textInput()->input('text',
-                                            ['placeholder' => "Cliente"])->label(false) ?>
+                                            ['placeholder' => 'Nombre del Cliente Cliente'])->label(false) ?>
                                     </div>
                                 </div>
 
-                                <span class="center-left">* Resumen</span>
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'area', [
+                                            'inputOptions' => [
+                                                'class' => 'form-control col-md-7 col-xs-12',
+                                                'value' => $cliente->area,
+                                                'readonly' => true,
+                                            ],
+                                        ])->textInput()->input('text',
+                                            ['placeholder' => 'Area'])->label(false) ?>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'cargo', [
+                                            'inputOptions' => [
+                                                'class' => 'form-control col-md-7 col-xs-12',
+                                                'value' => $cliente->puesto,
+                                                'readonly' => true,
+                                            ],
+                                        ])->textInput()->input('text',
+                                            ['placeholder' => 'Cargo'])->label(false) ?>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'anexo', [
+                                            'inputOptions' => [
+                                                'class' => 'form-control col-md-7 col-xs-12',
+                                                'value' => $cliente->anexo,
+                                                'readonly' => true,
+                                            ],
+                                        ])->textInput()->input('text',
+                                            ['placeholder' => 'Anexo'])->label(false) ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <?= $form->field($model,
+                                            'producto')->dropDownList(Incidencia::producto(), [
+                                            'prompt' => 'Seleccionar un Producto',
+                                            'class' => 'form-control col-md-7 col-xs-12',
+                                            'value' => '0',
+                                        ])->label(false) ?>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class='col-md-6 col-sm-12 col-xs-12'>
+                            <div class='container-fluid'>
+
+                                <span class='center-left'>* Detalle de la Incidencia</span>
 
                                 <?= $form->field($model, 'resumen')->widget(TinyMce::className(), [
                                     'options' => ['rows' => 8],
@@ -75,7 +130,7 @@ $descripcion = "Registrar Incidencia";
                                             'advlist autolink lists link charmap print preview anchor',
                                             'searchreplace visualblocks code fullscreen',
                                             'insertdatetime media table contextmenu paste',
-                                            "textcolor colorpicker",
+                                            'textcolor colorpicker',
                                         ],
                                         'toolbar' => 'undo redo | 
                                                       styleselect  fontselect fontsizeselect forecolor backcolor | 
@@ -84,22 +139,17 @@ $descripcion = "Registrar Incidencia";
                                                       bullist numlist outdent indent | 
                                                       link image',
                                     ],
-                                ]); ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="container-fluid">
-
+                                ])->label(false); ?>
                             </div>
                         </div>
                     </div>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
+                    <div class='ln_solid'></div>
+                    <div class='form-group'>
                         <center>
-                            <div class="col-md-6 col-xs-12 col-md-offset-3">
-                                <?= Html::submitButton('<i class="fa fa-floppy-o fa-lg"></i> ' . ' Guardar',
+                            <div class='col-md-6 col-xs-12 col-md-offset-3'>
+                                <?= Html::submitButton('<i class=\'fa fa-floppy-o fa-lg\'></i>' . ' Guardar',
                                     ['class' => 'btn btn-success']) ?>
-                                <?= Html::resetButton('<i class="fa fa-times fa-lg"></i> ' . ' Cancelar',
+                                <?= Html::resetButton('<i class=\'fa fa-times fa-lg\'></i>' . ' Cancelar',
                                     ['class' => 'btn btn-primary', 'id' => 'cancelar']) ?>
                             </div>
                         </center>

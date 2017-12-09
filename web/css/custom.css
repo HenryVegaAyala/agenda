@@ -5176,3 +5176,10 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     height: 642px !important;
     overflow: auto;
 }
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #ffffff;
+    opacity: 1;
+}

@@ -66,7 +66,7 @@ class Cliente extends ActiveRecord
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
             [['genero'], 'string', 'max' => 1],
-            [['ubicacion', 'fecha_nacimiento', 'fecha_ingreso','empresa'], 'string', 'max' => 250],
+            [['ubicacion', 'fecha_nacimiento', 'fecha_ingreso', 'empresa'], 'string', 'max' => 250],
             [['tipo'], 'string', 'max' => 200],
             [['estado_civil'], 'string', 'max' => 2],
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
@@ -120,7 +120,7 @@ class Cliente extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIncidencias():ActiveQuery
+    public function getIncidencias(): ActiveQuery
     {
         return $this->hasMany(Incidencia::className(), ['cliente_id' => 'id']);
     }

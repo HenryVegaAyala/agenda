@@ -1,24 +1,23 @@
-
 <?php
 
-use app\helpers\Utils;
 use app\models\Incidencia;
-use kartik\tabs\TabsX;
-use kartik\widgets\DatePicker;
+use dosamigos\tinymce\TinyMce;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Incidencia */
+/* @var $cliente app\models\Incidencia */
+/* @var $ticket app\models\Incidencia */
 /* @var $form yii\widgets\ActiveForm */
-$descripcion = "Registrar Incidencia";
+
+$descripcion = 'Actualizar Incidencia';
 ?>
-<div class="clearfix"></div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_content">
+<div class='clearfix'></div>
+<div class='row'>
+    <div class='col-md-12 col-sm-12 col-xs-12'>
+        <div class='x_panel'>
+            <div class='x_content'>
                 <?php $form = ActiveForm::begin(
                     [
                         'enableAjaxValidation' => false,
@@ -31,198 +30,123 @@ $descripcion = "Registrar Incidencia";
                         ],
                     ]
                 ); ?>
-                <span class="section"><?php echo Html::encode($descripcion) ?></span>
-                <div class="row">
-                    <div class="item form-group">
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="container-fluid">
+                <span class='section'><?php echo Html::encode($descripcion) ?></span>
+                <div class='row'>
+                    <div class='item form-group'>
+                        <div class='col-md-6 col-sm-12 col-xs-12'>
+                            <div class='container-fluid'>
 
-                                <span class="center-left">* Datos Empresarial</span>
+                                <span class='center-left'>* Datos Personales</span>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'empresa', [
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'numero', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
-                                                'value' => Utils::empresaName(Yii::$app->user->identity->empresa_id),
                                                 'readonly' => true,
                                             ],
-                                        ])->textInput()->input('text', ['placeholder' => "Empresa"])->label(false) ?>
+                                        ])->textInput()->input('text',
+                                            ['placeholder' => 'N° de Ticket'])->label(false) ?>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
                                         <?= $form->field($model, 'cliente', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
-                                                'value' => Yii::$app->user->identity->nombres,
+                                                'value' => $cliente->nombres . ' ' . $cliente->apellidos,
                                                 'readonly' => true,
                                             ],
                                         ])->textInput()->input('text',
-                                            ['placeholder' => "Cliente"])->label(false) ?>
+                                            ['placeholder' => 'Nombre del Cliente Cliente'])->label(false) ?>
                                     </div>
                                 </div>
 
-                                <span class="center-left">* Resumen</span>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'notas', [
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'area', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textarea(['rows' => '2', 'placeholder' => "Notas"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'resumen', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
+                                                'value' => $cliente->area,
+                                                'readonly' => true,
                                             ],
                                         ])->textInput()->input('text',
-                                            ['placeholder' => "Resumen"])->label(false) ?>
+                                            ['placeholder' => 'Area'])->label(false) ?>
                                     </div>
                                 </div>
 
-                                <span class="center-left">* Servicio</span>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'servico')->dropDownList(Incidencia::servicio(), [
-                                            'prompt' => 'Seleccionar Servicio',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                            'value' => '0',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'ci')->dropDownList(Incidencia::ci(), [
-                                            'prompt' => 'Seleccionar Servicio',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                            'value' => '0',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'fecha_deseada')->widget(DatePicker::classname(), [
-                                            'options' => ['placeholder' => 'Fecha Deseada'],
-                                            'value' => date('d-M-Y'),
-                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-                                            'pluginOptions' => [
-                                                'autoclose' => true,
-                                                'format' => 'dd-mm-yyyy',
-                                                'todayHighlight' => true,
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'cargo', [
+                                            'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
+                                                'value' => $cliente->puesto,
+                                                'readonly' => true,
                                             ],
-                                        ])->label(false);
-                                        ?>
+                                        ])->textInput()->input('text',
+                                            ['placeholder' => 'Cargo'])->label(false) ?>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='col-md-12 col-sm-6 col-xs-12'>
+                                        <?= $form->field($model, 'anexo', [
+                                            'inputOptions' => [
+                                                'class' => 'form-control col-md-7 col-xs-12',
+                                                'value' => $cliente->anexo,
+                                                'readonly' => true,
+                                            ],
+                                        ])->textInput()->input('text',
+                                            ['placeholder' => 'Anexo'])->label(false) ?>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
                                         <?= $form->field($model,
-                                            'impacto')->dropDownList(Incidencia::impacto(), [
-                                            'prompt' => 'Seleccionar Impacto',
+                                            'producto')->dropDownList(Incidencia::producto(), [
+                                            'prompt' => 'Seleccionar un Producto',
                                             'class' => 'form-control col-md-7 col-xs-12',
                                         ])->label(false) ?>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'urgencia')->dropDownList(Incidencia::urgencia(), [
-                                            'prompt' => 'Seleccionar Urgencia',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'prioridad')->dropDownList(Incidencia::prioridad(), [
-                                            'prompt' => 'Seleccionar Prioridad',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'tipo_incidencia')->dropDownList(Incidencia::tipoIncidencia(), [
-                                            'prompt' => 'Seleccionar Tipo de Incidencia',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model,
-                                            'fuente_reportada')->dropDownList(Incidencia::fuenteReportada(), [
-                                            'prompt' => 'Seleccionar Fuente Reportada',
-                                            'class' => 'form-control col-md-7 col-xs-12',
-                                        ])->label(false) ?>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="container-fluid">
-                                <?php
-                                $items = [
-                                    [
-                                        'label' => 'Categorización',
-                                        'content' => 'Hola',
-                                        'headerOptions' => [
-                                            'style' => 'font-weight:bold',
-                                            'id' => 'elemento1',
-                                            'value' => '1',
-                                        ],
-                                        'options' => ['id' => '1'],
-                                    ],
-                                    [
-                                        'label' => 'Tareas',
-                                        'content' => 'Hola',
-                                        'headerOptions' => [
-                                            'style' => 'font-weight:bold',
-                                            'id' => 'elemento1',
-                                            'value' => '1',
-                                        ],
-                                        'options' => ['id' => '2'],
-                                    ],
-                                ];
+                        <div class='col-md-6 col-sm-12 col-xs-12'>
+                            <div class='container-fluid'>
 
-                                echo TabsX::widget([
-                                    'position' => TabsX::POS_ABOVE,
-                                    'items' => $items,
-                                    'height' => TabsX::SIZE_LARGE,
-                                    'bordered' => false,
-                                    'encodeLabels' => true,
-                                ]);
-                                ?>
+                                <span class='center-left'>* Detalle de la Incidencia</span>
+
+                                <?= $form->field($model, 'resumen')->widget(TinyMce::className(), [
+                                    'options' => ['rows' => 8],
+                                    'language' => 'es',
+                                    'clientOptions' => [
+                                        'plugins' => [
+                                            'advlist autolink lists link charmap print preview anchor',
+                                            'searchreplace visualblocks code fullscreen',
+                                            'insertdatetime media table contextmenu paste',
+                                            'textcolor colorpicker',
+                                        ],
+                                        'toolbar' => 'undo redo | 
+                                                      styleselect  fontselect fontsizeselect forecolor backcolor | 
+                                                      bold italic | 
+                                                      alignleft aligncenter alignright alignjustify | 
+                                                      bullist numlist outdent indent | 
+                                                      link image',
+                                    ],
+                                ])->label(false); ?>
                             </div>
                         </div>
                     </div>
-                    <div class="ln_solid"></div>
-                    <div class="form-group">
+                    <div class='ln_solid'></div>
+                    <div class='form-group'>
                         <center>
-                            <div class="col-md-6 col-xs-12 col-md-offset-3">
-                                <?= Html::submitButton('<i class="fa fa-floppy-o fa-lg"></i> ' . ' Guardar',
+                            <div class='col-md-6 col-xs-12 col-md-offset-3'>
+                                <?= Html::submitButton('<i class=\'fa fa-floppy-o fa-lg\'></i>' . ' Guardar',
                                     ['class' => 'btn btn-success']) ?>
-                                <?= Html::resetButton('<i class="fa fa-times fa-lg"></i> ' . ' Cancelar',
+                                <?= Html::resetButton('<i class=\'fa fa-times fa-lg\'></i>' . ' Cancelar',
                                     ['class' => 'btn btn-primary', 'id' => 'cancelar']) ?>
                             </div>
                         </center>
@@ -232,3 +156,4 @@ $descripcion = "Registrar Incidencia";
             </div>
         </div>
     </div>
+</div>
