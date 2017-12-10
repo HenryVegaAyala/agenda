@@ -39,7 +39,7 @@ $config = [
     ],
     'components' => [
         'assetManager' => [
-            'linkAssets' => true,
+            //'linkAssets' => true,
             'appendTimestamp' => true,
             'converter' => [
                 'class' => 'yii\web\AssetConverter',
