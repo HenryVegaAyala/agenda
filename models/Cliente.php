@@ -61,7 +61,7 @@ class Cliente extends ActiveRecord
     {
         return [
             [['empresa_id', 'estado'], 'integer'],
-            [['nombres', 'apellidos', 'dni', 'email_corp', 'area'], 'required'],
+            [['nombres', 'apellidos', 'email_corp', 'area'], 'required'],
             [['fecha_nacimiento', 'fecha_ingreso', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
             [['nombres', 'apellidos', 'email_personal', 'area', 'email_corp', 'host'], 'string', 'max' => 150],
             [['dni', 'numero_celular'], 'string', 'max' => 15],
@@ -71,6 +71,7 @@ class Cliente extends ActiveRecord
             [['estado_civil'], 'string', 'max' => 2],
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
             [['numero_oficina', 'anexo'], 'string', 'max' => 20],
+            [['dni'], 'string', 'max' => 8],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
             [['ip'], 'string', 'max' => 30],
         ];
