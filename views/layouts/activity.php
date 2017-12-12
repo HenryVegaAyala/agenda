@@ -127,7 +127,7 @@ use yii\helpers\Url;
                                     </li>
                                     <?php break; ?>
                                 <?php case 0: ?>
-                                    <li><a><i class="fa fa-list-alt"></i> Usuario <span
+                                    <li><a><i class="fa fa-list-alt"></i> Analista <span
                                                     class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
                                             <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Registrar
@@ -140,6 +140,17 @@ use yii\helpers\Url;
                                             <!--</li>-->
                                             <li><a href="<?php echo Url::to(['/user/export']) ?>">Exportar
                                                     Analistas</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-list-alt"></i> Técnico <span
+                                                    class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo Url::to(['/cliente/tecnico']) ?>">Registrar
+                                                    Técnicos</a>
+                                            </li>
+                                            <li><a href="<?php echo Url::to(['/cliente/listatecnico']) ?>">Lista de
+                                                    Técnicos</a>
                                             </li>
                                         </ul>
                                     </li>

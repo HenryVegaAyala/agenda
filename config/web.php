@@ -166,6 +166,12 @@ $config = [
                 '/lista-proveedor' => '/cliente/index',
                 '/ver-proveedor/<id:\d+>' => '/cliente/personalview',
                 '/exportar-proveedor' => '/cliente/proveedor',
+
+                /**tecnico**/
+                '/nuevo-tecnico' => '/cliente/tecnico',
+                '/actualizar-tecnico/<id:\d+>' => '/cliente/tecnicoupdate',
+                '/lista-tecnico' => '/cliente/listatecnico',
+                '/ver-tecnico/<id:\d+>' => '/cliente/tecnicoview',
             ],
         ],
 

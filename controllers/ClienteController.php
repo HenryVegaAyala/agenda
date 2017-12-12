@@ -18,11 +18,11 @@ use yii\web\UploadedFile;
  * Class ClienteController
  * @property false|string fecha_nacimiento
  * @property false|string fecha_ingreso
- * @property int estado
- * @property mixed nombres
- * @property mixed apellidos
- * @property mixed email_corp
- * @property mixed dni
+ * @property int          estado
+ * @property mixed        nombres
+ * @property mixed        apellidos
+ * @property mixed        email_corp
+ * @property mixed        dni
  * @package app\controllers
  */
 class ClienteController extends Controller
@@ -390,5 +390,108 @@ class ClienteController extends Controller
         Utils::downloadFile($path, $file);
 
         return $this->refresh();
+    }
+
+    /**
+     * @return string|\yii\web\Response
+     */
+    public function actionTecnico()
+    {
+        $model = new Cliente();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->id = Utils::idTable(self::TABLE_CLIENTE);
+            $model->empresa_id = Yii::$app->user->identity->empresa_id;
+            $model->fecha_nacimiento = Utils::formatDate($model->fecha_nacimiento);
+            $model->fecha_ingreso = Utils::formatDate($model->fecha_ingreso);
+            $model->estado = 1;
+            $model->tipo = 'TECNICO';
+            $model->save();
+
+            $data = [
+                'cliente_id' => $model->id,
+                'empresa_id' => Yii::$app->user->identity->empresa_id,
+                'nombres' => $model->nombres . ' ' . $model->apellidos,
+                'correo' => $model->email_corp,
+                'contrasena' => Yii::$app->getSecurity()->generatePasswordHash($model->dni),
+                'authKey' => 1,
+                'accessToken' => 1,
+                'estado' => 1,
+                'type' => 3,
+
+            ];
+
+            Yii::$app->db->createCommand()->insert('usuario', $data)->execute();
+
+            return $this->redirect(['listatecnico']);
+        }
+
+        return $this->render('tecnico', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
+     */
+    public function actionTecnicoupdate($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->fecha_nacimiento = (empty($model->fecha_nacimiento) ? '' : Utils::formatDate($model->fecha_nacimiento));
+            $model->fecha_ingreso = (empty($model->fecha_ingreso) ? '' : Utils::formatDate($model->fecha_ingreso));
+            $model->save();
+
+            Yii::$app->db->createCommand()
+                ->update(self::TABLE_USUARIO,
+                    [
+                        'fecha_modificada' => Utils::zonaHoraria(),
+                        'usuario_modificado' => Yii::$app->user->identity->correo,
+                        'ip' => Yii::$app->request->userIP,
+                        'host' => strval(php_uname()),
+                        'estado' => 1,
+                        'nombres' => $model->nombres . ' ' . $model->apellidos,
+                        'correo' => $model->email_corp,
+                        'contrasena' => (string)Yii::$app->getSecurity()->generatePasswordHash($model->dni),
+                    ],
+                    'cliente_id = :cliente_id', [':cliente_id' => $id])
+                ->execute();
+
+            return $this->redirect(['listatecnico']);
+        }
+
+        return $this->render('tecnicou', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionListatecnico(): string
+    {
+
+        $searchModel = new ClienteSearch();
+        $dataProvider = $searchModel->searchTenico(Yii::$app->request->post());
+
+        return $this->render('listatecnico', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionTecnicoview($id)
+    {
+        return $this->render('tecnicoview', [
+            'model' => $this->findModel($id),
+        ]);
     }
 }
