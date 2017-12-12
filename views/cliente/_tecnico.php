@@ -148,53 +148,12 @@ $descripcion_user = 'Registrar Técnico';
 
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'area', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text', ['placeholder' => "Área"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'puesto', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text', ['placeholder' => "Puesto"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'categoria', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text', ['placeholder' => "Categoría"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
                                         <?= $form->field($model, 'email_corp', [
                                             'inputOptions' => [
                                                 'class' => 'form-control col-md-7 col-xs-12',
                                             ],
                                         ])->textInput()->input('text',
                                             ['placeholder' => "Email Corporativo"])->label(false) ?>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-6 col-xs-12">
-                                        <?= $form->field($model, 'numero_emergencia', [
-                                            'inputOptions' => [
-                                                'class' => 'form-control col-md-7 col-xs-12',
-                                            ],
-                                        ])->textInput()->input('text',
-                                            ['placeholder' => "Número de Emergencia"])->label(false) ?>
                                     </div>
                                 </div>
 

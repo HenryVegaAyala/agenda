@@ -155,6 +155,15 @@ use yii\helpers\Url;
                                         </ul>
                                     </li>
                                     <?php break; ?>
+                                <?php case 3: ?>
+                                    <li><a><i class="fa fa-list-alt"></i> Incidencias
+                                            <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Incidencias Asignadas</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <?php break; ?>
                                 <?php } ?>
                         </ul>
                     </div>
