@@ -104,27 +104,27 @@ use yii\helpers\Url;
                                         <ul class="nav child_menu">
                                             <li><a href="<?php echo '3' ?>">Priorizar Incidencias</a>
                                             </li>
-                                            <li><a href="<?php echo '4' ?>">Priorizar Requerimientos</a>
+                                            <!--<li><a href="--><?php //echo '4' ?><!--">Priorizar Requerimientos</a>-->
                                             </li>
                                             <li><a href="<?php echo '5' ?>">Asignar Técnicos</a>
                                             </li>
-                                            <li><a href="<?php echo '6' ?>">Asignar Proveedor</a>
+                                            <!--<li><a href="--><?php //echo '6' ?><!--">Asignar Proveedor</a>-->
                                             </li>
-                                            <li><a href="<?php echo '7' ?>">Realizar Pedido al Proveedor</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a><i class="fa fa-list-alt"></i> Reporte
-                                            <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?php echo '8' ?>">Reporte General</a>
-                                            </li>
-                                            <li><a href="<?php echo '9' ?>">Buscar Inc. y Req.</a>
-                                            </li>
-                                            <li><a href="<?php echo '10' ?>">Exportar Inc. y Req.</a>
+                                            <!--<li><a href="--><?php //echo '7' ?><!--">Realizar Pedido al Proveedor</a>-->
                                             </li>
                                         </ul>
                                     </li>
+                                    <!--<li><a><i class="fa fa-list-alt"></i> Reporte-->
+                                    <!--        <span class="fa fa-chevron-down"></span></a>-->
+                                    <!--    <ul class="nav child_menu">-->
+                                    <!--        <li><a href="--><?php //echo '8' ?><!--">Reporte General</a>-->
+                                    <!--        </li>-->
+                                    <!--        <li><a href="--><?php //echo '9' ?><!--">Buscar Inc. y Req.</a>-->
+                                    <!--        </li>-->
+                                    <!--        <li><a href="--><?php //echo '10' ?><!--">Exportar Inc. y Req.</a>-->
+                                    <!--        </li>-->
+                                    <!--    </ul>-->
+                                    <!--</li>-->
                                     <?php break; ?>
                                 <?php case 0: ?>
                                     <li><a><i class="fa fa-list-alt"></i> Analista <span
