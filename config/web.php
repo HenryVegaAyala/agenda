@@ -164,6 +164,7 @@ $config = [
                 '/incidencias-asignadas' => '/incidencia/end',
                 '/incidencia-terminar/<id:\d+>' => '/incidencia/terminar',
                 '/eliminar-incidencia/<id:\d+>' => '/incidencia/delete',
+                '/exportar-resultados' => '/incidencia/exportareporte',
 
                 /**Proveedor**/
                 '/nuevo-proveedor' => '/cliente/personal',

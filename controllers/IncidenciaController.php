@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\helpers\Utils;
 use app\models\Cliente;
 use Carbon\Carbon;
+use tebazil\runner\ConsoleCommandRunner;
 use Yii;
 use app\models\Incidencia;
 use app\models\IncidenciaSearch;
@@ -265,5 +266,28 @@ class IncidenciaController extends Controller
                 'cliente' => $cliente,
             ]);
         }
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionExportareporte()
+    {
+        return $this->render('exportareporte');
+    }
+
+    public function actionExecutereporte()
+    {
+        Utils::fileReporte();
+        $runner = new ConsoleCommandRunner();
+        $runner->run('command/proveedor', [Yii::$app->user->identity->empresa_id]);
+        $runner->getExitCode();
+
+        $path = Yii::getAlias('@PathReporteDownload');
+        $file = 'Proveedor.xlsx';
+        Utils::downloadFile($path, $file);
+
+        return $this->refresh();
     }
 }

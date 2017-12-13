@@ -1,4 +1,5 @@
 <?php
+
 use app\helpers\Utils;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -109,7 +110,8 @@ use yii\helpers\Url;
                                             <!--<li><a href="--><?php //echo '4' ?><!--">Priorizar Requerimientos</a>-->
                                             </li>
                                             <li>
-                                                <a href="<?php echo Url::to(['/incidencia/tecnico']) ?>">Asignar Técnicos</a>
+                                                <a href="<?php echo Url::to(['/incidencia/tecnico']) ?>">Asignar
+                                                    Técnicos</a>
                                             </li>
                                             <!--<li><a href="--><?php //echo '6' ?><!--">Asignar Proveedor</a>-->
                                             </li>
@@ -118,17 +120,20 @@ use yii\helpers\Url;
                                             </li>
                                         </ul>
                                     </li>
-                                    <!--<li><a><i class="fa fa-list-alt"></i> Reporte-->
-                                    <!--        <span class="fa fa-chevron-down"></span></a>-->
-                                    <!--    <ul class="nav child_menu">-->
-                                    <!--        <li><a href="--><?php //echo '8' ?><!--">Reporte General</a>-->
-                                    <!--        </li>-->
-                                    <!--        <li><a href="--><?php //echo '9' ?><!--">Buscar Inc. y Req.</a>-->
-                                    <!--        </li>-->
-                                    <!--        <li><a href="--><?php //echo '10' ?><!--">Exportar Inc. y Req.</a>-->
-                                    <!--        </li>-->
-                                    <!--    </ul>-->
-                                    <!--</li>-->
+                                    <li><a><i class="fa fa-list-alt"></i> Reporte
+                                            <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?php echo Url::to(['/incidencia/exportareporte']) ?>">Reporte
+                                                    General</a>
+                                            </li>
+                                            <!--                                            <li><a href="-->
+                                            <?php //echo '9' ?><!--">Buscar Inc. y Req.</a>-->
+                                            <!--                                            </li>-->
+                                            <!--                                            <li><a href="-->
+                                            <?php //echo '10' ?><!--">Exportar Inc. y Req.</a>-->
+                                            <!--                                            </li>-->
+                                        </ul>
+                                    </li>
                                     <?php break; ?>
                                 <?php case 0: ?>
                                     <li><a><i class="fa fa-list-alt"></i> Analista <span
