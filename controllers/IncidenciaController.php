@@ -202,7 +202,7 @@ class IncidenciaController extends Controller
                 $model->status = 'EN PROCESO';
                 $model->save();
 
-                return $this->redirect(['lista']);
+                return $this->redirect(['tecnico']);
             } else {
                 return $this->render('asignar', [
                     'model' => $model,
