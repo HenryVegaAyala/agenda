@@ -74,6 +74,7 @@ class Cliente extends ActiveRecord
             [['puesto', 'categoria', 'numero_emergencia'], 'string', 'max' => 45],
             [['numero_oficina'], 'string', 'max' => 20],
             [['dni'], 'string', 'max' => 8],
+            [['dni'], 'integer'],
             [['usuario_digitado', 'usuario_modificado', 'usuario_eliminado'], 'string', 'max' => 50],
             [['ip'], 'string', 'max' => 30],
         ];

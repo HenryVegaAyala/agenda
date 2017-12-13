@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle
         'js/agenda.min.js',
         'repository/bootstrap/dist/js/bootstrap.min.js',
         'js/custom.min.js',
+        'vendor/tinymce/tinymce/tinymce.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
