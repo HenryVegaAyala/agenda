@@ -255,6 +255,7 @@ class IncidenciaController extends Controller
             $model->host = (string)php_uname();
             $model->ip = Utils::getRealIpAddr();
             $model->status = 'TERMINADO';
+            $model->ci = Yii::$app->user->identity->nombres;
             $model->save();
 
             return $this->redirect(['end']);

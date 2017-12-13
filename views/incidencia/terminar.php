@@ -174,7 +174,7 @@ $indencia = new \app\models\Incidencia()
                     </div>
                     <div class="panel-footer container-fluid">
                         <div class="col-sm-12">
-                            <?= Html::a('<i class="fa fa-refresh" aria-hidden="true"></i> Refrescar', ['index'],
+                            <?= Html::a('<i class="fa fa-refresh" aria-hidden="true"></i> Refrescar', ['end'],
                                 ['class' => 'btn btn-primary']) ?>
                         </div>
                     </div>
