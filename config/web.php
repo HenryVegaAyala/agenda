@@ -157,7 +157,10 @@ $config = [
                 /**Indicencia**/
                 '/nueva-incidencia' => '/incidencia/create',
                 '/lista-incidencia' => '/incidencia/index',
+                '/lista-incidencia-priorizar' => '/incidencia/lista',
+                '/lista-asignar-tecnico' => '/incidencia/tecnico',
                 '/actualizar-incidencia/<id:\d+>' => '/incidencia/update',
+                '/asignar-incidencia/<id:\d+>' => '/incidencia/asignar',
                 '/eliminar-incidencia/<id:\d+>' => '/incidencia/delete',
 
                 /**Proveedor**/

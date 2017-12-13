@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "incidencia".
@@ -11,29 +12,29 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property integer $cliente_id
  * @property integer $empresa_id
- * @property string $notas
- * @property string $numero
- * @property string $resumen
- * @property string $producto
- * @property string $servico
- * @property string $ci
- * @property string $fecha_deseada
- * @property string $impacto
- * @property string $urgencia
- * @property string $prioridad
- * @property string $tipo_incidencia
- * @property string $tipo
- * @property string $fuente_reportada
- * @property string $fecha_digitada
- * @property string $fecha_modificada
- * @property string $fecha_eliminada
- * @property string $usuario_digitado
- * @property string $usuario_modificado
- * @property string $usuario_eliminado
+ * @property string  $notas
+ * @property string  $numero
+ * @property string  $resumen
+ * @property string  $producto
+ * @property string  $servico
+ * @property string  $ci
+ * @property string  $fecha_deseada
+ * @property string  $impacto
+ * @property string  $urgencia
+ * @property string  $prioridad
+ * @property string  $tipo_incidencia
+ * @property string  $tipo
+ * @property string  $fuente_reportada
+ * @property string  $fecha_digitada
+ * @property string  $fecha_modificada
+ * @property string  $fecha_eliminada
+ * @property string  $usuario_digitado
+ * @property string  $usuario_modificado
+ * @property string  $usuario_eliminado
  * @property integer $estado
- * @property string $ip
- * @property string $host
- * @property string $status
+ * @property string  $ip
+ * @property string  $host
+ * @property string  $status
  *
  * @property Cliente $cliente
  */
@@ -303,5 +304,15 @@ class Incidencia extends ActiveRecord
             'EN PROCESO' => 'EN PROCESO',
             'TERMINADO' => 'TERMINADO',
         ];
+    }
+
+    public static function userTecnico()
+    {
+        $resultado = ArrayHelper::map(
+            User::find()
+                ->where('type = 3')->asArray()
+                ->all(), 'nombres', 'nombres');
+
+        return $resultado;
     }
 }

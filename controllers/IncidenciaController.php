@@ -87,29 +87,46 @@ class IncidenciaController extends Controller
 
     /**
      * @param $id
-     * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidParamException
-     * @throws \yii\web\NotFoundHttpException
+     * @return string|Response
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $cliente = Cliente::find()->where(['id' => Yii::$app->user->identity->cliente_id])->one();
+        if (Yii::$app->user->identity->type === 2) {
+            $cliente = Cliente::find()->where(['id' => $model->cliente_id])->one();
+            if ($model->load(Yii::$app->request->post())) {
+                $model->fecha_modificada = Carbon::now('America/Lima');
+                $model->usuario_modificado = Yii::$app->user->identity->nombres;
+                $model->host = (string)php_uname();
+                $model->ip = Utils::getRealIpAddr();
+                $model->status = 'PENDIENTE';
+                $model->save();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->fecha_modificada = Carbon::now('America/Lima');
-            $model->usuario_modificado = Yii::$app->user->identity->nombres;
-            $model->host = (string)php_uname();
-            $model->ip = Utils::getRealIpAddr();
-            $model->save();
+                return $this->redirect(['lista']);
+            } else {
+                return $this->render('incidencia', [
+                    'model' => $model,
+                    'cliente' => $cliente,
+                ]);
+            }
+        } else {
 
-            return $this->redirect(['index']);
+            $cliente = Cliente::find()->where(['id' => Yii::$app->user->identity->cliente_id])->one();
+            if ($model->load(Yii::$app->request->post())) {
+                $model->fecha_modificada = Carbon::now('America/Lima');
+                $model->usuario_modificado = Yii::$app->user->identity->nombres;
+                $model->host = (string)php_uname();
+                $model->ip = Utils::getRealIpAddr();
+                $model->save();
+
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+                'cliente' => $cliente,
+            ]);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-            'cliente' => $cliente,
-        ]);
     }
 
     /**
@@ -138,5 +155,77 @@ class IncidenciaController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionLista(): string
+    {
+        $searchModel = new IncidenciaSearch();
+        $dataProvider = $searchModel->search2(Yii::$app->request->post());
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionTecnico(): string
+    {
+        $searchModel = new IncidenciaSearch();
+        $dataProvider = $searchModel->search2(Yii::$app->request->post());
+
+        return $this->render('lista', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionAsignar($id)
+    {
+        $model = $this->findModel($id);
+        if (Yii::$app->user->identity->type === 2) {
+            $cliente = Cliente::find()->where(['id' => $model->cliente_id])->one();
+            if ($model->load(Yii::$app->request->post())) {
+                $model->fecha_modificada = Carbon::now('America/Lima');
+                $model->usuario_modificado = Yii::$app->user->identity->nombres;
+                $model->host = (string)php_uname();
+                $model->ip = Utils::getRealIpAddr();
+                $model->status = 'EN PROCESO';
+                $model->save();
+
+                return $this->redirect(['lista']);
+            } else {
+                return $this->render('asignar', [
+                    'model' => $model,
+                    'cliente' => $cliente,
+                ]);
+            }
+        } else {
+
+            $cliente = Cliente::find()->where(['id' => Yii::$app->user->identity->cliente_id])->one();
+            if ($model->load(Yii::$app->request->post())) {
+                $model->fecha_modificada = Carbon::now('America/Lima');
+                $model->usuario_modificado = Yii::$app->user->identity->nombres;
+                $model->host = (string)php_uname();
+                $model->ip = Utils::getRealIpAddr();
+                $model->save();
+
+                return $this->redirect(['index']);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+                'cliente' => $cliente,
+            ]);
+        }
     }
 }

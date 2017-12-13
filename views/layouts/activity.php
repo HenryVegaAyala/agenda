@@ -88,13 +88,13 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Proveedores
                                             <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo  Url::to(['/cliente/personal']) ?>">Registrar
+                                            <li><a href="<?php echo Url::to(['/cliente/personal']) ?>">Registrar
                                                     Proveedores</a>
                                             </li>
-                                            <li><a href="<?php echo  Url::to(['/cliente/lista']) ?>">Lista de
+                                            <li><a href="<?php echo Url::to(['/cliente/lista']) ?>">Lista de
                                                     Proveedores</a>
                                             </li>
-                                            <li><a href="<?php echo  Url::to(['/cliente/proveedor']) ?>">Exportar
+                                            <li><a href="<?php echo Url::to(['/cliente/proveedor']) ?>">Exportar
                                                     Proveedores</a>
                                             </li>
                                         </ul>
@@ -102,15 +102,19 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Análisis de Inc. y Req.
                                             <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo '3' ?>">Priorizar Incidencias</a>
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/lista']) ?>">Priorizar
+                                                    Incidencias</a>
                                             </li>
                                             <!--<li><a href="--><?php //echo '4' ?><!--">Priorizar Requerimientos</a>-->
                                             </li>
-                                            <li><a href="<?php echo '5' ?>">Asignar Técnicos</a>
+                                            <li>
+                                                <a href="<?php echo Url::to(['/incidencia/tecnico']) ?>">Asignar Técnicos</a>
                                             </li>
                                             <!--<li><a href="--><?php //echo '6' ?><!--">Asignar Proveedor</a>-->
                                             </li>
-                                            <!--<li><a href="--><?php //echo '7' ?><!--">Realizar Pedido al Proveedor</a>-->
+                                            <!--<li><a href="-->
+                                            <?php //echo '7' ?><!--">Realizar Pedido al Proveedor</a>-->
                                             </li>
                                         </ul>
                                     </li>
@@ -136,7 +140,8 @@ use yii\helpers\Url;
                                             <li><a href="<?php echo Url::to(['/cliente/index']) ?>">Lista de
                                                     Analista</a>
                                             </li>
-                                            <!--<li><a href="--><?php //echo Url::to(['/user/index']) ?><!--">Lista de Usuarios</a>-->
+                                            <!--<li><a href="-->
+                                            <?php //echo Url::to(['/user/index']) ?><!--">Lista de Usuarios</a>-->
                                             <!--</li>-->
                                             <li><a href="<?php echo Url::to(['/user/export']) ?>">Exportar
                                                     Analistas</a>
@@ -159,7 +164,8 @@ use yii\helpers\Url;
                                     <li><a><i class="fa fa-list-alt"></i> Incidencias
                                             <span class="fa fa-chevron-down"></span></a>
                                         <ul class="nav child_menu">
-                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Incidencias Asignadas</a>
+                                            <li><a href="<?php echo Url::to(['/cliente/create']) ?>">Incidencias
+                                                    Asignadas</a>
                                             </li>
                                         </ul>
                                     </li>

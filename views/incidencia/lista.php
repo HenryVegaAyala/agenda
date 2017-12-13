@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\IncidenciaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ticket - Lista de Incidencias';
+$this->title = 'Ticket - Asignar Técnico';
 $this->params['breadcrumbs'][] = $this->title;
 $indencia = new \app\models\Incidencia()
 ?>
@@ -41,6 +41,11 @@ $indencia = new \app\models\Incidencia()
                                     ['class' => SerialColumn::class],
                                     'numero',
                                     'cliente',
+                                    [
+                                        'attribute' => 'ci',
+                                        'label' => 'Técnico',
+                                        'value' => 'ci',
+                                    ],
                                     [
                                         'attribute' => 'prioridad',
                                         'value' => 'prioridad',
@@ -82,7 +87,7 @@ $indencia = new \app\models\Incidencia()
                                         'buttons' => [
                                             'update' => function ($url, $model) {
                                                 return Html::a('<span class="fa fa-pencil-square-o fa-lg-icon"></span>',
-                                                    Yii::$app->urlManager->createUrl(['actualizar-incidencia/' . $model->id]),
+                                                    Yii::$app->urlManager->createUrl(['asignar-incidencia/' . $model->id]),
                                                     ['title' => Yii::t('yii', 'Actualizar'),]
                                                 );
                                             },
