@@ -252,6 +252,7 @@ class IncidenciaController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->fecha_modificada = Carbon::now('America/Lima');
             $model->usuario_modificado = Yii::$app->user->identity->nombres;
+            $model->fecha_final = Carbon::parse($model->fecha_final)->format('Y-m-d');
             $model->host = (string)php_uname();
             $model->ip = Utils::getRealIpAddr();
             $model->ci = Yii::$app->user->identity->nombres;

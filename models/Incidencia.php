@@ -3,8 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "incidencia".
@@ -35,10 +33,11 @@ use yii\helpers\ArrayHelper;
  * @property string  $ip
  * @property string  $host
  * @property string  $status
+ * @property string  $fecha_final
  *
  * @property Cliente $cliente
  */
-class Incidencia extends ActiveRecord
+class Incidencia extends \yii\db\ActiveRecord
 {
 
     public $num_ticket;
@@ -64,13 +63,12 @@ class Incidencia extends ActiveRecord
         return [
             [['cliente_id', 'empresa_id', 'estado'], 'integer'],
             [['resumen'], 'string'],
-            [['fecha_digitada', 'fecha_modificada', 'fecha_eliminada'], 'safe'],
+            [['fecha_deseada', 'fecha_digitada', 'fecha_modificada', 'fecha_eliminada', 'fecha_final'], 'safe'],
             [
                 [
                     'notas',
                     'servico',
                     'ci',
-                    'fecha_deseada',
                     'impacto',
                     'urgencia',
                     'prioridad',
@@ -139,6 +137,7 @@ class Incidencia extends ActiveRecord
             'cliente' => 'Usuario',
             'empresa' => 'Empresa',
             'status' => 'Estado',
+            'fecha_final' => 'Fecha Final',
         ];
     }
 
@@ -314,5 +313,15 @@ class Incidencia extends ActiveRecord
                 ->all(), 'nombres', 'nombres');
 
         return $resultado;
+    }
+
+    /**
+     * Returns static class instance, which can be used to obtain meta information.
+     * @param bool $refresh whether to re-create static instance even, if it is already cached.
+     * @return static class instance.
+     */
+    public static function instance($refresh = false)
+    {
+        // TODO: Implement instance() method.
     }
 }

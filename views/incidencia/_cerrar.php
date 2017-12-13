@@ -2,6 +2,7 @@
 
 use app\models\Incidencia;
 use dosamigos\tinymce\TinyMce;
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -121,6 +122,23 @@ $descripcion = 'Cerrar Incidencia';
                                             'class' => 'form-control col-md-7 col-xs-12',
                                             'required' => true,
                                         ])->label(false) ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6 col-xs-12">
+                                        <?= $form->field($model, 'fecha_final')->widget(DatePicker::classname(), [
+                                            'options' => ['placeholder' => 'Fecha Final'],
+                                            'value' => date('d-M-Y'),
+                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                                            'pluginOptions' => [
+                                                'autoclose' => true,
+                                                'format' => 'dd-mm-yyyy',
+                                                'todayHighlight' => true,
+                                                'class' => 'form-control col-md-7 col-xs-12',
+                                            ],
+                                        ])->label(false);
+                                        ?>
                                     </div>
                                 </div>
 
