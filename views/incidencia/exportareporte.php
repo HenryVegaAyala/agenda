@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 
-$this->title = 'Ticket - Exportar Proveedores';
+$this->title = 'Ticket - Exportar Incidencia';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="right_col" role="main">

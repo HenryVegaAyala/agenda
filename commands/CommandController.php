@@ -381,4 +381,107 @@ class CommandController extends Controller
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
         $objWriter->save('reporte/' . $xlsName);
     }
+
+    public static function actionIncidencia($empresa)
+    {
+        Utils::fileReporte();
+
+        $styleHeader = [
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => '000000'],
+                'size' => 10,
+                'name' => 'Arial',
+            ],
+            'borders' => [
+                'top' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'right' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'bottom' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'left' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+            ],
+            'alignment' => [
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            ],
+        ];
+
+        $styleBody = [
+            'font' => [
+                'color' => ['rgb' => '000000'],
+                'size' => 9,
+                'name' => 'Arial',
+            ],
+            'borders' => [
+                'top' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'right' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'bottom' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+                'left' => ['style' => PHPExcel_Style_Border::BORDER_THIN],
+            ],
+            'alignment' => [
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_JUSTIFY,
+            ],
+        ];
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getProperties()
+            ->setCreator("Henry Pablo Vega Ayala")
+            ->setLastModifiedBy("Henry Pablo Vega Ayala")
+            ->setTitle("Office 2007 XLSX Document")
+            ->setSubject("Office 2007 XLSX Document")
+            ->setDescription("Documento para Office 2007 XLSX, generado usando clases de PHP.")
+            ->setKeywords("office 2007 openxml php")
+            ->setCategory("Archivo de Resultados");
+
+
+        foreach (range('A', 'F') as $char) {
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle($char . '1')->applyFromArray($styleHeader);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:' . $char . '1')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:' . $char . '1')->getFill()->getStartColor()->setRGB('fff200');
+        }
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(27);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(32);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
+
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'NUMERO')
+            ->setCellValue('B1', 'PRODUCTO REPORTADO')
+            ->setCellValue('C1', 'TECNICO ASOCIADO')
+            ->setCellValue('D1', 'PRIORIDAD')
+            ->setCellValue('E1', 'USUARIO REPORTADO')
+            ->setCellValue('F1', 'STATUS');
+
+        $i = 2;
+        foreach (Cliente::listaIncidencia($empresa) as $listaCliente) {
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . $i, $listaCliente['numero'])
+                ->setCellValue('B' . $i, $listaCliente['producto'])
+                ->setCellValue('C' . $i, $listaCliente['ci'])
+                ->setCellValue('D' . $i, $listaCliente['prioridad'])
+                ->setCellValue('E' . $i, $listaCliente['usuario_digitado'])
+                ->setCellValue('F' . $i, $listaCliente['status']);
+
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('A' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('B' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('C' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('D' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('E' . $i)->applyFromArray($styleBody);
+            $objPHPExcel->setActiveSheetIndex(0)->getStyle('F' . $i)->applyFromArray($styleBody);
+            $i++;
+        }
+
+        $objPHPExcel->getActiveSheet()->setTitle('Lista de Proveedores');
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $xlsName = 'Incidencia.xlsx';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $xlsName . '"');
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('reporte/' . $xlsName);
+    }
 }

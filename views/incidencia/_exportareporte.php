@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\Cliente */
 /* @var $form yii\widgets\ActiveForm */
-$descripcion = "Exportar Proveedores";
+$descripcion = "Exportar Incidencia";
 ?>
 <div class="clearfix"></div>
 <div class="row">

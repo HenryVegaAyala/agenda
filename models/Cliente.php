@@ -224,4 +224,25 @@ class Cliente extends ActiveRecord
             ->orderBy(['cliente.nombres' => SORT_DESC])
             ->all();
     }
+
+    /**
+     * @param $empresa
+     * @return array|ActiveRecord[]
+     */
+    public static function listaIncidencia($empresa)
+    {
+        return Incidencia::find()
+            ->select([
+                'numero',
+                'producto',
+                'ci',
+                'prioridad',
+                'usuario_digitado',
+                'status',
+                'empresa_id',
+            ])
+            ->andWhere('empresa_id = :empresa', [':empresa' => $empresa])
+            ->orderBy(['numero' => SORT_DESC])
+            ->all();
+    }
 }
