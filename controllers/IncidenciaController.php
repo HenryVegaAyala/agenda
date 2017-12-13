@@ -228,4 +228,41 @@ class IncidenciaController extends Controller
             ]);
         }
     }
+
+    /**
+     * @return string
+     * @throws \Exception
+     * @throws \yii\base\InvalidParamException
+     */
+    public function actionEnd(): string
+    {
+        $searchModel = new IncidenciaSearch();
+        $dataProvider = $searchModel->search22(Yii::$app->request->post());
+
+        return $this->render('terminar', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionTerminar($id)
+    {
+        $model = $this->findModel($id);
+        $cliente = Cliente::find()->where(['id' => $model->cliente_id])->one();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->fecha_modificada = Carbon::now('America/Lima');
+            $model->usuario_modificado = Yii::$app->user->identity->nombres;
+            $model->host = (string)php_uname();
+            $model->ip = Utils::getRealIpAddr();
+            $model->status = 'TERMINADO';
+            $model->save();
+
+            return $this->redirect(['end']);
+        } else {
+            return $this->render('cerrar', [
+                'model' => $model,
+                'cliente' => $cliente,
+            ]);
+        }
+    }
 }

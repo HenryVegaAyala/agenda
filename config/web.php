@@ -161,6 +161,8 @@ $config = [
                 '/lista-asignar-tecnico' => '/incidencia/tecnico',
                 '/actualizar-incidencia/<id:\d+>' => '/incidencia/update',
                 '/asignar-incidencia/<id:\d+>' => '/incidencia/asignar',
+                '/incidencias-asignadas' => '/incidencia/end',
+                '/incidencia-terminar/<id:\d+>' => '/incidencia/terminar',
                 '/eliminar-incidencia/<id:\d+>' => '/incidencia/delete',
 
                 /**Proveedor**/
