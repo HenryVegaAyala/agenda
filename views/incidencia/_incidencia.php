@@ -119,6 +119,7 @@ $descripcion = 'Priorizar Incidencia';
                                             'prioridad')->dropDownList(Incidencia::prioridad(), [
                                             'prompt' => 'Seleccionar un Estado',
                                             'class' => 'form-control col-md-7 col-xs-12',
+                                            'required' => true,
                                         ])->label(false) ?>
                                     </div>
                                 </div>
