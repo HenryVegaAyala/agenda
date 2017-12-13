@@ -99,6 +99,14 @@ $indencia = new \app\models\Incidencia()
                                     ],
                                 ],
                             ]); ?>
+                    </div>
+                    <div class="panel-footer container-fluid">
+                        <div class="col-sm-12">
+                            <?= Html::a('<i class="fa fa-refresh" aria-hidden="true"></i> Refrescar', ['lista'],
+                                ['class' => 'btn btn-primary']) ?>
+                        </div>
+                    </div>
+                </div>
                         <?php } else { ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
@@ -165,15 +173,16 @@ $indencia = new \app\models\Incidencia()
                                     ],
                                 ],
                             ]); ?>
-                        <?php } ?>
-                    </div>
-                    <div class="panel-footer container-fluid">
-                        <div class="col-sm-12">
-                            <?= Html::a('<i class="fa fa-refresh" aria-hidden="true"></i> Refrescar', ['index'],
-                                ['class' => 'btn btn-primary']) ?>
-                        </div>
-                    </div>
+            </div>
+            <div class="panel-footer container-fluid">
+                <div class="col-sm-12">
+                    <?= Html::a('<i class="fa fa-refresh" aria-hidden="true"></i> Refrescar', ['index'],
+                        ['class' => 'btn btn-primary']) ?>
                 </div>
+            </div>
+        </div>
+                        <?php } ?>
+
                 <?php Pjax::end(); ?>
             </div>
         </div>
