@@ -67,7 +67,7 @@ class IncidenciaController extends Controller
             $model->fecha_digitada = Carbon::now('America/Lima');
             $model->usuario_digitado = Yii::$app->user->identity->nombres;
             $model->host = (string)php_uname();
-            $model->fecha_deseada = Carbon::now()->format('Y-m-d');
+            $model->fecha_deseada = Carbon::parse($model->fecha_deseada)->format('Y-m-d');
             $model->ip = Utils::getRealIpAddr();
             $model->numero = $ticket;
             $model->tipo = 'CLIENTE';
@@ -254,7 +254,6 @@ class IncidenciaController extends Controller
             $model->usuario_modificado = Yii::$app->user->identity->nombres;
             $model->host = (string)php_uname();
             $model->ip = Utils::getRealIpAddr();
-            $model->status = 'TERMINADO';
             $model->ci = Yii::$app->user->identity->nombres;
             $model->save();
 

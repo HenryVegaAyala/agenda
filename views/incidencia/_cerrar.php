@@ -116,7 +116,7 @@ $descripcion = 'Cerrar Incidencia';
                                 <div class="row">
                                     <div class="col-md-12 col-sm-6 col-xs-12">
                                         <?= $form->field($model,
-                                            'ci')->dropDownList(Incidencia::estado(), [
+                                            'status')->dropDownList(Incidencia::estado(), [
                                             'prompt' => 'Seleccionar un Estado',
                                             'class' => 'form-control col-md-7 col-xs-12',
                                             'required' => true,
