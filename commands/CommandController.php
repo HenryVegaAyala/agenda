@@ -444,7 +444,7 @@ class CommandController extends Controller
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(32);
         $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(50);
         $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(25);
 
         $objPHPExcel->setActiveSheetIndex(0)
