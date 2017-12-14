@@ -284,10 +284,9 @@ class IncidenciaController extends Controller
         $runner->run('command/incidencia', [Yii::$app->user->identity->empresa_id]);
         $runner->getExitCode();
 
-        $path = Yii::getAlias('@PathReporteDownload');
+        $path = '/reporte/';
         $file = 'Incidencia.xlsx';
-        Utils::downloadFile($path, $file);
 
-        return $this->refresh();
+        return  $this->redirect($path. $file);
     }
 }

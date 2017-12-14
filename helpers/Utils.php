@@ -57,9 +57,10 @@ class Utils
 
                 return true;
             }
+        } else {
+            return false;
         }
 
-        return false;
     }
 
     public static function fileReporte()

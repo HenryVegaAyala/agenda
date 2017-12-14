@@ -129,7 +129,7 @@ class CommandController extends Controller
         $objPHPExcel->setActiveSheetIndex(0);
 
         $xlsName = 'Colaboradores.xlsx';
-        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $xlsName . '"');
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -252,7 +252,7 @@ class CommandController extends Controller
     $objPHPExcel->setActiveSheetIndex(0);
 
     $xlsName = 'Analistas.xlsx';
-    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment;filename="' . $xlsName . '"');
     header('Cache-Control: max-age=0');
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -375,7 +375,7 @@ class CommandController extends Controller
         $objPHPExcel->setActiveSheetIndex(0);
 
         $xlsName = 'Proveedor.xlsx';
-        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $xlsName . '"');
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
@@ -474,11 +474,11 @@ class CommandController extends Controller
             $i++;
         }
 
-        $objPHPExcel->getActiveSheet()->setTitle('Lista de Proveedores');
+        $objPHPExcel->getActiveSheet()->setTitle('Lista de Incidencia');
         $objPHPExcel->setActiveSheetIndex(0);
 
         $xlsName = 'Incidencia.xlsx';
-        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $xlsName . '"');
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');

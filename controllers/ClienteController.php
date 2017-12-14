@@ -248,11 +248,15 @@ class ClienteController extends Controller
         $runner->run('command/export', [Yii::$app->user->identity->empresa_id]);
         $runner->getExitCode();
 
-        $path = Yii::getAlias('@PathReporteDownload');
+        //$path = Yii::getAlias('@PathReporteDownload');
+        //$file = 'Colaboradores.xlsx';
+        //Utils::downloadFile($path, $file);
+        //
+        //return $this->redirect(['cliente/import']);
+        $path = '/reporte/';
         $file = 'Colaboradores.xlsx';
-        Utils::downloadFile($path, $file);
 
-        return $this->redirect(['cliente/import']);
+        return  $this->redirect($path. $file);
     }
 
     /**
@@ -385,11 +389,13 @@ class ClienteController extends Controller
         $runner->run('command/proveedor', [Yii::$app->user->identity->empresa_id]);
         $runner->getExitCode();
 
-        $path = Yii::getAlias('@PathReporteDownload');
+        //$path = Yii::getAlias('@PathReporteDownload');
+        //
+        //Utils::downloadFile($path, $file);
+        $path = '/reporte/';
         $file = 'Proveedor.xlsx';
-        Utils::downloadFile($path, $file);
 
-        return $this->refresh();
+        return  $this->redirect($path. $file);
     }
 
     /**

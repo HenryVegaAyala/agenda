@@ -240,10 +240,15 @@ class UserController extends Controller
         $runner->run('command/analista', [Yii::$app->user->identity->empresa_id]);
         $runner->getExitCode();
 
-        $path = Yii::getAlias('@PathReporteDownload');
-        $file = 'Analistas.xlsx';
-        Utils::downloadFile($path, $file);
+        //$path = Yii::getAlias('@PathReporteDownload');
+        //$file = 'Analistas.xlsx';
+        //Utils::downloadFile($path, $file);
 
-        return $this->redirect(['user/export']);
+        $path = '/reporte/';
+        $file = 'Analistas.xlsx';
+
+        return  $this->redirect($path. $file);
+
+        //return $this->redirect(['user/export']);
     }
 }
